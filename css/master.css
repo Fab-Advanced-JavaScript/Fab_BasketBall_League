@@ -115,5 +115,81 @@ li a:hover {
   padding-left: 10px; 
 }
 
+/*
+* styling for activity 
+*/
+
+.forecast{
+  float: right;
+  border: 2px solid #c4de00;
+
+  width: 20em;
+
+}
+.colorActitvity, .activity {
+  background-color: black;
+  color: #c4de00;
+  padding-left: 35%;
+  font-style: normal;
+  /* width: 20em; */
+}
+
+.datainput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.forecast-button {
+  background-color: black;
+  color: #c4de00;
+ 
+}
+
+.outputCityInfos  {
+ color: black;
+ padding-left: 10px;
+}
+.category {
+  color: black;
+}
+
+.options {
+  display: flex;
+  height: 2em;
+  background-color: grey;
+  margin-top : -0.5em;
+  padding-left: 10px;
+
+}
+
+#solo {
+  width: 7em;
+}
+#team {
+  width: 7em;
+}
+#all {
+  width: 6em;
+}
+
+.selected {
+  background-color: #ffcd42;
+}
+
+.activities {
+  border: 2px solid #ffcd42 ;
+  display: flex;
+  margin-left: 35%;
+  margin-top: 2.2px;
+  width: 13.7%;
+  height: 40%;
+  font-size: 13px;
+  padding-right: 8px;
+  background-color: burlywood;
+
+}
+
+
+
 
 

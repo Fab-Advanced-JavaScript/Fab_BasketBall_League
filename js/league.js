@@ -70,6 +70,7 @@ const getCityDetails = async() => {
 
 // this function fetch data from the api
 const getCityInformation = async() => {
+
     let location = document.querySelector("#location").value;
     console.log(location);
     const apiKey = "2642ff9b94561afaf575fd98bb10ac61";
@@ -93,24 +94,26 @@ const displayCityInfo = element => {
     let degF = degC * 1.8 + 32;
     let degFInt = Math.floor(degF);
 
+    let myforcast = document.querySelector(".forecast");
+
     let myDiv = document.createElement("div");
     myDiv.setAttribute("class", "outputCityInfos");
 
-    let myH1 = document.createElement("h1");
-    let myH2 = document.createElement("h2");
-    let myH3 = document.createElement("h3");
-    let myH3One = document.createElement("h3");
-    let myH3Two = document.createElement("h3");
+    let myH1 = document.createElement("label");
+    let myH2 = document.createElement("label");
+    let myH3 = document.createElement("label");
+    let myH3One = document.createElement("label");
+    let myH3Two = document.createElement("label");
 
     let myLabel1 = document.createElement("label");
     let myLabel2 = document.createElement("label");
     let myLabel3 = document.createElement("label");
     let myLabel4 = document.createElement("label");
 
-    let spanOne = document.createElement("span");
-    let spanTwo = document.createElement("span");
-    let spanThree = document.createElement("span");
-    let spanfour = document.createElement("span");
+    let spanOne = document.createElement("label");
+    let spanTwo = document.createElement("label");
+    let spanThree = document.createElement("label");
+    let spanfour = document.createElement("label");
 
     let lineBreakOne = document.createElement("br");
     let lineBreakTwo = document.createElement("br");
@@ -138,9 +141,10 @@ const displayCityInfo = element => {
     myLabel4.textContent = `Weather Icon: ${element.weather[0].icon}`;
 
     myDiv.appendChild(myH1);
+    myDiv.appendChild(lineBreakThree);
     myDiv.appendChild(myH2);
-    myDiv.appendChild(myH3);
-    myDiv.appendChild(myLabel1);
+    // myDiv.appendChild(myH3);
+    // myDiv.appendChild(myLabel1);
     myDiv.appendChild(weatherBr1);
     myDiv.appendChild(myLabel2);
     myDiv.appendChild(weatherBr2);
@@ -148,58 +152,66 @@ const displayCityInfo = element => {
     myDiv.appendChild(weatherBr3);
     myDiv.appendChild(myLabel4);
     myDiv.appendChild(weatherBr4);
-    myDiv.appendChild(lineBreak);
+    // myDiv.appendChild(lineBreak);
     myDiv.appendChild(spanOne);
     myDiv.appendChild(lineBreakOne);
     myDiv.appendChild(spanTwo);
     myDiv.appendChild(lineBreakTwo);
     myDiv.appendChild(spanThree);
-    myDiv.appendChild(lineBreakThree);
-    myDiv.appendChild(spanfour);
-    document.body.appendChild(myDiv);
+    // myDiv.appendChild(lineBreakThree);
+    // myDiv.appendChild(spanfour);
+    myforcast.appendChild(myDiv)
+    document.body.appendChild(myforcast);
 
     displayCategories(element);
 }
 
 // this display the categories or activities options
 const displayCategories = el => {
+
+    let myforcast = document.querySelector(".forecast");
+
     let category = document.querySelector('.category');
     category = document.createElement('div');
     category.classList.add("category");
 
-    let headerThree = document.createElement("h3");
-    headerThree.setAttribute("id", "activity")
+    let divActivity = document.querySelector('.activity');
+    divActivity = document.createElement('div');
+    divActivity.classList.add("activity");
+
+    let headerThree = document.createElement("label");
+    // headerThree.setAttribute("id", "activity")
     headerThree.textContent = "Activities";
 
     let options = document.querySelector('.options');
     options = document.createElement('div');
-    options.setAttribute("id", "options");
+    options.setAttribute("class", "options");
 
     let solo = document.querySelector('#solo');
     solo = document.createElement('div');
     solo.setAttribute("id", "solo");
-    solo.className ="option";
     solo.textContent = "Solo";
 
     let team = document.querySelector('#team');
     team = document.createElement('div');
     team.setAttribute("id", "team");
-    team.className ="option";
     team.textContent = "Team";
 
     let all = document.querySelector('#all');
     all = document.createElement('div');
     all.setAttribute("id", "all");
-    all.className ="option";
+    all.className ="selected";
     all.textContent = "All";
 
     // append elements
-    category.appendChild(headerThree);
+    category.appendChild(divActivity);
+    divActivity.appendChild(headerThree)
     options.appendChild(solo);
     options.appendChild(team);
     options.appendChild(all);
-    category.appendChild(options);
-    document.body.appendChild(category);
+    category.appendChild(options); 
+    myforcast.appendChild(category)
+    document.body.appendChild(myforcast);
 
     changeMenuColor(el);
 }
@@ -208,7 +220,7 @@ const displayCategories = el => {
 const changeMenuColor = event => {
 
     // update list of sports when user selects a different category (solo/team/all)
-    let myOption = document.querySelectorAll(".option");
+    let myOption = document.querySelectorAll(".options");
         console.log(myOption);
         myOption.forEach(element => {
             element.addEventListener("click", data => {
