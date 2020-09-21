@@ -66,6 +66,7 @@ const toggleBurger = () => {
 //
 const getCityDetails = async() => {
     let listInfos = await getCityInformation();
+    console.log(listInfos);
 }
 
 // this function fetch data from the api
@@ -214,11 +215,12 @@ const displayCategories = el => {
     document.body.appendChild(myforcast);
 
     changeMenuColor(el);
+    // updateActivityList();
+   
 }
 
-// this change color when a menu activities is clicked
+// this change color of menu when the user selects different category 
 const changeMenuColor = event => {
-
     // update list of sports when user selects a different category (solo/team/all)
     let myOption = document.querySelectorAll(".options");
         console.log(myOption);
@@ -231,10 +233,10 @@ const changeMenuColor = event => {
                 data.target.classList.add("selected") 
                 updateActivityList(data);
             })
-        }); 
+        });    
 }
 
-// this function update the activities according to the option clicked
+// this function update the activities according to the option selected
 const updateActivityList = response => {
     
     const activities = {
@@ -246,42 +248,48 @@ const updateActivityList = response => {
         soloOutCold: ['snowshoeing','downhill skiing','cross-country skiing','ice skating']
     };
     
-  
-    if(response.target.classList.contains("selected") && response.target.id == 'all') {
-        
-        let activitiesContainer = document.createElement('div');
+    
+    let teamActivity = [...activities.teamIn, ...activities.soloIn ];
+    console.log(teamActivity);
+    let myforcast = document.querySelector(".forecast");
+    let activitiesContainer = document.querySelector(".activities");
+
+    if(response.target.id == 'all' && response.target.classList.contains("selected")) {
+        activitiesContainer = document.createElement('div');
         activitiesContainer.className = "activities";
         let myList = document.createElement('ul');
         myList.setAttribute("id", "listAll")
-        activities.teamIn.map(items => {
-            let itemList = document.createElement('li');
-            itemList.textContent = items;
-            myList.appendChild(itemList);
-        })
-        activitiesContainer.appendChild(myList)
-        document.body.appendChild(activitiesContainer);
-
-    } else if(response.target.classList.contains("selected") && response.target.id == 'team') {
-       
-        let teamActivity = [...activities.teamOutWarm];
-        console.log(teamActivity);
-
-        let activitiesContainer = document.createElement('div');
-        activitiesContainer.className = "activities";
-        let myList = document.createElement('ul');
-        myList.setAttribute("id", "listTeam")
         teamActivity.map(items => {
             let itemList = document.createElement('li');
             itemList.textContent = items;
             myList.appendChild(itemList);
         })
         activitiesContainer.appendChild(myList)
-        document.body.appendChild(activitiesContainer);
-    } else {
+        myforcast.appendChild(activitiesContainer);
 
-        let ulActivities = document.querySelector('#list ul');
-        ulActivities.p.replaceChild(myList, ulActivities)
+    // } else if(response.target.classList.contains("selected") && response.target.id == 'team') {
+       
+    //     let teamActivity = [...activities.teamOutWarm];
+    //     console.log(teamActivity);
+
+    //     let activitiesContainer = document.createElement('div');
+    //     activitiesContainer.className = "activities";
+    //     let myList = document.createElement('ul');
+    //     myList.setAttribute("id", "listTeam")
+    //     teamActivity.map(items => {
+    //         let itemList = document.createElement('li');
+    //         itemList.textContent = items;
+    //         myList.appendChild(itemList);
+    //     })
+    //     activitiesContainer.appendChild(myList)
+    //     document.body.appendChild(activitiesContainer);
+    // } else {
+
+    //     let ulActivities = document.querySelector('#list ul');
+    //     ulActivities.parentNode.replaceChild(myList, ulActivities)
         
+    // }
+
     }
 }
 

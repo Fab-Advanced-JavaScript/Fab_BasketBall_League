@@ -122,16 +122,14 @@ li a:hover {
 .forecast{
   float: right;
   border: 2px solid #c4de00;
-
   width: 20em;
-
 }
+
 .colorActitvity, .activity {
   background-color: black;
   color: #c4de00;
   padding-left: 35%;
   font-style: normal;
-  /* width: 20em; */
 }
 
 .datainput {
@@ -158,8 +156,6 @@ li a:hover {
   height: 2em;
   background-color: grey;
   margin-top : -0.5em;
-  padding-left: 10px;
-
 }
 
 #solo {
@@ -173,20 +169,15 @@ li a:hover {
 }
 
 .selected {
-  background-color: #ffcd42;
+  background-color: #c4de00;
+  ;
 }
 
-.activities {
-  border: 2px solid #ffcd42 ;
-  display: flex;
-  margin-left: 35%;
-  margin-top: 2.2px;
-  width: 13.7%;
-  height: 40%;
+.activities, #listAll {
+  width: 20em;
+  height: 10em;
   font-size: 13px;
-  padding-right: 8px;
-  background-color: burlywood;
-
+  background-color: white;
 }
 
 
