@@ -1,12 +1,19 @@
 const init = () => {
     console.log("let get the web version up and running");
     // this implement the event
+    // let myBurger = document.querySelector("#burger");
+    // myBurger.addEventListener("click", toggleBurger);
+
+    /**
+     * this event listener  is for the toggle()
+     */
     let myBurger = document.querySelector("#burger");
-    myBurger.addEventListener("click", toggleBurger);
+    myBurger.addEventListener("click", toggleBurger)  
 
     /**
      * this event listener  fecth data from openweathermap api
      */
+
 
     let btnTask = document.querySelector(".forecast-button");
     btnTask.addEventListener("click", () => {
@@ -19,51 +26,21 @@ const init = () => {
 * this listen to an event on a hamburger menu to display the slide bar menu on and off when clicking on the hamburger icon
 * 
 */
+
 const toggleBurger = () => {
-    console.log('i am about the wire this');
+    console.log('button is clicked');
+    let burgerItems = document.querySelector(".burger-items")
 
-    let div = document.querySelector('.menu-items')
-
-    if(!div) {
-        let div = document.createElement('div');
-        div.classList.add("menu-items");
-        let ul = document.createElement('ul');
-        ul.setAttribute("id", "items");
-        let createLine1 = document.createElement('hr');
-        let createLine2 = document.createElement('hr');
-        let li1 = document.createElement('li');
-        let li2 = document.createElement('li');
-        let li3 = document.createElement('li');
-        let linebreak1 = document.createElement('br');
-        let linebreak2 = document.createElement('br');
-
-        li1.innerHTML = "Full Schedule";
-        li2.innerHTML = "FBL Events";
-        li3.innerHTML = "2020 FBL Drafts";
-       
-        ul.appendChild(li1);
-        ul.appendChild(linebreak1);
-        ul.appendChild(createLine1);
-        ul.appendChild(li2);
-        ul.appendChild(linebreak2);
-        ul.appendChild(createLine2);
-        ul.appendChild(li3);
-        div.appendChild(ul);
-        document.body.appendChild(div);
-    } else {
-        // let myUl = document.querySelector("#items");
-        // myUl.remove();
-        // div.remove();
-        div.parentNode.removeChild(div);
-    }
+    burgerItems.classList.toggle("showNav")
+    // myBurger.classList.toggle("showClose")
   }
 
+
 /*
-* This implement data fetch from the api and display it on the page
+* This function is implemented to  fetch data from the api using async/await then display it on the page
 * 
 */
 
-//
 const getCityDetails = async() => {
     let listInfos = await getCityInformation();
     console.log(listInfos);
@@ -294,3 +271,48 @@ const updateActivityList = response => {
 }
 
 window.addEventListener("load", init);
+
+/*
+* This implement burger icon method 1
+* 
+*/
+
+// const toggleBurger = () => {
+//     console.log('i am about the wire this');
+
+//     let div = document.querySelector('.menu-items')
+
+//     if(!div) {
+//         let div = document.createElement('div');
+//         div.classList.add("menu-items");
+//         let ul = document.createElement('ul');
+//         ul.setAttribute("id", "items");
+//         let createLine1 = document.createElement('hr');
+//         let createLine2 = document.createElement('hr');
+//         let li1 = document.createElement('li');
+//         let li2 = document.createElement('li');
+//         let li3 = document.createElement('li');
+//         let linebreak1 = document.createElement('br');
+//         let linebreak2 = document.createElement('br');
+
+//         li1.innerHTML = "Full Schedule";
+//         li2.innerHTML = "FBL Events";
+//         li3.innerHTML = "2020 FBL Drafts";
+       
+//         ul.appendChild(li1);
+//         ul.appendChild(linebreak1);
+//         ul.appendChild(createLine1);
+//         ul.appendChild(li2);
+//         ul.appendChild(linebreak2);
+//         ul.appendChild(createLine2);
+//         ul.appendChild(li3);
+//         div.appendChild(ul);
+//         document.body.appendChild(div);
+//     } else {
+//         // let myUl = document.querySelector("#items");
+//         // myUl.remove();
+//         // div.remove();
+//         div.parentNode.removeChild(div);
+//     }
+//   }
+
