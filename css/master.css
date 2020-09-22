@@ -5,6 +5,9 @@ html {
 * {
   box-sizing: inherit;
 } 
+body {
+  background-color: gray;
+}
 
 /*
 * this the color i am going to use on FBL website  #c4de00 -> dark yellow
@@ -84,14 +87,6 @@ html {
   display: block;
 }
 
-/*this creates a line divider class */
-
-/* span .divider {
-  height: 5px;
-  width: 10px;
-  background-color: black;
-} */
-
 .dropdown-content a:hover {background-color: #d7eb2d;}
 
 .dropdown:hover .dropdown-content {
@@ -132,14 +127,20 @@ html {
 .forecast{
   float: right;
   border: 2px solid #c4de00;
-  width: 20em;
+  background-color: grey;
+  width: 17.5em;
+}
+#location {
+  width: 9.5em;
 }
 
 .colorActitvity, .activity {
   background-color: black;
   color: #c4de00;
-  padding-left: 35%;
+  padding-left: 28%;
   font-style: normal;
+  font-size: 18px;
+  height: 35px;
 }
 
 .datainput {
@@ -156,6 +157,7 @@ html {
 .outputCityInfos  {
  color: black;
  padding-left: 10px;
+ background-color: rgb(235, 235, 205);
 }
 .category {
   color: black;
@@ -184,14 +186,15 @@ html {
 }
 
 .activities, #listAll {
-  width: 20em;
+  list-style-type: none;
   height: 10em;
-  font-size: 13px;
-  background-color: white;
+  font-size: 15px;
+  background-color: rgb(235, 235, 205);
+  
 }
 
-/** implementing the Method 2 of the burger menu*/
 
+/** implementing the Method 2 of the burger menu*/
 
 .burger-items {
   position: absolute;

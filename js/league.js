@@ -1,5 +1,6 @@
 const init = () => {
     console.log("let get the web version up and running");
+    
     // this implement the event
     // let myBurger = document.querySelector("#burger");
     // myBurger.addEventListener("click", toggleBurger);
@@ -32,7 +33,6 @@ const toggleBurger = () => {
     let burgerItems = document.querySelector(".burger-items")
 
     burgerItems.classList.toggle("showNav")
-    // myBurger.classList.toggle("showClose")
   }
 
 
@@ -62,7 +62,6 @@ const getCityInformation = async() => {
                           }).catch(err => {
                             console.error("There is problem fetching data");
                         });
- 
 }
 
 // display data on the page
@@ -127,8 +126,8 @@ const displayCityInfo = element => {
     myDiv.appendChild(myLabel2);
     myDiv.appendChild(weatherBr2);
     myDiv.appendChild(myLabel3);
-    myDiv.appendChild(weatherBr3);
-    myDiv.appendChild(myLabel4);
+    // myDiv.appendChild(weatherBr3);
+    // myDiv.appendChild(myLabel4);
     myDiv.appendChild(weatherBr4);
     // myDiv.appendChild(lineBreak);
     myDiv.appendChild(spanOne);
@@ -192,7 +191,6 @@ const displayCategories = el => {
     document.body.appendChild(myforcast);
 
     changeMenuColor(el);
-    // updateActivityList();
    
 }
 
@@ -210,7 +208,7 @@ const changeMenuColor = event => {
                 data.target.classList.add("selected") 
                 updateActivityList(data);
             })
-        });    
+        });  
 }
 
 // this function update the activities according to the option selected
@@ -228,10 +226,12 @@ const updateActivityList = response => {
     
     let teamActivity = [...activities.teamIn, ...activities.soloIn ];
     console.log(teamActivity);
-    let myforcast = document.querySelector(".forecast");
+    let category = document.querySelector('.category');
     let activitiesContainer = document.querySelector(".activities");
 
     if(response.target.id == 'all' && response.target.classList.contains("selected")) {
+        console.log(response.target.id);
+
         activitiesContainer = document.createElement('div');
         activitiesContainer.className = "activities";
         let myList = document.createElement('ul');
@@ -242,7 +242,7 @@ const updateActivityList = response => {
             myList.appendChild(itemList);
         })
         activitiesContainer.appendChild(myList)
-        myforcast.appendChild(activitiesContainer);
+        category.appendChild(activitiesContainer);
 
     // } else if(response.target.classList.contains("selected") && response.target.id == 'team') {
        
