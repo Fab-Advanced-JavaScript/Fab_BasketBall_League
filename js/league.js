@@ -1,20 +1,21 @@
 const init = () => {
-    console.log("let get the web version up and running");
-    
-    // this implement the event
-    // let myBurger = document.querySelector("#burger");
-    // myBurger.addEventListener("click", toggleBurger);
 
     /**
-     * this event listener  is for the toggle()
+     * this event listener  is for the toggle() to open and close the sidebar menu
      */
     let myBurger = document.querySelector("#burger");
-    myBurger.addEventListener("click", toggleBurger)  
+    myBurger.addEventListener("click", toggleBurger) 
+    
+
+    /**
+     * this event listener  to the closebtn to remove the sidebar menu when the user click on it
+     */
+    let closebtn = document.querySelector("#closebtn");
+    closebtn.addEventListener("click", closeBurger)  
 
     /**
      * this event listener  fecth data from openweathermap api
      */
-
 
     let btnTask = document.querySelector(".forecast-button");
     btnTask.addEventListener("click", () => {
@@ -29,11 +30,24 @@ const init = () => {
 */
 
 const toggleBurger = () => {
-    console.log('button is clicked');
-    let burgerItems = document.querySelector(".burger-items")
 
-    burgerItems.classList.toggle("showNav")
+    let burgerItems = document.querySelector(".burger-items")
+    burgerItems.classList.toggle("showNav");
+    console.log('button is clicked to open the sidebar menu');
   }
+
+/*
+* this listen to an event to close the burger menu
+* 
+*/
+const closeBurger = () => {
+
+    let burgerItems = document.querySelector(".burger-items")
+    burgerItems.classList.remove("showNav")
+
+    console.log('button is clicked to close the burger');
+
+}
 
 
 /*
@@ -43,7 +57,6 @@ const toggleBurger = () => {
 
 const getCityDetails = async() => {
     let listInfos = await getCityInformation();
-    console.log(listInfos);
 }
 
 // this function fetch data from the api
@@ -116,6 +129,9 @@ const displayCityInfo = element => {
     myLabel2.textContent = `Weather Main: ${element.weather[0].main}`;
     myLabel3.textContent = `Weather Description: ${element.weather[0].description}`;
     myLabel4.textContent = `Weather Icon: ${element.weather[0].icon}`;
+    let iconImage = document.createElement('img');
+    iconImage.setAttribute('src', `http://openweathermap.org/img/wn/${element.weather[0].icon}.png`);
+    iconImage.setAttribute('alt', `${element.weather[0].main}`);
 
     myDiv.appendChild(myH1);
     myDiv.appendChild(lineBreakThree);
@@ -132,6 +148,7 @@ const displayCityInfo = element => {
     // myDiv.appendChild(lineBreak);
     myDiv.appendChild(spanOne);
     myDiv.appendChild(lineBreakOne);
+    spanTwo.appendChild(iconImage);
     myDiv.appendChild(spanTwo);
     myDiv.appendChild(lineBreakTwo);
     myDiv.appendChild(spanThree);
@@ -141,13 +158,13 @@ const displayCityInfo = element => {
     document.body.appendChild(myforcast);
 
     displayCategories(element);
+    
 }
 
 // this display the categories or activities options
 const displayCategories = el => {
 
     let myforcast = document.querySelector(".forecast");
-
     let category = document.querySelector('.category');
     category = document.createElement('div');
     category.classList.add("category");
@@ -191,7 +208,6 @@ const displayCategories = el => {
     document.body.appendChild(myforcast);
 
     changeMenuColor(el);
-   
 }
 
 // this change color of menu when the user selects different category 
@@ -207,13 +223,21 @@ const changeMenuColor = event => {
                 }
                 data.target.classList.add("selected") 
                 updateActivityList(data);
-            })
-        });  
+            });
+        });   
 }
 
-// this function update the activities according to the option selected
+/*
+* this function update the activities according to the option selected
+* 
+*/
 const updateActivityList = response => {
-    
+    let state = {};
+    let allCategory = 'all';
+    // state = {
+    //     condition: response.weather[0].main
+    // };
+
     const activities = {
 		teamIn: ['basketball','hockey','volleyball'],
 		teamOutWarm: ['softball/baseball','football/soccer','American football','rowing','tennis','volleyball','ultimate frisbee','rugby'],
@@ -222,18 +246,18 @@ const updateActivityList = response => {
 		soloOutWarm: ['rowing','running','hiking','cycling','rock climbing'],
         soloOutCold: ['snowshoeing','downhill skiing','cross-country skiing','ice skating']
     };
+
     
-    
-    let teamActivity = [...activities.teamIn, ...activities.soloIn ];
+  let teamActivity = [];
+  teamActivity.push(...activities['soloIn'], ...activities['teamIn'])
     console.log(teamActivity);
     let category = document.querySelector('.category');
-    let activitiesContainer = document.querySelector(".activities");
+    let results = document.querySelector(".results");
 
-    if(response.target.id == 'all' && response.target.classList.contains("selected")) {
+    if(!results) {
         console.log(response.target.id);
-
-        activitiesContainer = document.createElement('div');
-        activitiesContainer.className = "activities";
+        results = document.createElement('div');
+        results.className = "results";
         let myList = document.createElement('ul');
         myList.setAttribute("id", "listAll")
         teamActivity.map(items => {
@@ -241,78 +265,29 @@ const updateActivityList = response => {
             itemList.textContent = items;
             myList.appendChild(itemList);
         })
-        activitiesContainer.appendChild(myList)
-        category.appendChild(activitiesContainer);
-
-    // } else if(response.target.classList.contains("selected") && response.target.id == 'team') {
-       
-    //     let teamActivity = [...activities.teamOutWarm];
-    //     console.log(teamActivity);
-
-    //     let activitiesContainer = document.createElement('div');
-    //     activitiesContainer.className = "activities";
-    //     let myList = document.createElement('ul');
-    //     myList.setAttribute("id", "listTeam")
-    //     teamActivity.map(items => {
-    //         let itemList = document.createElement('li');
-    //         itemList.textContent = items;
-    //         myList.appendChild(itemList);
-    //     })
-    //     activitiesContainer.appendChild(myList)
-    //     document.body.appendChild(activitiesContainer);
-    // } else {
-
-    //     let ulActivities = document.querySelector('#list ul');
-    //     ulActivities.parentNode.replaceChild(myList, ulActivities)
-        
-    // }
-
+        results.appendChild(myList);
+        category.appendChild(results);
     }
 }
 
 window.addEventListener("load", init);
 
-/*
-* This implement burger icon method 1
-* 
-*/
 
-// const toggleBurger = () => {
-//     console.log('i am about the wire this');
+    // state.activities = [];
+   
+	// if (state.condition === "Rain" && response.target.id === 'Solo') {
+    //     state.activities.push(...activities['solo' + 'In']);
+		
+    // } else if (state.condition === "Rain" && allCategory == "Team") {
+    //     state.activities.push(...activities['team' + 'In']);
 
-//     let div = document.querySelector('.menu-items')
-
-//     if(!div) {
-//         let div = document.createElement('div');
-//         div.classList.add("menu-items");
-//         let ul = document.createElement('ul');
-//         ul.setAttribute("id", "items");
-//         let createLine1 = document.createElement('hr');
-//         let createLine2 = document.createElement('hr');
-//         let li1 = document.createElement('li');
-//         let li2 = document.createElement('li');
-//         let li3 = document.createElement('li');
-//         let linebreak1 = document.createElement('br');
-//         let linebreak2 = document.createElement('br');
-
-//         li1.innerHTML = "Full Schedule";
-//         li2.innerHTML = "FBL Events";
-//         li3.innerHTML = "2020 FBL Drafts";
-       
-//         ul.appendChild(li1);
-//         ul.appendChild(linebreak1);
-//         ul.appendChild(createLine1);
-//         ul.appendChild(li2);
-//         ul.appendChild(linebreak2);
-//         ul.appendChild(createLine2);
-//         ul.appendChild(li3);
-//         div.appendChild(ul);
-//         document.body.appendChild(div);
-//     } else {
-//         // let myUl = document.querySelector("#items");
-//         // myUl.remove();
-//         // div.remove();
-//         div.parentNode.removeChild(div);
-//     }
-//   }
-
+    // } else if (state.condition === "Snow" || state.degFInt < 50 && allCategory == "solo") {
+    //     state.activities.push(...activities['solo' + 'OutCold']);
+		
+    // } else if (state.condition === "Snow" || state.degFInt < 50 && allCategory == "Team") {
+    //     state.activities.push(...activities['team' + 'OutCold']);
+		
+	// }
+    // else {
+	// 	state.activities.push(...activities['solo' + 'OutWarm'], ...activities['team' + 'OutWarm']);
+    // }

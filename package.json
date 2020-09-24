@@ -1,0 +1,25 @@
+{
+  "name": "fab_basketball_league",
+  "version": "1.0.0",
+  "description": "\"# Fab_BasketBall_League\"",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fab-Advanced-JavaScript/Fab_BasketBall_League.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fab-Advanced-JavaScript/Fab_BasketBall_League/issues"
+  },
+  "homepage": "https://github.com/Fab-Advanced-JavaScript/Fab_BasketBall_League#readme"
+}

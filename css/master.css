@@ -185,7 +185,7 @@ body {
   ;
 }
 
-.activities, #listAll {
+.results, #listAll {
   list-style-type: none;
   height: 10em;
   font-size: 15px;
@@ -200,8 +200,8 @@ body {
   position: absolute;
   background: black;
   top: 6em;
-  width: 12%;
-  height: 32%;
+  width: 22%;
+  height: 55.5%;
   overflow: hidden;
   padding-top: 1em;
   margin-left: -1em;
@@ -218,17 +218,16 @@ body {
 
 .liBurger a{
   color: #c4de00;
-  padding-top: 1em;
 }
 
 /* show the menu */
 .showNav {
-  transform: translateY(0);
+  transform: translate(0);
 }
 
 hr.lihr {
   background-color: #c4de00;
-  margin-right: 4em;;
+  margin-right: 5em;
 }
 
 
