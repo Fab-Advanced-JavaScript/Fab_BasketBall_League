@@ -270,6 +270,7 @@ const updateActivityList = response => {
     }
 }
 
+
 window.addEventListener("load", init);
 
 
