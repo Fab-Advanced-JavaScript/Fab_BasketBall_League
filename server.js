@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('request');
 let bodyParser = require('body-parser');
+const nba = require('nba-api-client');
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
@@ -20,18 +21,26 @@ let options = {
     }
   };
 
+  let jsonData = {}
+
     request(options, (error, response, body) => {
         if (error) throw err
         let jsonData = JSON.parse(body);
-        console.log(jsonData);
-    
+        // console.log(jsonData);
     });
 
 
 /** restFul api */
-// app.get("/api/allPlayers", (req, res) => {
+app.get("/api/allPlayers", (req, res) => {
+  // res.json(jsonData)
+});
 
-// });
+/** get url of nba teams logo */
+
+let logo = nba.getTeamLogoURLs("clippers")
+  console.log(logo);
+
+
 
 app.listen(port, () => {
     console.log(`I am listening to a port ${port}`);

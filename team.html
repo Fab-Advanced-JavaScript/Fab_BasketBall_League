@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBL Team</title>
+    <script src="js/burgerMenu.js" charset="utf-8"></script>
+    <script src="js/nbaData.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+   
+</head>
+<body>
+
+    <header>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+            <a class="nav-link" id="fbar" href="#">Fab BasketBall League</a>
+            </li>
+        </ul>
+    </header>
+
+<!-- tags for the main menu-->
+<div>
+    <ul class="ulMain">
+        <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
+        <li class="liMain"><a href="index.html">Home</a></li>
+        <li class="liMain"><a href="#score">Scores</a></li>
+        <li class="liMain"><a href="#video">Videos</a></li>
+        <li class="liMain"><a href="#players">Players</a></li>
+        <li class="liMain"><a href="team.html">Teams</a></li>
+        <li class="liMain" id="store"><a href="#shop">Store</a></li>
+    </ul>
+</div>
+
+<!-- tags for the person account icon -->
+<div class="dropdown">
+    <button class="accountbtn">
+        <img src ="images/account_circle-24px.svg" alt="account person" id="account">
+    </button>
+    <div class="dropdown-content">
+        <a href="#">Account Details</a>
+        <a href="#">Help</a>
+        <hr>
+        <a href="#">Hide Score</a>
+    </div>
+  </div>
+
+  <!-- tags for the burger menu-->
+  <nav class="burger-items">
+    <img src="images/closebtn.png" alt="close button" style="height: 30px; width: 25px; margin-left: 14.5em;" id ="closebtn">
+    <br>
+    <ul class="navburger">
+        <li class="liBurger"><a href="#">Full schedule</a></li><hr class="lihr">
+        <li class="liBurger"><a href="#">Scores</a></li><hr class="lihr">
+        <li class="liBurger"><a href="#">Tickets</a></li><hr class="lihr">
+        <li class="liBurger"><a href="#">Trivia</a></li><hr class="lihr">
+        <li class="liBurger"><a href="#">2020 FBL Draft</a></li><hr class="lihr">
+        <li class="liBurger"><a href="#">FBL Music BASE: Line PlayList</a></li>
+    </ul>
+</nav>
+
+<!-- team list content-->
+<div id="container">
+    <section id="teamlist"> 
+        <div class='team_list_scroll'>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/ATL.svg"  alt="Atlanta Logo"><a href="">Atlanta Hawks</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/BOS.svg"  alt="Atlanta Logo"><a href="">Boston Celtics</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/BKN.svg"  alt="Atlanta Logo"><a href="">Booklyn</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/CHA.svg"  alt="Atlanta Logo"><a href="">Charlotte</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/CHI.svg"  alt="Atlanta Logo"><a href="">Chicago</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/CLE.svg"  alt="Atlanta Logo"><a href="">Cleveland</a></p>
+            <p class="logo"><img  src="https://nba.com/assets/logos/teams/primary/web/DAL.svg"  alt="Atlanta Logo"><a href="">Dallas</a></p>
+
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/DEN.svg"  alt="Atlanta Logo"><a href="">Denver Nuggets</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/DET.svg"  alt="Atlanta Logo"><a href="">Detroit Pistons</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/GSW.svg"  alt="Atlanta Logo"><a href="">Golden State Warriors</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/HOU.svg"  alt="Atlanta Logo"><a href="">Houston Rockets</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/IND.svg"  alt="Atlanta Logo"><a href="">Indiana Pacers</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/LAC.svg"  alt="Atlanta Logo"><a href="">LA Clippers</a></p>
+            <p class="logo"><img  src="https://nba.com/assets/logos/teams/primary/web/LAL.svg"  alt="Atlanta Logo"><a href="">Los Angeles Lakers</a></p>
+
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/MEM.svg"  alt="Atlanta Logo"><a href="">Memphis Grizzlies</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/MIA.svg"  alt="Atlanta Logo"><a href="">Miami Heat</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/MIL.svg"  alt="Atlanta Logo"><a href="">Milwaukee Bucks</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/MIN.svg"  alt="Atlanta Logo"><a href="">Minnesota Timberwolves</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/NOP.svg"  alt="Atlanta Logo"><a href="">New Orleans Pelicans</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/NYK.svg"  alt="Atlanta Logo"><a href="">New York Knicks</a></p>
+            <p class="logo"><img  src="https://nba.com/assets/logos/teams/primary/web/OKC.svg"  alt="Atlanta Logo"><a href="">Oklahoma City Thunder</a></p>
+
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/ORL.svg"  alt="Atlanta Logo"><a href="">Orlando Magic</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/PHI.svg"  alt="Atlanta Logo"><a href="">Philadelphia 76ers</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/PHX.svg"  alt="Atlanta Logo"><a href="">Phoenix Suns</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/POR.svg"  alt="Atlanta Logo"><a href="">Portland Trail Blazers</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/SAC.svg"  alt="Atlanta Logo"><a href="">Sacramento Kings</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/SAS.svg"  alt="Atlanta Logo"><a href="">San Antonio Spurs</a></p>
+            <p class="logo"><img  src="https://nba.com/assets/logos/teams/primary/web/TOR.svg"  alt="Atlanta Logo"><a href="">Toronto Raptors</a></p>
+            <p class="logo"><img src="https://nba.com/assets/logos/teams/primary/web/UTA.svg"  alt="Atlanta Logo"><a href="">Utah Jazz</a></p>
+            <p class="logo"><img  src="https://nba.com/assets/logos/teams/primary/web/WAS.svg"  alt="Atlanta Logo"><a href="">Washington Wizards</a></p>
+        </div>
+    </section>
+
+    <section class="team_details">
+        <div>
+            <h1>name of the Team</h1>
+            <h2>some other info about it</h2>
+        </div>
+    </section>
+</div>
+    
+</body>
+</html>

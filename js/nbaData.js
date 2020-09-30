@@ -4,7 +4,7 @@ const init_nba =() => {
 
 const getData = () => {
 
-    let url = "https://free-nba.p.rapidapi.com/players?page=0";
+    let url = "https://free-nba.p.rapidapi.com/teams?page=0";
     const settings = {
         method: "GET",
         headers: {
@@ -20,6 +20,10 @@ const getData = () => {
     }).catch(err => {
         console.log(err);
     });
+}
+
+const drawTeamInfo = () => {
+    
 }
 
 window.addEventListener("load", init_nba)
