@@ -77,9 +77,7 @@ class TaskManager {
     TeamModel.find({}, (err, docs) => {
       if(err) throw err
       console.log("display data from  Mongodb");
-      docs.forEach(element => {
-        callback(element);
-      });
+        callback(docs);
 
     })
   }

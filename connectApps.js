@@ -19,8 +19,7 @@ const taskObj = new TaskManager();
 /** restFul api */
 app.get("/api/allTeams", (req, res) => {
     taskObj.findTeamData(data => {
-        console.log(data);
-        // res.json(data);
+        res.json(data);
     })
 });
     
