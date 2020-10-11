@@ -14,28 +14,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const taskObj = new TaskManager();
 
 /** insert data into the MongoDb */
-
-// taskObj.connectToInsert(data => {
-//     console.log(data);
-// });
-
-taskObj.getApiData();
-
-/** get data from the api */
-
-// taskObj.getApiData(data => {
-//     console.log(data);
-// })
+// taskObj.getApiData();
 
 /** restFul api */
-// app.get("/api/allPlayers", (req, res) => {
-//     taskObj.findDocuments(data => {
-//         console.log("Document retrieved");
-//         res.json(data)
-//         console.log("------------------");
-//         console.log(data);
-//     })
-//   });
+app.get("/api/allTeams", (req, res) => {
+    taskObj.findTeamData(data => {
+        console.log(data);
+        res.json(data);
+    })
+});
     
   app.listen(port, () => {
     console.log(`I am listening to a port ${port}`);

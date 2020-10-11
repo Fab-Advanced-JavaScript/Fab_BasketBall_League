@@ -1,6 +1,7 @@
 // Import moogose Module
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const TeamModel = require('./teamModel')
 
 class TaskManager {
 
@@ -37,7 +38,6 @@ class TaskManager {
                         .then(res => res.json())
                         .then(data => {
                           console.log(data);
-                          console.log('data before the loop');
                           this.insertTeamData(data)
                         })
                         .catch(err => {
@@ -47,23 +47,9 @@ class TaskManager {
 
   // this insert data to Mongodb
   insertTeamData(results) {
-    
+
     // setting up the connection
     this.setUpConnection();
-
-    // instantiate Shema
-    const Schema = mongoose.Schema;
-
-    //Define a schema
-    let TeamSchema = new Schema({
-      abbreviation: String,
-      city: String,
-      conference: String,
-      full_name: String
-    });
-
-    // compile schema to model
-    const TeamModel = mongoose.model('Team', TeamSchema);
 
     // loop through data
     results.data.map(el => {
@@ -81,6 +67,22 @@ class TaskManager {
         });
     });
     console.log("Succesfully inserted Data From the free-nba.p.rapidapi into MongoDB" );
+  }
+
+  findTeamData(callback) {
+
+    // setting up the connection
+    this.setUpConnection();
+
+    // compile schema to model
+    TeamModel.find({}, (err, docs) => {
+      if(err) throw err
+      console.log("display data from  Mongodb");
+      docs.forEach(element => {
+        callback(element);
+      });
+
+    })
   }
 }
 
