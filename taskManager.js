@@ -47,7 +47,6 @@ class TaskManager {
 
   // this insert data to Mongodb
   insertTeamData(results) {
-
     // setting up the connection
     this.setUpConnection();
 
@@ -69,8 +68,8 @@ class TaskManager {
     console.log("Succesfully inserted Data From the free-nba.p.rapidapi into MongoDB" );
   }
 
+  // this is used to Retrieve data from Mongodb
   findTeamData(callback) {
-
     // setting up the connection
     this.setUpConnection();
 
