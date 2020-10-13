@@ -258,6 +258,13 @@ hr.lihr {
   margin-left: 1em;
 }
 
+/*testing class*/
+
+.open {
+  max-height: 50px;
+  border: 1px solid white;
+}
+
 
 
 

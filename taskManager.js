@@ -18,7 +18,6 @@ class TaskManager {
 
     //Bind connection to error event (to get notification of connection errors)
     db.on('error', console.error.bind(console, 'connection error:'));
-
   }
 
   // this is used to get data from the api
