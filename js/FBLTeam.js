@@ -15,15 +15,15 @@ const getData = () => {
     fetch(teamsUrl)
                .then(response => response.json())
                .then(data  => {
-               console.log(data);
-               return fetch(imgUrl)
-                                   .then(response => response.json())
-                                   .then(imgItems => {
-                                       console.log(imgItems);
-                                       drawTeamList(imgItems)
-                                   }).catch(err => {
-                                       console.error(err);
-                                   });
+                    console.log(data);
+                    return fetch(imgUrl)
+                                        .then(response => response.json())
+                                        .then(imgItems => {
+                                            console.log(imgItems);
+                                            drawTeamList(imgItems)
+                                        }).catch(err => {
+                                            console.error(err);
+                                        });
 
     });
 
@@ -56,27 +56,37 @@ const getData = () => {
 }
 
 const drawTeamInfo = () => {
+     // create Element
+     let divContainer = document.querySelector('.container')
+     let sectionTwo = document.createElement('section');
+     let teamInfo = document.createElement('div')
+
+    // set up classe Names
+    sectionTwo.className = "team_details";
+    teamInfo.className = "infoPerTeam";
+
+
+  
+
+     
     
 }
 
 const drawTeamList = imgElement => {
-
     // create Element
     let divContainer = document.createElement('div');
     let sectionOne = document.createElement('section');
     let listScroll = document.createElement('div');
-    
-
+   
     // set up classe Names
     divContainer.className = "container";
     sectionOne.className = "teamList";
     listScroll.className = "team_list_scroll";
-
-    // select
-    let teamPara = document.querySelectorAll('.logo');
     
+    // loop through the items in the json file
     imgElement.map(items => {
-        teamPara = document.createElement('p');
+        let hr = document.createElement('hr');
+        let teamPara = document.createElement('p');
         teamPara.classList.add('logo')
         let imgList = document.createElement('img');
         imgList.src = `${items.image}`
@@ -87,11 +97,30 @@ const drawTeamList = imgElement => {
         teamPara.appendChild(imgList);
         teamPara.appendChild(teamhyperlink);
         listScroll.appendChild(teamPara);
+        listScroll.appendChild(hr);
     });
    
     sectionOne.appendChild(listScroll);
     divContainer.appendChild(sectionOne);
     document.body.appendChild(divContainer);
+
+    teamListEvent(imgElement);
+}
+
+const teamListEvent = teamPara => {
+
+    let divContainer = document.querySelector('.container')
+    // select all className = logo
+    teamPara = document.querySelectorAll(".logo");
+    console.log(teamPara);
+
+    // add an event listener
+    teamPara.forEach(el => {
+        el.addEventListener('click', data => {
+        console.log(data.target);
+
+        });
+    })
 
 }
 
