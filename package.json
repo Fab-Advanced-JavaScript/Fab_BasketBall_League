@@ -2,7 +2,7 @@
   "name": "fab_basketball_league",
   "version": "1.0.0",
   "description": "\"# Fab_BasketBall_League\"",
-  "main": "server.js",
+  "main": "connectApps.js",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",

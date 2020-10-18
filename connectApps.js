@@ -1,12 +1,22 @@
 const TaskManager = require('./TaskManager');
-const path = require('path');
+const teamRest = require('./restTeams')
+const navMenu = require('./navMenuRouter');
 const express = require("Express");
 const bodyParser = require('body-parser');
 const app = express();
+
 const port = 8080;
 
+  //setup  the router for the Nav Menu and the List of the team in '/Team'
+  app.use('/', navMenu);
+  app.use('/', teamRest);
+
 // configuration
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
+
+// setup to allow the app to access file in public folder
+app.use(express.static('public'));
+app.use('/js', express.static(__dirname +'/js'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,11 +26,6 @@ const taskObj = new TaskManager();
 
 /** insert data into the MongoDb */
 // taskObj.getAllData();
-
-//...
-const teams = require('./restTeams.js');
-// ...
-app.use('/rest/', teams);
 
 
 /** restFul api to get informatin of Team */
@@ -47,12 +52,6 @@ app.get("/api/teamJson", (req, res) => {
         res.json(jsonData);
     })
 });
-
-// app.get('/fbl/teams/atlanta', (req, res) =>{
-//     res.sendFile(path.join(__dirname + '/teams/hawks.html'));
-// });
-
-
 
 // displays a message about the port the app is using
 app.listen(port, () => {

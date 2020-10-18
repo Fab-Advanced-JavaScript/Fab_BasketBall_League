@@ -1,0 +1,47 @@
+
+    /**
+     *   ----- Method One ------
+     * use a fetch to make multiple api call
+     * let datafile1 = fetch("./data.json")
+     * let datafile2 = fetch("./data.json")
+     * Promise.all([teamInfo, teamImg])
+                                    .then(files => {
+                                        files.map(el => {
+                                            processData(el.json());
+                                        })
+                                    }).catch(err => {
+                                        console.error(err);
+                                    })
+
+     * 
+     * then create a separate function to resolve the promise
+     * const processData = promise => {
+        promise 
+            .then (data => {
+                console.log(data);
+                
+                drawTeamList(data);
+                return data
+                // return data;
+            })
+}
+
+     ------- Method Two -------
+      const teamInfoUrl = "http://localhost:8080/api/teamInfo";
+       const teamUrl = "http://localhost:8080/api/teamUrl";
+
+         fetch(teamInfoUrl)
+               .then(response => response.json())
+               .then(data  => {
+                    console.log(data);
+                    return fetch(teamUrl)
+                                        .then(response => response.json())
+                                        .then(imgItems => {
+                                            console.log(imgItems);
+                                            drawTeamList(imgItems);
+                                        }).catch(err => {
+                                            console.error(err);
+                                        });
+                }); 
+
+     */

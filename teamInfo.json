@@ -17,7 +17,7 @@
         
         {
             "id": 3,
-            "team_name": "Booklyn Nets",
+            "team_name": "Brooklyn Nets",
             "url":"http://localhost:8080/fbl/teams/brooklyn",
             "image" : "https://nba.com/assets/logos/teams/primary/web/BKN.svg"
         },
@@ -100,7 +100,7 @@
         {
             "id": 15,
             "team_name": "Memphis Grizzlies",
-            "url":"http://localhost:8080/fbl/teams/mempphis",
+            "url":"http://localhost:8080/fbl/teams/memphis",
             "image" : "https://nba.com/assets/logos/teams/primary/web/MEM.svg"
         },
     
