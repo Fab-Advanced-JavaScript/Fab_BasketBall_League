@@ -5,31 +5,98 @@ const init_fbl =() => {
 
 // this get data from the RestFul api pull from Mongodb
 const getData = () => {
-    const teamsUrl = "http://localhost:8080/api/allTeams";
-    const imgUrl = "teamPics.json";
+    // const allTeamUrl = "http://localhost:8080/api/allTeam";
+    // const teamJsonUrl = "http://localhost:8080/api/teamJson";
+    const teamUrl = "http://localhost:8080/api/teamUrl";
             
     /**
      *   ----- Method One ------
      * use a fetch to make multiple api call
      */
-    fetch(teamsUrl)
-               .then(response => response.json())
-               .then(data  => {
-                    console.log(data);
-                    return fetch(imgUrl)
-                                        .then(response => response.json())
-                                        .then(imgItems => {
-                                            console.log(imgItems);
-                                            drawTeamList(imgItems)
-                                        }).catch(err => {
-                                            console.error(err);
-                                        });
+    fetch(teamUrl)
+                    .then(response => response.json())
+                    .then(el => {
+                        console.log(el);
+                        drawTeamList(el);
+                    }).catch(err => {
+                        console.error(err);
+                    });
+   
+}
 
+const drawTeamInfo = () => {
+     // create Element
+     let divContainer = document.querySelector('.container')
+     let sectionTwo = document.createElement('section');
+     let teamInfo = document.createElement('div')
+
+    // set up classe Names
+    sectionTwo.className = "team_details";
+    teamInfo.className = "infoPerTeam";
+    
+}
+
+const drawTeamList = items => {
+    // create Element
+    let divContainer = document.createElement('div');
+    let sectionOne = document.createElement('section');
+    let listScroll = document.createElement('div');
+   
+    // set up classe Names
+    divContainer.className = "container";
+    sectionOne.className = "teamList";
+    listScroll.className = "team_list_scroll";
+    
+    // loop through the items in the json file
+    items.map(components => {
+        let hr = document.createElement('hr');
+        let teamPara = document.createElement('p');
+        teamPara.classList.add('logo')
+        let imgList = document.createElement('img');
+        imgList.src = `${components.imageUrl}`
+        let teamhyperlink = document.createElement('a')
+        teamhyperlink.setAttribute('href', `${components.teamUrl}`);
+        teamhyperlink.innerHTML =`${components.team_name}`;
+        
+        teamPara.appendChild(imgList);
+        teamPara.appendChild(teamhyperlink);
+        listScroll.appendChild(teamPara);
+        listScroll.appendChild(hr);
     });
+   
+    sectionOne.appendChild(listScroll);
+    divContainer.appendChild(sectionOne);
+    document.body.appendChild(divContainer);
+
+    // teamListEvent(imgElement);
+}
+
+const teamListEvent = teamPara => {
+
+    let divContainer = document.querySelector('.container')
+    // select all className = logo
+    teamPara = document.querySelectorAll(".logo");
+    console.log(teamPara);
+
+    // add an event listener
+    teamPara.forEach(el => {
+        el.addEventListener('click', data => {
+        console.log(data.target);
+
+        });
+    })
+}
+window.addEventListener("load", init_fbl);
+
+
+
+
 
     /**
      *   ----- Method Two ------
      * use a fetch to make multiple api call
+     * let datafile1 = fetch("./data.json")
+     * let datafile2 = fetch("./data.json")
      * Promise.all([teamInfo, teamImg])
                                     .then(files => {
                                         files.map(el => {
@@ -52,81 +119,22 @@ const getData = () => {
             })
 }
      * 
+
+         fetch(teamInfoUrl)
+               .then(response => response.json())
+               .then(data  => {
+                    console.log(data);
+                    return fetch(teamUrl)
+                                        .then(response => response.json())
+                                        .then(imgItems => {
+                                            console.log(imgItems);
+                                            drawTeamList(imgItems);
+                                        }).catch(err => {
+                                            console.error(err);
+                                        });
+                }); 
+
      */
-}
-
-const drawTeamInfo = () => {
-     // create Element
-     let divContainer = document.querySelector('.container')
-     let sectionTwo = document.createElement('section');
-     let teamInfo = document.createElement('div')
-
-    // set up classe Names
-    sectionTwo.className = "team_details";
-    teamInfo.className = "infoPerTeam";
-
-
-  
-
-     
-    
-}
-
-const drawTeamList = imgElement => {
-    // create Element
-    let divContainer = document.createElement('div');
-    let sectionOne = document.createElement('section');
-    let listScroll = document.createElement('div');
-   
-    // set up classe Names
-    divContainer.className = "container";
-    sectionOne.className = "teamList";
-    listScroll.className = "team_list_scroll";
-    
-    // loop through the items in the json file
-    imgElement.map(items => {
-        let hr = document.createElement('hr');
-        let teamPara = document.createElement('p');
-        teamPara.classList.add('logo')
-        let imgList = document.createElement('img');
-        imgList.src = `${items.image}`
-        let teamhyperlink = document.createElement('a')
-        teamhyperlink.setAttribute('href', '#');
-        teamhyperlink.innerHTML =`${items.team_name}`;
-        
-        teamPara.appendChild(imgList);
-        teamPara.appendChild(teamhyperlink);
-        listScroll.appendChild(teamPara);
-        listScroll.appendChild(hr);
-    });
-   
-    sectionOne.appendChild(listScroll);
-    divContainer.appendChild(sectionOne);
-    document.body.appendChild(divContainer);
-
-    teamListEvent(imgElement);
-}
-
-const teamListEvent = teamPara => {
-
-    let divContainer = document.querySelector('.container')
-    // select all className = logo
-    teamPara = document.querySelectorAll(".logo");
-    console.log(teamPara);
-
-    // add an event listener
-    teamPara.forEach(el => {
-        el.addEventListener('click', data => {
-        console.log(data.target);
-
-        });
-    })
-
-}
-
-window.addEventListener("load", init_fbl);
-
-
 
 
 

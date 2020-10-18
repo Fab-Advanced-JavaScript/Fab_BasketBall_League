@@ -1,7 +1,9 @@
 // Import moogose Module
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
-const TeamModel = require('./teamModel')
+const file = require('fs');
+const TeamModel = require('./teamModel');
+const TeamUrlModel = require('./teamUrlModel');
 
 class TaskManager {
 
@@ -21,10 +23,9 @@ class TaskManager {
   }
 
   // this is used to get data from the api
-  async getApiData() {
-    let url = "https://free-nba.p.rapidapi.com/teams?page=0";
+  getAllData() {
 
-    let options = {
+      let options = {
             method: 'GET',
             headers: {
               'x-rapidapi-host': 'free-nba.p.rapidapi.com',
@@ -32,23 +33,31 @@ class TaskManager {
               useQueryString: true
             }
           };
-    let teamData = fetch(url, options)
-    return await teamData
-                        .then(res => res.json())
-                        .then(data => {
-                          console.log(data);
-                          this.insertTeamData(data)
-                        })
-                        .catch(err => {
-                          console.error(err);
-                        })
+    // urls      
+    let apiUrl = "https://free-nba.p.rapidapi.com/teams?page=0";
+    let teamUrl = "http://localhost:8080/api/teamJson";
+
+    fetch(apiUrl, options)
+                .then(response => response.json())
+                .then(data  => {
+                    console.log(data);
+                    this.insertTeamData(data);
+                    return fetch(teamUrl)
+                                        .then(response => response.json())
+                                        .then(imgItems => {
+                                            console.log(imgItems);
+                                            this.insertTeamUrlInfo(imgItems);
+                                        }).catch(err => {
+                                            console.error(err);
+                                        });
+              });
   }
 
   // this insert data to Mongodb
   insertTeamData(results) {
     // setting up the connection
     this.setUpConnection();
-
+    console.log('team shema');
     // loop through data
     results.data.map(el => {
       // defining the team object
@@ -57,7 +66,7 @@ class TaskManager {
           abbreviation: el.abbreviation,
           city: el.city,
           conference: el.conference,
-          full_name: el.full_name
+          full_name: el.full_name,
         };
         console.log(teamObj);
         TeamModel.collection.insertOne(teamObj, (err, res) => {
@@ -65,6 +74,27 @@ class TaskManager {
         });
     });
     console.log("Succesfully inserted Data From the free-nba.p.rapidapi into MongoDB" );
+  }
+
+  // this insert data to Mongodb
+  insertTeamUrlInfo(docs) {
+  // setting up the connection
+  this.setUpConnection();
+  // loop through data
+  docs.data.map(el => {
+    // defining the team object
+    let teamObjUrl =
+    {
+      team_name: el.team_name,
+      imageUrl: el.image,
+      teamUrl: el.url
+    };
+    console.log(teamObjUrl);
+    TeamUrlModel.collection.insertOne(teamObjUrl, (err, res) => {
+      if(err) throw err
+      });
+    });
+    console.log("Succesfully inserted Data From restFul api name /api/teamInfo" );
   }
 
   // this is used to Retrieve data from Mongodb
@@ -75,11 +105,53 @@ class TaskManager {
     // compile schema to model
     TeamModel.find({}, (err, docs) => {
       if(err) throw err
-      console.log("display data from  Mongodb");
+        console.log("display data from collection TeamInfos");
         callback(docs);
-
     })
   }
+
+  // this is used to Retrieve data from Mongodb
+  findTeamUrl(callback) {
+    // setting up the connection
+    this.setUpConnection();
+
+    //sort name alphabetically or ascending using {team_name: 1}; and  descending{team_name: -1};
+    var mysort = {team_name: 1};
+    // compile schema to model
+    TeamUrlModel.find({}, (err, data) => {
+      if(err) throw err
+        console.log("display data from  collection teamUrl");
+        callback(data);
+    }).sort(mysort);
+  }
+
+  // this is used to read the teamInfo.json file
+  readTeamFile(callback) {
+    let fileName = "teamInfo.json"
+    file.readFile(fileName, (err, data) => {
+      if(err) throw err;
+      callback(data);
+    })
+  }
+
 }
 
 module.exports = TaskManager;
+
+
+
+   // const urls = [apiUrl, teamInfoUrl]
+
+    // urls.map(url => {
+    //   console.log('value of the url:' + url);
+    //   console.log('display data from both end points');
+    //   return fetch(url, options)
+    //                           .then(res => res.json())
+    //                           . then(data => {
+    //                             console.log(data);
+    //                             this.insertTeamData(data);
+    //                             // this.insertTeamUrlInfo(data)
+    //                           }).catch(err => {
+    //                               console.error(err);
+    //                           })
+    // })

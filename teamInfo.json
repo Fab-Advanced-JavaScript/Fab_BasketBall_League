@@ -1,0 +1,210 @@
+
+{
+    "data": [
+        {
+            "id": 1,
+            "team_name": "Atlanta Hawks",
+            "url":"http://localhost:8080/fbl/teams/atlanta",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/ATL.svg"
+        },
+    
+        {
+            "id": 2,
+            "team_name": "Boston Celtics",
+            "url":"http://localhost:8080/fbl/teams/boston",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/BOS.svg"
+        },
+        
+        {
+            "id": 3,
+            "team_name": "Booklyn Nets",
+            "url":"http://localhost:8080/fbl/teams/brooklyn",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/BKN.svg"
+        },
+    
+        {
+            "id": 4,
+            "team_name": "Charlotte Hornets",
+            "url":"http://localhost:8080/fbl/teams/charlotte",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/CHA.svg"
+        },
+    
+        {   
+            "id": 5,
+            "team_name": "Chicago Bulls",
+            "url":"http://localhost:8080/fbl/teams/chicago",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/CHI.svg"
+        },
+    
+        {
+            "id": 6,
+            "team_name": "Cleveland Cavaliers", 
+            "url":"http://localhost:8080/fbl/teams/cleveland",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/CLE.svg"
+        },
+    
+        {
+            "id": 7,
+            "team_name": "Dallas Mavericks",
+            "url":"http://localhost:8080/fbl/teams/dallas",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/DAL.svg"
+        },
+    
+        {
+            "id": 8,
+            "team_name": "Denver Nuggets",
+            "url":"http://localhost:8080/fbl/teams/denver",     
+            "image" : "https://nba.com/assets/logos/teams/primary/web/DEN.svg"
+        },
+    
+        {
+            "id": 9,
+            "team_name": "Detroit Pistons",
+            "url":"http://localhost:8080/fbl/teams/detroit", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/DET.svg"
+        },
+    
+        {
+            "id": 10,
+            "team_name": "Golden State Warriors",   
+            "url":"http://localhost:8080/fbl/teams/goldenState",    
+            "image" : "https://nba.com/assets/logos/teams/primary/web/GSW.svg"
+        },
+    
+        {
+            "id": 11,
+            "team_name": "Houston Rockets",
+            "url":"http://localhost:8080/fbl/teams/houston",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/HOU.svg"
+        },
+    
+        {
+            "id": 12,
+            "team_name": "Indiana Pacers",  
+            "url":"http://localhost:8080/fbl/teams/indiana",    
+            "image" : "https://nba.com/assets/logos/teams/primary/web/IND.svg"
+        },
+        {
+            "id": 13,
+            "team_name": "LA Clippers",
+            "url":"http://localhost:8080/fbl/teams/clippers",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/LAC.svg"
+        },
+    
+        {
+            "id": 14,
+            "team_name": "Los Angeles Lakers",
+            "url":"http://localhost:8080/fbl/teams/lakers",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/LAL.svg"
+        },
+        {
+            "id": 15,
+            "team_name": "Memphis Grizzlies",
+            "url":"http://localhost:8080/fbl/teams/mempphis",
+            "image" : "https://nba.com/assets/logos/teams/primary/web/MEM.svg"
+        },
+    
+        {
+            "id": 16,
+            "team_name": "Miami Heat", 
+            "url":"http://localhost:8080/fbl/teams/miami",   
+            "image" : "https://nba.com/assets/logos/teams/primary/web/MIA.svg"
+        },
+        {
+            "id": 17,
+            "team_name": "Milwaukee Bucks",
+            "url":"http://localhost:8080/fbl/teams/milwaukee", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/MIL.svg"
+        },
+    
+        {
+            "id": 18,
+            "team_name": "Minnesota Timberwolves",
+            "url":"http://localhost:8080/fbl/teams/minesota",   
+            "image" : "https://nba.com/assets/logos/teams/primary/web/MIN.svg"
+        },
+        {
+            "id": 19,
+            "team_name": "New Orleans Pelicans",
+            "url":"http://localhost:8080/fbl/teams/newOrleans", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/NOP.svg"
+        },
+        {
+            "id": 20,
+            "team_name": "New York Knicks",      
+            "url":"http://localhost:8080/fbl/teams/newyork", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/NYK.svg"
+        },
+    
+        {
+            "id": 21,
+            "team_name": "Oklahoma City Thunder",
+            "url":"http://localhost:8080/fbl/teams/oklahoma", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/OKC.svg"
+        },
+        {
+            "id": 22,
+            "team_name": "Orlando Magic",   
+            "url":"http://localhost:8080/fbl/teams/orlando",  
+            "image" : "https://nba.com/assets/logos/teams/primary/web/ORL.svg"
+        },
+        {
+            "id": 23,
+            "team_name": "Philadelphia 76ers",
+            "url":"http://localhost:8080/fbl/teams/philadelphia", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/PHI.svg"
+        },
+    
+        {
+            "id": 24,
+            "team_name": "Phoenix Suns",   
+            "url":"http://localhost:8080/fbl/teams/phoenix", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/PHX.svg"
+        },
+        {
+            "id": 25,
+            "team_name": "Portland Trail Blazers",
+            "url":"http://localhost:8080/fbl/teams/portland",  
+            "image" : "https://nba.com/assets/logos/teams/primary/web/POR.svg"
+        },
+    
+        {
+            "id": 26,
+            "team_name": "Sacramento Kingsks",     
+            "url":"http://localhost:8080/fbl/teams/sacramento", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/SAC.svg"
+        },
+    
+        {
+            "id": 27,
+            "team_name": "San Antonio Spurs", 
+            "url":"http://localhost:8080/fbl/teams/sanAntono", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/SAS.svg"
+        },
+    
+        {
+            "id": 28,
+            "team_name": "Toronto Raptors", 
+            "url":"http://localhost:8080/fbl/teams/toronto",     
+            "image" : "https://nba.com/assets/logos/teams/primary/web/TOR.svg"
+        },
+    
+        {
+            "id": 29,
+            "team_name": "Utah Jazz", 
+            "url":"http://localhost:8080/fbl/teams/utah", 
+            "image" : "https://nba.com/assets/logos/teams/primary/web/UTA.svg"
+        },
+    
+        {
+            "id": 30,
+            "team_name": "Washington Wizards",
+            "url":"http://localhost:8080/fbl/teams/washington",  
+            "image" : "https://nba.com/assets/logos/teams/primary/web/WAS.svg"
+        }
+        
+    ]
+
+}
+
+

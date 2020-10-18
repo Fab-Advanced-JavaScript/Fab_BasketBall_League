@@ -237,8 +237,8 @@ hr.lihr {
   margin-top: 5em;
   overflow-x: hidden;
   overflow-y: auto;
-  width: 280px;
-  height: 600px;
+  width: 250px;
+  height: 500px;
   
 }
 
@@ -247,7 +247,7 @@ hr.lihr {
   height: 35px;
 }
 .teamList {
-  margin-left: -4.2em;
+  margin-left: -4em;
 }
 
 /* team details styling*/
@@ -259,6 +259,9 @@ hr.lihr {
 .team_details {
   margin-top: 5em;
   margin-left: 1em;
+}
+.logo {
+  height: 20px;
 }
 
 /*testing class*/
