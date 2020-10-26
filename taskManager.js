@@ -102,12 +102,14 @@ class TaskManager {
     // setting up the connection
     this.setUpConnection();
 
+    //sort name alphabetically or ascending using {team_name: 1}; and  descending{team_name: -1};
+    let mysort = {full_name: 1}; 
     // compile schema to model
     TeamModel.find({}, (err, docs) => {
       if(err) throw err
         console.log("display data from collection TeamInfos");
         callback(docs);
-    })
+    }).sort(mysort);
   }
 
   // this is used to Retrieve data from Mongodb
@@ -116,7 +118,7 @@ class TaskManager {
     this.setUpConnection();
 
     //sort name alphabetically or ascending using {team_name: 1}; and  descending{team_name: -1};
-    var mysort = {team_name: 1};
+    let mysort = {team_name: 1};
     // compile schema to model
     TeamUrlModel.find({}, (err, data) => {
       if(err) throw err

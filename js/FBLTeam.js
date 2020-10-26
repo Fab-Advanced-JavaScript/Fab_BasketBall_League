@@ -1,4 +1,3 @@
-
 const init_fbl =() => {
     getData();
 }
@@ -12,26 +11,14 @@ const getData = () => {
      * use a fetch to make multiple api call
      */
     fetch(teamUrl)
-                    .then(response => response.json())
-                    .then(el => {
-                        console.log(el);
-                        drawTeamList(el);
-                    }).catch(err => {
-                        console.error(err);
-                    });
+                .then(response => response.json())
+                .then(el => {
+                    console.log(el);
+                    drawTeamList(el);
+                }).catch(err => {
+                    console.error(err);
+                });
    
-}
-
-const drawTeamInfo = () => {
-     // create Element
-     let divContainer = document.querySelector('.container')
-     let sectionTwo = document.createElement('section');
-     let teamInfo = document.createElement('div')
-
-    // set up classe Names
-    sectionTwo.className = "team_details";
-    teamInfo.className = "infoPerTeam";
-    
 }
 
 const drawTeamList = items => {
@@ -53,7 +40,9 @@ const drawTeamList = items => {
         let imgList = document.createElement('img');
         imgList.src = `${components.imageUrl}`
         let teamhyperlink = document.createElement('a')
-        teamhyperlink.setAttribute('href', `${components.teamUrl}`);
+        teamhyperlink.setAttribute('href', "#");
+        teamhyperlink.setAttribute('onclick', "loadPages(event)");
+        // teamhyperlink.setAttribute('id', `${components._id}`)
         teamhyperlink.innerHTML =`${components.team_name}`;
         
         teamPara.appendChild(imgList);
@@ -66,23 +55,49 @@ const drawTeamList = items => {
     divContainer.appendChild(sectionOne);
     document.body.appendChild(divContainer);
 
-    // teamListEvent(imgElement);
+    // call display atlanta content if any content does not exist when the page load
+    loadPages(items);
 }
 
-const teamListEvent = teamPara => {
+const loadPages = event => {
+    // this clear the content if it exist
+    clearHtml();
+    //...
+    let teamName = "";
+    if(event.target) {
+        let fullteamName = event.target.innerHTML;
+        teamName = fullteamName.split(' ')[0].toLowerCase();
+    } else {
+        teamName = "atlanta";
+    }
+   
+    let teamurl = `http://localhost:8080/fbl/teams/${teamName}`
 
-    let divContainer = document.querySelector('.container')
-    // select all className = logo
-    teamPara = document.querySelectorAll(".logo");
-    console.log(teamPara);
-
-    // add an event listener
-    teamPara.forEach(el => {
-        el.addEventListener('click', data => {
-        console.log(data.target);
-
-        });
+    fetch(teamurl)
+    .then(res => res.text())
+    .then(html => {
+        console.log(html);
+            let divContainer = document.querySelector('.container')
+            let sectionTwo = document.createElement('section');
+            let div = document.createElement('div');
+            // set up classe Names
+            sectionTwo.className = "team_details";
+            div.classList.add('output');
+            div.innerHTML = html;
+            sectionTwo.appendChild(div);
+            divContainer.appendChild(sectionTwo);
     })
+    .catch((error) => {
+        console.warn(error);
+    });
+
 }
+const clearHtml = () => {
+    removeSection = document.querySelector(".team_details")
+    if(removeSection) {
+        removeSection.remove();
+    }
+}
+
 window.addEventListener("load", init_fbl);
 

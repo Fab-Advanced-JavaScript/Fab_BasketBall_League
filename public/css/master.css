@@ -16,7 +16,7 @@ body {
 */
 
 .container {
-    color : #edece8;
+    /* color : #edece8; */
     margin-left: 50%;
     margin-top: -2em;
 }
@@ -105,8 +105,7 @@ body {
 }
 
 #store {
-  margin-left: 53.5%;
-  font-weight: 500;
+  margin-left: 33em;
 }
 
 #items {
@@ -201,8 +200,8 @@ body {
   position: absolute;
   background: black;
   top: 6em;
-  width: 22%;
-  height: 55.5%;
+  width: 15em;
+  height: 25em;
   overflow: hidden;
   padding-top: 1em;
   margin-left: -1em;
@@ -234,11 +233,11 @@ hr.lihr {
 /*team List styling*/
 
 .team_list_scroll  {
-  margin-top: 5em;
+  margin-left: -3.5em;
   overflow-x: hidden;
   overflow-y: auto;
   width: 250px;
-  height: 500px;
+  height: 400px;
   
 }
 
@@ -246,19 +245,20 @@ hr.lihr {
   width: 54px;
   height: 35px;
 }
-.teamList {
+/* .teamList {
   margin-left: -4em;
-}
+} */
 
 /* team details styling*/
 
-#container {
+.container {
   display: flex;
+  padding-top: 5em;
 }
 
 .team_details {
-  margin-top: 5em;
-  margin-left: 1em;
+  /* margin-top: 5em; */
+  margin-left: 1.2em;
 }
 .logo {
   height: 20px;
