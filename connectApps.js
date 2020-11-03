@@ -15,8 +15,8 @@ const port = 8080;
 // app.use(express.static(__dirname));
 
 // setup to allow the app to access file in public folder
+app.use(express.static('config'));
 app.use(express.static('public'));
-app.use('/js', express.static(__dirname +'/js'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
