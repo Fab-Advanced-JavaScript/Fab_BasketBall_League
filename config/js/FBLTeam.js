@@ -18,7 +18,6 @@ const getData = () => {
                 }).catch(err => {
                     console.error(err);
                 });
-   
 }
 
 const drawTeamList = items => {
@@ -100,4 +99,3 @@ const clearHtml = () => {
 }
 
 window.addEventListener("load", init_fbl);
-

@@ -130,5 +130,4 @@ router.get('/fbl/teams/washington',(req, res) =>{
     res.sendFile(path.join(__dirname + '/teams/washington.html'));
 });
 
-
 module.exports = router;

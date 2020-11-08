@@ -7,9 +7,9 @@ const app = express();
 
 const port = 8080;
 
-  //setup  the router for the Nav Menu and the List of the team in '/Team'
-  app.use('/', navMenu);
-  app.use('/', teamRest);
+//setup  the router for the Nav Menu and the List of the team in '/Team'
+app.use('/', navMenu);
+app.use('/', teamRest);
 
 // configuration
 // app.use(express.static(__dirname));

@@ -1,0 +1,82 @@
+
+  body {
+    font-family: 'Roboto Slab', serif;
+    background-color: #d4d4c2;
+  }
+
+  #fbar {
+    background-color: #000000;
+    color: #edece8;
+    font-style: normal;
+    font-size: 15px;
+    text-align: center;
+    height: 45px;
+    margin-top: -14px;
+    padding-top: 0.2px;
+  }
+
+/*styling for the back button*/
+#back a {
+    margin-left: 3%;
+    border: 2px solid #e6e6d4;
+    background-color: black;
+    color: #edece8;
+    width: 7%;
+    padding: 8px 8px;
+    font-size: 16px;
+}
+
+ul {list-style-type: none;} 
+
+/*styling the button*/
+#submit {
+    color: cornsilk;
+    margin-left: 30%;
+    margin-top: 10%;
+    background-color: black;
+    border-radius: 5px;
+}
+
+/* #quizBtn {
+    padding-top: 5%;
+}; */
+
+/*styling the entire questions and answers*/
+/* main {
+    margin-bottom: 200px;
+} */
+#quizContainer {  
+    /* position: absolute; */
+    height: 400px;
+    width: 450px;
+    margin-top: 5%;
+    margin-left: 30%;
+    border: 1px solid #e6e6d4;
+    background-color: rgb(216, 215, 206);
+    /* transform: translateX(-50%) translateY(-50%); */
+}
+ #title {
+     margin-top: -20px;
+     text-align: center;
+     border: 2px;
+     color: blanchedalmond;
+     background-color: black;
+ }
+
+#quiz > h4 {
+    padding: 8px;
+    font-size: 18px;
+    text-align: center;
+}
+.multiOption  {
+    padding: 10px 0 10px 15px;
+    align-items: center;
+    width: 300px;
+}
+
+#prev, #next {
+    margin-left: 25%;
+    margin-top: 15px;;
+    background-color: black;
+    color: blanchedalmond;
+}
