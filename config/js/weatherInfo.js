@@ -15,7 +15,6 @@ const init = () => {
         soloOutCold: ['snowshoeing','downhill skiing','cross-country skiing','ice skating']
     };
 
-
     /*
     * This function is implemented to  fetch data from the api using async/await then display it on the page
     * 
@@ -23,6 +22,7 @@ const init = () => {
 
     const getCityDetails = async() => {
         await getCityInformation();
+        clearInput();
     }
 
     // this function fetch data from the api
@@ -213,24 +213,25 @@ const init = () => {
             condition : `${weatherInfo.weather[0].description}`,
             degFint : degFInt
         }
+        console.log(state.condition);
 
-        if(state.condition.toLowerCase() == "rain") {
+        if(state.condition.toLowerCase() == "rain" || state.condition.toLocaleLowerCase() == "thunderstorm") {
            type = 'In';
         } else if (state.condition.toLowerCase() == "snow" || state.degFint < 50 ) {
             type = 'OutCold';
         } else {
             type = "OutWarm";
         }
-        updateState(type, category);
+        updateState(type);
     }
 
-    const updateState = (type, category) => {
+    const updateState = (type) => {
         //..
         let stateActivities = []
 
-        if (category.toLowerCase() === "solo") {
+        if (category === "Solo") {
             stateActivities.push(...activities['solo' + type]);
-        } else if (category.toLowerCase() === "team") {
+        } else if (category === "Team") {
             stateActivities.push(...activities['team' + type]);
         } else {
             stateActivities.push(...activities['solo' + type]);
@@ -258,6 +259,13 @@ const init = () => {
         results.appendChild(myList);
         categoryDom.appendChild(results);
     }
+    //.. this will clear the input enter by user
+    const clearInput = () => {
+         clearValue = document.querySelector('#location');
+         clearValue.value = "";
+    }
+
+    //..
     let btnTask = document.querySelector(".forecast-button");
     btnTask.addEventListener("click", getCityDetails);
 }

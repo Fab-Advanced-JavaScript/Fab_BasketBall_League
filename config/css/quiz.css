@@ -29,22 +29,7 @@
 ul {list-style-type: none;} 
 
 /*styling the button*/
-#submit {
-    color: cornsilk;
-    margin-left: 30%;
-    margin-top: 10%;
-    background-color: black;
-    border-radius: 5px;
-}
 
-/* #quizBtn {
-    padding-top: 5%;
-}; */
-
-/*styling the entire questions and answers*/
-/* main {
-    margin-bottom: 200px;
-} */
 #quizContainer {  
     /* position: absolute; */
     height: 400px;
@@ -64,19 +49,40 @@ ul {list-style-type: none;}
  }
 
 #quiz > h4 {
-    padding: 8px;
+    padding-top: 2px;
     font-size: 18px;
     text-align: center;
 }
 .multiOption  {
-    padding: 10px 0 10px 15px;
-    align-items: center;
-    width: 300px;
+    display: block;
+    padding: 3px 0 10px 15px;
+    width: 200px;
+    padding-left: 8em;
 }
 
 #prev, #next {
     margin-left: 25%;
-    margin-top: 15px;;
+    margin-top: 5px;
+    width: 65px;
     background-color: black;
     color: blanchedalmond;
 }
+
+/*submit button styling*/
+.hidden {
+    display: none;
+  
+}
+
+#submit {
+    color: cornsilk;
+    margin-left: 40%;
+    margin-top: 20%;
+    width: 85px;
+    height: 45px;
+    background-color: black;
+    border-radius: 5px;
+
+}
+
+

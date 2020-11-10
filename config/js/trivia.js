@@ -15,11 +15,12 @@ const init_trivia = () => {
         {
           question: "Which one of these is a JavaScript package manager?",
           answers: {
-            a: "Node.js",
+            a: "npm",
             b: "TypeScript",
-            c: "npm"
+            c: "none",
+            d: "Node.JS"
           },
-          correctAnswer: "c"
+          correctAnswer: "a"
         },
         {
           question: "Which tool can you use to ensure code quality?",
@@ -36,17 +37,17 @@ const init_trivia = () => {
     // select document
     let quizContainer = document.querySelector('#quizContainer');
     let quiz = document.querySelector('#quiz');
-    let multiOption = document.querySelector('.multiOption')
+    let multiOption = document.querySelector('.multiOption');
+    let btnContainer = document.querySelector('#btncontainer');
     
     const resultsContainer = document.querySelector('#results');
-    // event handler
-    const submitBtn = document.querySelector('#submit');
-    // Pagination
+    const submitBtn = document.querySelector('.hidden');
     const previousButton = document.querySelector("#prev");
     const nextButton = document.querySelector("#next");;
 
     // set starting question item
     let currentQuestion = 0;
+    let currentAnswer= 0;
     let score = 0;
     
     //.. update question on the
@@ -61,73 +62,52 @@ const init_trivia = () => {
             Object.entries(triviaQuiz.answers).sort((a, b) => b[0].localeCompare(a[0])).map((items, indexItems) => {
                 console.log(indexItems);
                 console.log(items);
+                let hr = document.createElement('hr')
                 let label = document.createElement('label');
                 let input = document.createElement('input');
                 input.type = 'radio';
                 input.name = 'answers'
-                input.value = `${indexItems + 1}`;
+                input.value = `${items[0]}`;
                 label.textContent = `${items[1]}`;
                 multiOption.appendChild(input);
                 multiOption.appendChild(label);
+                multiOption.appendChild(hr);
 
             });
     }
 
-    updateQuestion(currentQuestion);
-
-    //...
-    nextButton.addEventListener("click", event => {
-
+    //.. this function will display the submit button 
+    //. and when the user click on it will display score
+    //...and show the correct answers
+    const displayScore = element => {
         let selectedOption = document.querySelector('input[type=radio]:checked');
-
-        if (!checkOptions(event)) {
-            return
-        } 
-
-        quiz.innerHTML = "";
-        multiOption.innerHTML= "";
-        currentQuestion++;
-
-        if (currentQuestion > myQuestions.length - 1) {
-            currentQuestion = 0;
-        }
-
         let answerSelected = selectedOption.value;
-        if(myQuestions[currentQuestion].correctAnswer == answerSelected) {
-            score++;
-        }
-        // selectedOption.checked = false;
-        
-        // if(currentQuestion == myQuestions.length - 1) {
-        //     nextButton.textContent = "Finish";
+        console.log("selected answer: " + answerSelected);
+        console.log('Correct answer: ' + myQuestions[currentAnswer].correctAnswer);
+       
+        // if(myQuestions[currentQuestion].correctAnswer === answerSelected) {
+        //     score++;
         // }
+        console.log(myQuestions.length);
+        if(currentQuestion == myQuestions.length) {
+            quiz.style.display = 'none';
+            multiOption.style.display = 'none';
+            nextButton.style.display = 'none';
+            previousButton.style.display = 'none';
+            submitBtn.classList.remove('hidden');
+            
+        } else if (currentQuestion == myQuestions.length - 1) {
+            element.target.innerHTML = "Finish";
+        }
 
         // if(currentQuestion == myQuestions.length) {
-        //     quizContainer.style.display = "none";
-        //     resultsContainer.style.display = "";
-        //     resultsContainer.textContent = "your Score is:" + score;
+        //     quizContainer.style.display = 'none';
+        //     resultsContainer.style.display = '';
+        //     resultsContainer.textContent = `Your score is ${score}`;
         //     return
         // }
-           
-        updateQuestion(currentQuestion)
-    });
-
-    // show prev question
-    previousButton.addEventListener("click",  event => {
-
-        if (!checkOptions(event)) {
-            return
-        } 
-        
-        quiz.innerHTML = "";
-        multiOption.innerHTML= "";
-        currentQuestion--;
-
-         if (currentQuestion < 0) {
-             currentQuestion = myQuestions.length - 1;
-         }
-         updateQuestion(currentQuestion);
-   });
+       
+    }
 
    //...
    checkOptions = event => {
@@ -143,7 +123,57 @@ const init_trivia = () => {
             event.target.style.border = 'none';
             return true;
         }
-   }
+    }
 
+    //....kick off function here or launcher below......
+    updateQuestion(currentQuestion);
+
+    //...
+    nextButton.addEventListener("click", event => {
+
+         //.. this check if the option has been selected
+         if (!checkOptions(event)) {
+            return
+        }
+        
+        //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+        currentQuestion++;
+        displayScore(event);
+        currentAnswer++;
+        quiz.innerHTML = "";
+        multiOption.innerHTML= "";
+        
+        if (currentQuestion > myQuestions.length - 1) {
+            currentQuestion = 0;
+        } 
+        
+        if (currentAnswer > myQuestions.length - 1) {
+            currentAnswer = 0;
+        }
+       
+        updateQuestion(currentQuestion)
+    });
+
+    // show prev question
+    previousButton.addEventListener("click",  event => {
+
+        // if (!checkOptions(event)) {
+        //     return
+        // } 
+        //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+        quiz.innerHTML = "";
+        multiOption.innerHTML= "";
+        currentQuestion--;
+
+         if (currentQuestion < 0) {
+             currentQuestion = myQuestions.length - 1;
+             nextButton.innerHTML = "Finish";
+         } else if (currentQuestion < myQuestions.length - 1 ) {
+            nextButton.innerHTML = "Next";
+         }
+
+         updateQuestion(currentQuestion);
+         
+   });
 }
 window.addEventListener('load', init_trivia);
