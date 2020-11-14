@@ -82,7 +82,27 @@ ul {list-style-type: none;}
     height: 45px;
     background-color: black;
     border-radius: 5px;
+}
 
+#results {
+    margin-top: -35%;
+    margin-left: 35px;
+    border: 2px solid black;
+    width: 140px;
+}
+#scoretitle {
+    position: relative;
+    background-color: black;
+    color : blanchedalmond;
+    text-align: center;
+    height: 35px;
+    padding-top: -2%;
+
+}
+#results > label {
+    color: black;
+    font-weight: bold;
+    margin-left: 4em;
 }
 
 

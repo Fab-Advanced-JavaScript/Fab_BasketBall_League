@@ -38,10 +38,8 @@ const init_trivia = () => {
     let quizContainer = document.querySelector('#quizContainer');
     let quiz = document.querySelector('#quiz');
     let multiOption = document.querySelector('.multiOption');
-    let btnContainer = document.querySelector('#btncontainer');
     
-    const resultsContainer = document.querySelector('#results');
-    const submitBtn = document.querySelector('.hidden');
+    const hideSubmitBtn = document.querySelector('.hidden');
     const previousButton = document.querySelector("#prev");
     const nextButton = document.querySelector("#next");;
 
@@ -76,41 +74,56 @@ const init_trivia = () => {
             });
     }
 
-    //.. this function will display the submit button 
-    //. and when the user click on it will display score
-    //...and show the correct answers
-    const displayScore = element => {
-        let selectedOption = document.querySelector('input[type=radio]:checked');
-        let answerSelected = selectedOption.value;
-        console.log("selected answer: " + answerSelected);
-        console.log('Correct answer: ' + myQuestions[currentAnswer].correctAnswer);
-       
-        // if(myQuestions[currentQuestion].correctAnswer === answerSelected) {
-        //     score++;
-        // }
+    //..
+    const reviewQuestions = () => {
+        // use toggle function to display list of question with their correct answers
+        const reviewDom = document.createElement("div");
+        reviewDom.className = "reviews"
+        reviewDom.setAttribute("onclick", displayQuiz)
+
+
+    }
+
+    //..
+    const displayScore = () => {
+        
+
+        const resultsContainer = document.createElement("div");
+        resultsContainer.setAttribute('id', "results");
+
+        let scoreTitle = document.createElement('h2');
+        scoreTitle.setAttribute('id', 'scoretitle')
+        let scoreLabel = document.createElement('label');
+
+        scoreTitle.textContent = "Your Score";
+        scoreLabel.textContent =  `${score}`;
+        resultsContainer.appendChild(scoreTitle);
+        resultsContainer.appendChild(scoreLabel);
+        document.body.appendChild(resultsContainer);
+
+
+    }
+
+    /**
+     * this function will turn the next button to finish button then displays the submit button once click on
+     */
+    
+    const questionsPosition = element => {
         console.log(myQuestions.length);
         if(currentQuestion == myQuestions.length) {
             quiz.style.display = 'none';
             multiOption.style.display = 'none';
             nextButton.style.display = 'none';
             previousButton.style.display = 'none';
-            submitBtn.classList.remove('hidden');
+            hideSubmitBtn.classList.remove('hidden');
             
         } else if (currentQuestion == myQuestions.length - 1) {
             element.target.innerHTML = "Finish";
         }
-
-        // if(currentQuestion == myQuestions.length) {
-        //     quizContainer.style.display = 'none';
-        //     resultsContainer.style.display = '';
-        //     resultsContainer.textContent = `Your score is ${score}`;
-        //     return
-        // }
-       
     }
 
    //...
-   checkOptions = event => {
+   const checkOptions = event => {
 
         let selectedOption = document.querySelector('input[type=radio]:checked');
         nextButton.style.border = 'none';
@@ -138,15 +151,17 @@ const init_trivia = () => {
         
         //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
         currentQuestion++;
-        displayScore(event);
-        currentAnswer++;
+        questionsPosition(event);
         quiz.innerHTML = "";
         multiOption.innerHTML= "";
-        
+
+          //.. set the current question to index 0 once it hit the index 3 or the last question in the array
         if (currentQuestion > myQuestions.length - 1) {
             currentQuestion = 0;
         } 
-        
+
+        //.. set the current answer to index0 once it hit the index 3 or the last answer in the array
+        currentAnswer++;
         if (currentAnswer > myQuestions.length - 1) {
             currentAnswer = 0;
         }
@@ -156,10 +171,6 @@ const init_trivia = () => {
 
     // show prev question
     previousButton.addEventListener("click",  event => {
-
-        // if (!checkOptions(event)) {
-        //     return
-        // } 
         //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
         quiz.innerHTML = "";
         multiOption.innerHTML= "";
@@ -174,6 +185,33 @@ const init_trivia = () => {
 
          updateQuestion(currentQuestion);
          
-   });
+    });
+
+    // declaring the submit button
+    const submitBtn = document.querySelector('#submit');
+    submitBtn.addEventListener("click", () => {
+        console.log("dry test.......");
+        if(submitBtn) {
+            submitBtn.remove();
+            displayScore();
+        }
+
+
+
+       
+   })
+
 }
 window.addEventListener('load', init_trivia);
+
+
+
+// let selectedOption = document.querySelector('input[type=radio]:checked');
+        // let answerSelected = selectedOption.value;
+        // console.log("selected answer: " + answerSelected);
+        // console.log('Correct answer: ' + myQuestions[currentAnswer].correctAnswer);
+        // console.log("dry test.......");
+
+        // if(myQuestions[currentQuestion].correctAnswer === answerSelected) {
+        //     score++;
+        // }
