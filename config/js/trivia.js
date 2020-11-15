@@ -36,6 +36,7 @@ const init_trivia = () => {
 
     // select document
     let quizContainer = document.querySelector('#quizContainer');
+    let main = document.querySelector('main');
     let quiz = document.querySelector('#quiz');
     let multiOption = document.querySelector('.multiOption');
     
@@ -47,67 +48,99 @@ const init_trivia = () => {
     let currentQuestion = 0;
     let currentAnswer= 0;
     let score = 0;
-    
+
     //.. update question on the
-    const updateQuestion = (questionIndex) => {
-
+    const updateQuestion = questionIndex => {
         const triviaQuiz = myQuestions[questionIndex];
-            let header4 = document.createElement('h4');
-            header4.textContent = `${questionIndex + 1} . ${triviaQuiz.question}`;
-            quiz.appendChild(header4);
+        let header4 = document.createElement('h4');
+        header4.textContent = `${questionIndex + 1} . ${triviaQuiz.question}`;
+        quiz.appendChild(header4);
 
-            //... this loop through properties of the answers objects using Obeject.entiries = [key, values]
-            Object.entries(triviaQuiz.answers).sort((a, b) => b[0].localeCompare(a[0])).map((items, indexItems) => {
-                console.log(indexItems);
-                console.log(items);
-                let hr = document.createElement('hr')
-                let label = document.createElement('label');
-                let input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'answers'
-                input.value = `${items[0]}`;
-                label.textContent = `${items[1]}`;
-                multiOption.appendChild(input);
-                multiOption.appendChild(label);
-                multiOption.appendChild(hr);
+        //... this loop through properties of the answers objects using Obeject.entiries = [key, values]
+        Object.entries(triviaQuiz.answers).sort((a, b) => b[0].localeCompare(a[0])).map((items, indexItems) => {
+            console.log(indexItems);
+            console.log(items);
+            let hr = document.createElement('hr')
+            let label = document.createElement('label');
+            let input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answers'
+            input.value = `${items[0]}`;
+            label.textContent = `${items[1]}`;
+            multiOption.appendChild(input);
+            multiOption.appendChild(label);
+            multiOption.appendChild(hr);
 
-            });
+        });
     }
 
-    //..
-    const reviewQuestions = () => {
-        // use toggle function to display list of question with their correct answers
-        const reviewDom = document.createElement("div");
-        reviewDom.className = "reviews"
-        reviewDom.setAttribute("onclick", displayQuiz)
-
-
-    }
-
-    //..
+    //.. display the score
     const displayScore = () => {
-        
-
-        const resultsContainer = document.createElement("div");
-        resultsContainer.setAttribute('id', "results");
-
-        let scoreTitle = document.createElement('h2');
-        scoreTitle.setAttribute('id', 'scoretitle')
+        let sectionScore = document.createElement("section");
+        sectionScore.setAttribute('class', "results");
+        let resultsTile = document.createElement("div");
+        resultsTile.setAttribute('id', 'scoreTitle');
+        let resultsScore = document.createElement("div");
+        resultsScore.setAttribute('id', 'scoreOutput')
+        let resultsSummary = document.createElement("div");
+        resultsSummary.setAttribute('id', 'scoreSummary')
+        //...
+        let scoreTitle = document.createElement('h4');
         let scoreLabel = document.createElement('label');
-
+        let scoreSummary = document.createElement('label');
+        //..
+        let colorDiv = document.createElement("div");
+        colorDiv.className = "colorInfo"
+        let correct = document.createElement('label');
+        let incorrect = document.createElement('label');
+        
+        let colorCorrect = document.createElement('span');
+        let colorIncorrect = document.createElement('span');
+        let linebr1 = document.createElement('br')
+        let linebr2 = document.createElement('br')
+        //..
+        correct.textContent = "Correct Answer: ";
+        incorrect.textContent = "Incorrect Answer: ";
+        colorCorrect.textContent = " c";
+        colorCorrect.style.backgroundColor = "#0ac99a";  //gree color  #00b344
+        colorCorrect.style.width = "10px";
+        colorIncorrect.style.backgroundColor = "#bf0f0f";  // red color
+        colorIncorrect.style.width = "10px";
+        colorIncorrect.textContent = "c ";
+        //..
         scoreTitle.textContent = "Your Score";
-        scoreLabel.textContent =  `${score}`;
-        resultsContainer.appendChild(scoreTitle);
-        resultsContainer.appendChild(scoreLabel);
-        document.body.appendChild(resultsContainer);
-
+        scoreLabel.textContent =  `${score}/${myQuestions.length}`;
+    
+        if(score <= myQuestions.length - 1) {
+            scoreSummary.textContent =  `You failed`;
+            scoreSummary.style.color =  "#bf0f0f";
+        } else {
+            scoreSummary.textContent =  `you passed`;
+            scoreSummary.style.color =  "#00b344";
+        }
+        //.. appending child
+        resultsTile.appendChild(scoreTitle);
+        resultsScore.appendChild(scoreLabel);
+        resultsSummary.appendChild(scoreSummary);
+        sectionScore.appendChild(resultsTile);
+        sectionScore.appendChild(resultsScore);
+        sectionScore.appendChild(resultsSummary);
+        main.appendChild(sectionScore);
+        main.appendChild(linebr1);
+        colorDiv.appendChild(correct)
+        colorDiv.appendChild(colorCorrect)
+        colorDiv.appendChild(linebr2)
+        colorDiv.appendChild(incorrect)
+        colorDiv.appendChild(colorIncorrect)
+        // correct.appendChild(colorCorrect)
+        // incorrect.appendChild(colorIncorrect)
+        main.appendChild(colorDiv);
 
     }
 
     /**
      * this function will turn the next button to finish button then displays the submit button once click on
      */
-    
     const questionsPosition = element => {
         console.log(myQuestions.length);
         if(currentQuestion == myQuestions.length) {
@@ -122,9 +155,8 @@ const init_trivia = () => {
         }
     }
 
-   //...
+   //.. this prevent the user to go to the next question if no options were selected
    const checkOptions = event => {
-
         let selectedOption = document.querySelector('input[type=radio]:checked');
         nextButton.style.border = 'none';
         previousButton.style.border = 'none';
@@ -137,81 +169,149 @@ const init_trivia = () => {
             return true;
         }
     }
+    const displayNext = () => {
 
-    //....kick off function here or launcher below......
+        nextButton.addEventListener("click", event => {
+            //.. this check if the option has been selected
+            if (!checkOptions(event)) {
+               return
+           }
+           //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+           currentQuestion++;
+           questionsPosition(event);
+           quiz.innerHTML = "";
+           multiOption.innerHTML= "";
+   
+             //.. set the current question to index 0 once it hit the index 3 or the last question in the array
+           if (currentQuestion > myQuestions.length - 1) {
+               currentQuestion = 0;
+           } 
+   
+           //.. set the current answer to index0 once it hit the index 3 or the last answer in the array
+           currentAnswer++;
+           if (currentAnswer > myQuestions.length - 1) {
+               currentAnswer = 0;
+           }
+           updateQuestion(currentQuestion)
+       });
+    }
+
+    //.. this function is used to display the previous question
+    const displayPrevious = () => {
+        // show prev question
+        previousButton.addEventListener("click",  () => {
+            //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+            quiz.innerHTML = "";
+            multiOption.innerHTML= "";
+            currentQuestion--;
+
+            if (currentQuestion < 0) {
+                currentQuestion = myQuestions.length - 1;
+                nextButton.innerHTML = "Finish";
+            } else if (currentQuestion < myQuestions.length - 1 ) {
+                nextButton.innerHTML = "Next";
+            }
+            updateQuestion(currentQuestion);
+        });
+    }
+
+    //..
+    const reviewAnswers = () => {
+        // use toggle function to display list of question with their correct answers
+        let reviewDom = document.createElement("div");
+        reviewDom.addEventListener("click", outputAnswers);
+        reviewDom.className = "reviews"
+
+        let ReviewH4 = document.createElement('h4')
+        ReviewH4.textContent = "Review Answers";
+        reviewDom.style.backgroundColor = "#0ac99a"; // type of green
+        reviewDom.style.color = "#0d2959";  
+        reviewDom.style.width = "145px";
+        reviewDom.style.marginLeft = "50%";
+        reviewDom.style.textAlign = "center";
+        reviewDom.style.borderRadius = " 15px";
+        reviewDom.style.height = "25px";
+        reviewDom.style.cursor = "pointer";
+        reviewDom.style.marginTop = "-8em";
+        reviewDom.appendChild(ReviewH4);
+        main.appendChild(reviewDom);
+    }
+    //..
+    const outputAnswers = () => {
+
+        console.log('review button was clicked ........................');
+        let oldReview = document.querySelector(".reviews");
+        if(oldReview) {
+            oldReview.remove();
+        }
+
+        const output = [];
+        let quizDiv = document.createElement('div');
+        let answerDiv = document.createElement('div');
+        myQuestions.map((items, itemIndex) => {
+            quizDiv.className = "outputQuestions"
+            let header4 = document.createElement('h4');
+            header4.textContent = `${itemIndex + 1} . ${items.question}`;
+            console.log("questions: " + items.question);
+            let answers = []
+            for(const[key, value] of Object.entries(items.answers)) {
+                console.log("answers: " + items.answers);
+                answerDiv.className = "outputAnswers"
+                let label = document.createElement('label');
+                let input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'answers'
+                input.value = `${key}`;
+                label.textContent = `${value}`;
+                console.log("key ->" + `${key}`);
+                console.log("value -> " + `${value}` );
+                answerDiv.appendChild(input);
+                answerDiv.appendChild(label);
+                // answers.push(`${answerDiv}`)
+                // console.log(answers);
+               
+            }
+            quizDiv.appendChild(header4);
+            // answerDiv.appendChild()
+            // output.push(`${quizDiv} ${answers.join("")}`)
+            quizContainer.appendChild(answerDiv);
+            quizContainer.appendChild(quizDiv);
+           
+            
+        });
+        
+
+        // quizContainer.textContent = output;
+        
+
+        
+    }
+
+    //.. this fun is used to show submit button
+    const displaySubmitBtn = () => {
+        // this fun display  the submit button
+        const submitBtn = document.querySelector('#submit');
+        submitBtn.addEventListener("click", () => {
+            console.log("dry test.......");
+            if(submitBtn) {
+                submitBtn.remove();
+                displayScore();
+                reviewAnswers();
+            } 
+        })
+    }
+
+    //....kick off functions here or launcher below......
+    //.. display the first question and answer
     updateQuestion(currentQuestion);
 
-    //...
-    nextButton.addEventListener("click", event => {
+    //... display next question
+    displayNext();
+    //.. display the prev question
+    displayPrevious();
 
-         //.. this check if the option has been selected
-         if (!checkOptions(event)) {
-            return
-        }
-        
-        //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
-        currentQuestion++;
-        questionsPosition(event);
-        quiz.innerHTML = "";
-        multiOption.innerHTML= "";
-
-          //.. set the current question to index 0 once it hit the index 3 or the last question in the array
-        if (currentQuestion > myQuestions.length - 1) {
-            currentQuestion = 0;
-        } 
-
-        //.. set the current answer to index0 once it hit the index 3 or the last answer in the array
-        currentAnswer++;
-        if (currentAnswer > myQuestions.length - 1) {
-            currentAnswer = 0;
-        }
-       
-        updateQuestion(currentQuestion)
-    });
-
-    // show prev question
-    previousButton.addEventListener("click",  event => {
-        //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
-        quiz.innerHTML = "";
-        multiOption.innerHTML= "";
-        currentQuestion--;
-
-         if (currentQuestion < 0) {
-             currentQuestion = myQuestions.length - 1;
-             nextButton.innerHTML = "Finish";
-         } else if (currentQuestion < myQuestions.length - 1 ) {
-            nextButton.innerHTML = "Next";
-         }
-
-         updateQuestion(currentQuestion);
-         
-    });
-
-    // declaring the submit button
-    const submitBtn = document.querySelector('#submit');
-    submitBtn.addEventListener("click", () => {
-        console.log("dry test.......");
-        if(submitBtn) {
-            submitBtn.remove();
-            displayScore();
-        }
-
-
-
-       
-   })
+    //.. show submit button
+    displaySubmitBtn();
 
 }
 window.addEventListener('load', init_trivia);
-
-
-
-// let selectedOption = document.querySelector('input[type=radio]:checked');
-        // let answerSelected = selectedOption.value;
-        // console.log("selected answer: " + answerSelected);
-        // console.log('Correct answer: ' + myQuestions[currentAnswer].correctAnswer);
-        // console.log("dry test.......");
-
-        // if(myQuestions[currentQuestion].correctAnswer === answerSelected) {
-        //     score++;
-        // }

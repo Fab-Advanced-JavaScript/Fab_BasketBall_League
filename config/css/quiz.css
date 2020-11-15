@@ -3,7 +3,7 @@
     font-family: 'Roboto Slab', serif;
     background-color: #d4d4c2;
   }
-
+/*styling the header*/
   #fbar {
     background-color: #000000;
     color: #edece8;
@@ -20,21 +20,21 @@
     margin-left: 3%;
     border: 2px solid #e6e6d4;
     background-color: black;
-    color: #edece8;
+    color: blanchedalmond;
     width: 7%;
     padding: 8px 8px;
-    font-size: 16px;
 }
 
 ul {list-style-type: none;} 
 
-/*styling the button*/
+/*styling the title, quiz and answers*/
+main {
+    margin-top: 1%;
+}
 
 #quizContainer {  
-    /* position: absolute; */
-    height: 400px;
-    width: 450px;
-    margin-top: 5%;
+    height: 475px;
+    width: 550px;
     margin-left: 30%;
     border: 1px solid #e6e6d4;
     background-color: rgb(216, 215, 206);
@@ -43,7 +43,6 @@ ul {list-style-type: none;}
  #title {
      margin-top: -20px;
      text-align: center;
-     border: 2px;
      color: blanchedalmond;
      background-color: black;
  }
@@ -57,18 +56,19 @@ ul {list-style-type: none;}
     display: block;
     padding: 3px 0 10px 15px;
     width: 200px;
-    padding-left: 8em;
-}
+    margin: 2.5em 0 0 10em;
 
+}
+/*styling for the prev and next button*/
 #prev, #next {
     margin-left: 25%;
-    margin-top: 5px;
+    margin-top: 5em;
     width: 65px;
     background-color: black;
     color: blanchedalmond;
 }
 
-/*submit button styling*/
+/*submit button and score styling*/
 .hidden {
     display: none;
   
@@ -84,25 +84,32 @@ ul {list-style-type: none;}
     border-radius: 5px;
 }
 
-#results {
-    margin-top: -35%;
-    margin-left: 35px;
-    border: 2px solid black;
-    width: 140px;
-}
-#scoretitle {
-    position: relative;
-    background-color: black;
-    color : blanchedalmond;
+.results {
+    margin-top: -38%;
+    margin-left: 2em;
     text-align: center;
-    height: 35px;
-    padding-top: -2%;
+    border: 2.5px solid #e6e6d4;
+    width: 130px;
+}
+
+#scoreTitle {
+    background-color: black;
+    text-align: center;
+    margin-top: -1.5em;
+    color: blanchedalmond;
 
 }
-#results > label {
+
+#scoreOutput, #scoreSummary {
     color: black;
     font-weight: bold;
-    margin-left: 4em;
+    padding-bottom: 1em;
+
 }
+
+.colorInfo {
+    margin-left: 2em;
+}
+
 
 
