@@ -46,7 +46,7 @@ const init_trivia = () => {
 
     // set starting question item
     let currentQuestion = 0;
-    let currentAnswer= 0;
+    let currentAnswer = 0;
     let score = 0;
 
     //.. update question on the
@@ -73,9 +73,119 @@ const init_trivia = () => {
 
         });
     }
+    /**
+     * this function will turn the next button to finish button then displays the submit button once click on
+     */
+    const questionsPosition = element => {
+        console.log(myQuestions.length);
+        if(currentQuestion == myQuestions.length) {
+            quiz.style.display = 'none';
+            multiOption.style.display = 'none';
+            nextButton.style.display = 'none';
+            previousButton.style.display = 'none';
+            hideSubmitBtn.classList.remove('hidden');
+            
+        } else if (currentQuestion == myQuestions.length - 1) {
+            element.target.innerHTML = "Finish";
+        }
+    }
+    //..
+    const checkedValue = () => {
+        const selectedAnswer = document.querySelectorAll('input[name="answers"]');
+        // let selectedvalue;
+        for(const element of selectedAnswer) {
+            element.checked = true
+            // if(element.checked) {
+                // console.log(element);
+                // selectedvalue = element.value
+                // break;
+                // selectedvalue = true;
+                // return
+            // }
+            
+        }
+
+        // let selectedOption = document.querySelector('input[type="radio"]:checked');
+        // selectedOption = true;
+
+    }
+
+   //.. this prevent the user to go to the next question if no options were selected
+   const preventUsers = event => {
+        let selectedOption = document.querySelector('input[type=radio]:checked');
+        nextButton.style.border = 'none';
+        previousButton.style.border = 'none';
+        if(!selectedOption) {
+            event.preventDefault()
+            event.target.style.border = "3px solid red";
+            return false
+        } else {
+            event.target.style.border = 'none';
+            return true;
+        }
+    }
+    const displayNext = () => {
+        //..
+        nextButton.addEventListener("click", event => {
+            //.. this check if the option has been selected
+            if (!preventUsers(event)) {
+                return
+            }
+            //..
+            let selectedOption = document.querySelector('input[type="radio"]:checked');
+            let answerValue = selectedOption.value;
+            console.log(answerValue);
+            console.log(myQuestions[currentAnswer].correctAnswer);
+            if(answerValue === myQuestions[currentAnswer].correctAnswer) {
+               score++;
+           }
+           //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+           currentQuestion++;
+           questionsPosition(event);
+           quiz.innerHTML = "";
+           multiOption.innerHTML= "";
+   
+             //.. set the current question to index 0 once it hit the index 3 or the last question in the array
+           if (currentQuestion > myQuestions.length - 1) {
+               currentQuestion = 0;
+           } 
+           //.. set the current answer to index0 once it hit the index 3 or the last answer in the array
+           currentAnswer++;
+           if (currentAnswer > myQuestions.length - 1) {
+               currentAnswer = 0;
+           }
+           updateQuestion(currentQuestion)
+        //    checkedValue();
+           
+       });
+    }
+
+    //.. this function is used to display the previous question
+    const displayPrevious = () => {
+        // show prev question
+        previousButton.addEventListener("click",  () => {
+            
+            //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
+            quiz.innerHTML = "";
+            multiOption.innerHTML= "";
+            currentQuestion--;
+           
+            if (currentQuestion < 0) {
+                currentQuestion = myQuestions.length - 1;
+                nextButton.innerHTML = "Finish";
+            } else if (currentQuestion < myQuestions.length - 1 ) {
+                nextButton.innerHTML = "Next";
+            }
+           
+            updateQuestion(currentQuestion);
+            checkedValue();
+          
+        });
+    }
 
     //.. display the score
     const displayScore = () => {
+
         let sectionScore = document.createElement("section");
         sectionScore.setAttribute('class', "results");
         let resultsTile = document.createElement("div");
@@ -102,7 +212,7 @@ const init_trivia = () => {
         correct.textContent = "Correct Answer: ";
         incorrect.textContent = "Incorrect Answer: ";
         colorCorrect.textContent = " c";
-        colorCorrect.style.backgroundColor = "#0ac99a";  //gree color  #00b344
+        colorCorrect.style.backgroundColor = "#0ac99a";  //green color  #00b344
         colorCorrect.style.width = "10px";
         colorIncorrect.style.backgroundColor = "#bf0f0f";  // red color
         colorIncorrect.style.width = "10px";
@@ -111,7 +221,7 @@ const init_trivia = () => {
         scoreTitle.textContent = "Your Score";
         scoreLabel.textContent =  `${score}/${myQuestions.length}`;
     
-        if(score <= myQuestions.length - 1) {
+        if(score <= myQuestions.length - 2) {
             scoreSummary.textContent =  `You failed`;
             scoreSummary.style.color =  "#bf0f0f";
         } else {
@@ -132,87 +242,7 @@ const init_trivia = () => {
         colorDiv.appendChild(linebr2)
         colorDiv.appendChild(incorrect)
         colorDiv.appendChild(colorIncorrect)
-        // correct.appendChild(colorCorrect)
-        // incorrect.appendChild(colorIncorrect)
         main.appendChild(colorDiv);
-
-    }
-
-    /**
-     * this function will turn the next button to finish button then displays the submit button once click on
-     */
-    const questionsPosition = element => {
-        console.log(myQuestions.length);
-        if(currentQuestion == myQuestions.length) {
-            quiz.style.display = 'none';
-            multiOption.style.display = 'none';
-            nextButton.style.display = 'none';
-            previousButton.style.display = 'none';
-            hideSubmitBtn.classList.remove('hidden');
-            
-        } else if (currentQuestion == myQuestions.length - 1) {
-            element.target.innerHTML = "Finish";
-        }
-    }
-
-   //.. this prevent the user to go to the next question if no options were selected
-   const checkOptions = event => {
-        let selectedOption = document.querySelector('input[type=radio]:checked');
-        nextButton.style.border = 'none';
-        previousButton.style.border = 'none';
-        if(!selectedOption) {
-            event.preventDefault()
-            event.target.style.border = "3px solid red";
-            return false
-        } else {
-            event.target.style.border = 'none';
-            return true;
-        }
-    }
-    const displayNext = () => {
-
-        nextButton.addEventListener("click", event => {
-            //.. this check if the option has been selected
-            if (!checkOptions(event)) {
-               return
-           }
-           //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
-           currentQuestion++;
-           questionsPosition(event);
-           quiz.innerHTML = "";
-           multiOption.innerHTML= "";
-   
-             //.. set the current question to index 0 once it hit the index 3 or the last question in the array
-           if (currentQuestion > myQuestions.length - 1) {
-               currentQuestion = 0;
-           } 
-   
-           //.. set the current answer to index0 once it hit the index 3 or the last answer in the array
-           currentAnswer++;
-           if (currentAnswer > myQuestions.length - 1) {
-               currentAnswer = 0;
-           }
-           updateQuestion(currentQuestion)
-       });
-    }
-
-    //.. this function is used to display the previous question
-    const displayPrevious = () => {
-        // show prev question
-        previousButton.addEventListener("click",  () => {
-            //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
-            quiz.innerHTML = "";
-            multiOption.innerHTML= "";
-            currentQuestion--;
-
-            if (currentQuestion < 0) {
-                currentQuestion = myQuestions.length - 1;
-                nextButton.innerHTML = "Finish";
-            } else if (currentQuestion < myQuestions.length - 1 ) {
-                nextButton.innerHTML = "Next";
-            }
-            updateQuestion(currentQuestion);
-        });
     }
 
     //..
@@ -227,7 +257,7 @@ const init_trivia = () => {
         reviewDom.style.backgroundColor = "#0ac99a"; // type of green
         reviewDom.style.color = "#0d2959";  
         reviewDom.style.width = "145px";
-        reviewDom.style.marginLeft = "50%";
+        reviewDom.style.marginLeft = "45%";
         reviewDom.style.textAlign = "center";
         reviewDom.style.borderRadius = " 15px";
         reviewDom.style.height = "25px";
@@ -238,24 +268,25 @@ const init_trivia = () => {
     }
     //..
     const outputAnswers = () => {
-
         console.log('review button was clicked ........................');
         let oldReview = document.querySelector(".reviews");
+        let btncontainer = document.querySelector("#btncontainer")
         if(oldReview) {
             oldReview.remove();
+            btncontainer.remove();
         }
-
-        const output = [];
-        let quizDiv = document.createElement('div');
-        let answerDiv = document.createElement('div');
+        //...
         myQuestions.map((items, itemIndex) => {
+            let quizDiv = document.createElement('div');
+           
             quizDiv.className = "outputQuestions"
             let header4 = document.createElement('h4');
             header4.textContent = `${itemIndex + 1} . ${items.question}`;
             console.log("questions: " + items.question);
-            let answers = []
+            quizDiv.appendChild(header4);
             for(const[key, value] of Object.entries(items.answers)) {
                 console.log("answers: " + items.answers);
+                let answerDiv = document.createElement('div');
                 answerDiv.className = "outputAnswers"
                 let label = document.createElement('label');
                 let input = document.createElement('input');
@@ -267,24 +298,10 @@ const init_trivia = () => {
                 console.log("value -> " + `${value}` );
                 answerDiv.appendChild(input);
                 answerDiv.appendChild(label);
-                // answers.push(`${answerDiv}`)
-                // console.log(answers);
-               
+                quizDiv.appendChild(answerDiv);
             }
-            quizDiv.appendChild(header4);
-            // answerDiv.appendChild()
-            // output.push(`${quizDiv} ${answers.join("")}`)
-            quizContainer.appendChild(answerDiv);
-            quizContainer.appendChild(quizDiv);
-           
-            
+            quizContainer.appendChild(quizDiv)
         });
-        
-
-        // quizContainer.textContent = output;
-        
-
-        
     }
 
     //.. this fun is used to show submit button
