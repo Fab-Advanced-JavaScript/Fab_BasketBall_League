@@ -105,7 +105,10 @@ body {
 }
 
 #store {
-  margin-left: 33em;
+  margin-left: 35em;
+}
+.dropdown {
+  margin-right: 3em;
 }
 
 #items {
@@ -130,6 +133,7 @@ body {
   background-color: grey;
   width: 17.5em;
 }
+
 #location {
   width: 9.5em;
 }

@@ -48,6 +48,10 @@ const init_trivia = () => {
     let currentQuestion = 0;
     let currentAnswer = 0;
     let score = 0;
+    let tempStorage = [];
+    let selectedOption = 0;
+    //....
+    let choices = document.getElementsByName("answers");
 
     //.. update question on the
     const updateQuestion = questionIndex => {
@@ -70,7 +74,6 @@ const init_trivia = () => {
             multiOption.appendChild(input);
             multiOption.appendChild(label);
             multiOption.appendChild(hr);
-
         });
     }
     /**
@@ -89,25 +92,27 @@ const init_trivia = () => {
             element.target.innerHTML = "Finish";
         }
     }
-    //..
-    const checkedValue = () => {
-        const selectedAnswer = document.querySelectorAll('input[name="answers"]');
-        // let selectedvalue;
-        for(const element of selectedAnswer) {
-            element.checked = true
-            // if(element.checked) {
-                // console.log(element);
-                // selectedvalue = element.value
-                // break;
-                // selectedvalue = true;
-                // return
-            // }
-            
+
+    //.. save the value of the selected answer
+    const getRadioInfo = () => {
+        let decision = null;
+        for (const option of choices) {
+            console.log(option);
+            if(option.checked) {
+                console.log('option selected ' + option.checked);
+                decision = option.value;
+            }
         }
-
-        // let selectedOption = document.querySelector('input[type="radio"]:checked');
-        // selectedOption = true;
-
+        return decision;
+    }
+    
+    //.. reporting answer by keeping the input radio button selected
+    const keepAnswers = () => {
+        for(const input of choices) {
+            if (tempStorage[currentQuestion] != null && tempStorage[currentQuestion] == input.value) {
+                input.checked = true;
+            } 
+        }      
     }
 
    //.. this prevent the user to go to the next question if no options were selected
@@ -127,15 +132,19 @@ const init_trivia = () => {
     const displayNext = () => {
         //..
         nextButton.addEventListener("click", event => {
+             //.. keep the selected radio button by returning the value of the input checked and saving it in an empty array
+             let decision = getRadioInfo();
+             tempStorage[currentQuestion] = decision;
+
             //.. this check if the option has been selected
             if (!preventUsers(event)) {
                 return
             }
-            //..
+         
             let selectedOption = document.querySelector('input[type="radio"]:checked');
             let answerValue = selectedOption.value;
-            console.log(answerValue);
-            console.log(myQuestions[currentAnswer].correctAnswer);
+            console.log('the selected  answer: ' + answerValue);
+            console.log('the correct answer: ' + myQuestions[currentAnswer].correctAnswer);
             if(answerValue === myQuestions[currentAnswer].correctAnswer) {
                score++;
            }
@@ -154,9 +163,8 @@ const init_trivia = () => {
            if (currentAnswer > myQuestions.length - 1) {
                currentAnswer = 0;
            }
-           updateQuestion(currentQuestion)
-        //    checkedValue();
-           
+           updateQuestion(currentQuestion);
+           keepAnswers();
        });
     }
 
@@ -164,22 +172,22 @@ const init_trivia = () => {
     const displayPrevious = () => {
         // show prev question
         previousButton.addEventListener("click",  () => {
+            //.. keep the selected radio button by returning the value of the input checked and saving it in an empty array
+            let decision = getRadioInfo();
+            tempStorage[currentQuestion] = decision;
             
             //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
             quiz.innerHTML = "";
             multiOption.innerHTML= "";
             currentQuestion--;
-           
             if (currentQuestion < 0) {
                 currentQuestion = myQuestions.length - 1;
                 nextButton.innerHTML = "Finish";
             } else if (currentQuestion < myQuestions.length - 1 ) {
                 nextButton.innerHTML = "Next";
             }
-           
             updateQuestion(currentQuestion);
-            checkedValue();
-          
+            keepAnswers();
         });
     }
 

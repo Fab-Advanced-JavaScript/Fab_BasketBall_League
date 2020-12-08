@@ -215,7 +215,7 @@ const init = () => {
         }
         console.log(state.condition);
 
-        if(state.condition.toLowerCase() == "rain" || state.condition.toLocaleLowerCase() == "thunderstorm") {
+        if(state.condition.toLowerCase() == "light rain" || state.condition.toLowerCase() == "rain" || state.condition.toLocaleLowerCase() == "thunderstorm") {
            type = 'In';
         } else if (state.condition.toLowerCase() == "snow" || state.degFint < 50 ) {
             type = 'OutCold';

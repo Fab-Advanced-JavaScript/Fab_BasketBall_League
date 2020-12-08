@@ -36,7 +36,7 @@ app.get("/api/allTeams", (req, res) => {
     })
 });
 
-/** restFul api to get information few properties in TeamUrl */
+/** restFul api to get information of few properties in TeamUrl */
 app.get("/api/teamUrl", (req, res) => {
     taskObj.findTeamUrl(data => {
         console.log(data);
