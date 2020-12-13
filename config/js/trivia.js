@@ -49,7 +49,6 @@ const init_trivia = () => {
     let currentAnswer = 0;
     let score = 0;
     let tempStorage = [];
-    let selectedOption = 0;
     //....
     let choices = document.getElementsByName("answers");
 
@@ -79,7 +78,7 @@ const init_trivia = () => {
     /**
      * this function will turn the next button to finish button then displays the submit button once click on
      */
-    const questionsPosition = element => {
+    const positionSubmitBtn = element => {
         console.log(myQuestions.length);
         if(currentQuestion == myQuestions.length) {
             quiz.style.display = 'none';
@@ -140,17 +139,10 @@ const init_trivia = () => {
             if (!preventUsers(event)) {
                 return
             }
-         
-            let selectedOption = document.querySelector('input[type="radio"]:checked');
-            let answerValue = selectedOption.value;
-            console.log('the selected  answer: ' + answerValue);
-            console.log('the correct answer: ' + myQuestions[currentAnswer].correctAnswer);
-            if(answerValue === myQuestions[currentAnswer].correctAnswer) {
-               score++;
-           }
+
            //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
            currentQuestion++;
-           questionsPosition(event);
+           positionSubmitBtn(event);
            quiz.innerHTML = "";
            multiOption.innerHTML= "";
    
@@ -175,7 +167,7 @@ const init_trivia = () => {
             //.. keep the selected radio button by returning the value of the input checked and saving it in an empty array
             let decision = getRadioInfo();
             tempStorage[currentQuestion] = decision;
-            
+
             //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
             quiz.innerHTML = "";
             multiOption.innerHTML= "";
@@ -193,6 +185,15 @@ const init_trivia = () => {
 
     //.. display the score
     const displayScore = () => {
+        let selectedOption = document.querySelector('input[type="radio"]:checked');
+        let answerValue = selectedOption.value;
+        console.log('the selected  answer: ' + answerValue);
+        console.log('the correct answer: ' + myQuestions[currentAnswer].correctAnswer);
+        tempStorage.forEach((element, index) => {
+            if(element  === myQuestions[index].correctAnswer) {
+               score++
+            }
+        });
 
         let sectionScore = document.createElement("section");
         sectionScore.setAttribute('class', "results");
