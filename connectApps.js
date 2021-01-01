@@ -1,4 +1,5 @@
 const TaskManager = require('./TaskManager');
+const PlayersManager = require('./PlayersManager');
 const teamRest = require('./restTeams')
 const navMenu = require('./navMenuRouter');
 const express = require("Express");
@@ -14,7 +15,7 @@ app.use('/', teamRest);
 // configuration
 // app.use(express.static(__dirname));
 
-// setup to allow the app to access file in public folder
+// setup to allow the app to access file in public and config folders
 app.use(express.static('config'));
 app.use(express.static('public'));
 app.use(express.json());
@@ -23,8 +24,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // create an instance of taskManager
 const taskObj = new TaskManager();
+const playerObj = new PlayersManager();
 
-/** insert data into the MongoDb */
+
+/**
+ * this is the player data section
+ */
+
+//this  taskObj.getAllData() get data from the rapidAPI then insert it into teamStoreDB in mongodb
 // taskObj.getAllData();
 
 
@@ -48,10 +55,24 @@ app.get("/api/teamUrl", (req, res) => {
 app.get("/api/teamJson", (req, res) => {
     taskObj.readTeamFile(data => {
         let jsonData = JSON.parse(data);
-        console.log('json data: ' + data);
         res.json(jsonData);
     })
 });
+
+/**
+ * this is the player data section
+ */
+
+//this  playerObj.allPlayers(); get data from the api Sport data IO then insert it into teamStoreDB in mongodb
+// playerObj.allPlayers();
+
+/** restFul api to get Players information */
+app.get("/api/allPlayers", (req, res) => {
+    playerObj.findPlayerData(data => {
+        res.json(data);
+    })
+});
+
 
 // displays a message about the port the app is using
 app.listen(port, () => {

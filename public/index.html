@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/master.css">
         <script src="js/weatherInfo.js" charset="utf-8"></script>
         <script src="js/burgerMenu.js" charset="utf-8"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=PT+Serif&family=Redressed&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -14,38 +15,36 @@
     </head>
     <body>
         <header>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                <a class="nav-link" id="fbar" href="#">Fab BasketBall League</a>
-                </li>
-            </ul>
+            <!-- tags for the main navigation menu-->
+            <nav>
+                <ul class="list-container">
+                    <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
+                    <li class="liMain"><a href="/">Home</a></li>
+                    <li class="liMain"><a href="/scores">Scores</a></li>
+                    <li class="liMain"><a href="#video">Videos</a></li>
+                    <li class="liMain"><a href="/players">Players</a></li>
+                    <li class="liMain"><a href="/teams">Teams</a></li>
+                    <li class="liMain"><a href="#shop">Store</a></li>
+                </ul>
+                <!-- tags for the person account icon -->
+                <div class="dropdown">
+                    <button class="accountbtn">
+                        <img src ="images/account_circle-24px.svg" alt="account person" id="account">
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Account Details</a>
+                        <a href="#">Help</a>
+                        <hr>
+                        <a href="#">Hide Score</a>
+                    </div>
+                </div>
+            </nav>
+            <div> 
+                <ul>
+                    <li class="spanheader"><span >Fab BasketBall League</span></li>
+                </ul> 
+            </div>
         </header>
-    
-    <!-- tags for the main menu-->
-    <div>
-        <ul class="ulMain">
-            <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
-            <li class="liMain"><a href="/">Home</a></li>
-            <li class="liMain"><a href="/scores">Scores</a></li>
-            <li class="liMain"><a href="#video">Videos</a></li>
-            <li class="liMain"><a href="#players">Players</a></li>
-            <li class="liMain"><a href="/teams">Teams</a></li>
-            <li class="liMain" id="store"><a href="#shop">Store</a></li>
-        </ul>
-    </div>
-
-    <!-- tags for the person account icon -->
-    <div class="dropdown">
-        <button class="accountbtn">
-            <img src ="images/account_circle-24px.svg" alt="account person" id="account">
-        </button>
-        <div class="dropdown-content">
-            <a href="#">Account Details</a>
-            <a href="#">Help</a>
-            <hr>
-            <a href="#">Hide Score</a>
-        </div>
-      </div>
 
       <!-- tags for the burger menu-->
       <nav class="burger-items">
@@ -71,8 +70,10 @@
             <div class="datainput">
               <!-- <label for="location" class="hidden">Location</label> -->
               <input id="location" placeholder="Enter location" type = text>
+              <br>
               <button type="submit" class="forecast-button">Get Forecast</button>
             </div>
         </div>
+        
     </body>
 </html>

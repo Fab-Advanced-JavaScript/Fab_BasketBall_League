@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    <link rel="stylesheet" href="css/master.css">
+    <script src="js/burgerMenu.js" charset="utf-8"></script>
+    <script src="js/fbl_players.js" charset="utf-8"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- tags for the main navigation menu-->
+        <nav>
+            <ul class="list-container">
+                <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
+                <li class="liMain"><a href="/">Home</a></li>
+                <li class="liMain"><a href="/scores">Scores</a></li>
+                <li class="liMain"><a href="#video">Videos</a></li>
+                <li class="liMain"><a href="/players">Players</a></li>
+                <li class="liMain"><a href="/teams">Teams</a></li>
+                <li class="liMain"><a href="#shop">Store</a></li>
+            </ul>
+            <!-- tags for the person account icon -->
+            <div class="dropdown">
+                <button class="accountbtn">
+                    <img src ="images/account_circle-24px.svg" alt="account person" id="account">
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Account Details</a>
+                    <a href="#">Help</a>
+                    <hr>
+                    <a href="#">Hide Score</a>
+                </div>
+            </div>
+        </nav>
+
+        <div>  
+            <ul>
+                <li class="spanheader"><span >Fab BasketBall League</span></li>
+            </ul> 
+        </div>
+    </header>
+
+    <!-- tags for the burger menu-->
+    <nav class="burger-items">
+        <img src="images/closebtn.png" alt="close button" style="height:28px; width:25px; margin-left:11em;" id ="closebtn">
+        <br>
+        <ul class="navburger">
+            <li class="liBurger"><a href="#">Full schedule</a></li><hr class="lihr">
+            <li class="liBurger"><a href="/scores">Scores</a></li><hr class="lihr">
+            <li class="liBurger"><a href="#">Tickets</a></li><hr class="lihr">
+            <li class="liBurger"><a href="/trivia">Trivia</a></li><hr class="lihr">
+            <li class="liBurger"><a href="/draft">2020 FBL Draft</a></li><hr class="lihr">
+            <li class="liBurger"><a href="#">FBL Music BASE: Line PlayList</a></li>
+        </ul>
+    </nav>
+
+    <!--table-->
+    <div class="searches-tables-container">
+
+        <div class="title-search-container">
+            <div id="playersh2">
+                <h2>All Players</h2>
+            </div>
+
+            <div>
+                <input type="text" id="searchPlayer" placeholder="Search for a Player ....">
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+        
+        <!--dropdown container-->
+        <div class="dropdown-container">
+            <div class="dropdown-players">
+                <select name="cars" id="players">
+                    <option value="volvo">All players</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <div class="dropdown-teams">
+                <select name="cars" id="teams">
+                    <option value="volvo">All Teams</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <div class="dropdown-positions">
+                <select name="cars" id="positions">
+                    <option value="volvo">All positions</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <div class="dropdown-colleges">
+                <select name="Colleges" id="college">
+                    <option value="volvo">All Colleges</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <div class="dropdown-countries">
+                <select name="cars" id="countries">
+                    <option value="volvo">All Countries</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+        </div>
+        <br><br>
+       
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">PLAYERS</th>
+                    <th scope="col" >TEAN</th>
+                    <th scope="col">NUMBER</th>
+                    <th scope="col">POSITION</th>
+                    <th scope="col">HEIGHT</th>
+                    <th scope="col">WEIGHT</th>
+                    <th scope="col">LAST ATTENTED</th>
+                    <th scope="col">COUNTRY</th>
+                </tr>
+            </thead>
+            <tbody id="playerinfos">
+                <!--table body goes here-->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

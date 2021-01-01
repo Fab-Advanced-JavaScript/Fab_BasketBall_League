@@ -66,7 +66,7 @@ class TaskManager {
           abbreviation: el.abbreviation,
           city: el.city,
           conference: el.conference,
-          full_name: el.full_name,
+          full_name: el.full_name
         };
         console.log(teamObj);
         TeamModel.collection.insertOne(teamObj, (err, res) => {
@@ -139,21 +139,3 @@ class TaskManager {
 }
 
 module.exports = TaskManager;
-
-
-
-   // const urls = [apiUrl, teamInfoUrl]
-
-    // urls.map(url => {
-    //   console.log('value of the url:' + url);
-    //   console.log('display data from both end points');
-    //   return fetch(url, options)
-    //                           .then(res => res.json())
-    //                           . then(data => {
-    //                             console.log(data);
-    //                             this.insertTeamData(data);
-    //                             // this.insertTeamUrlInfo(data)
-    //                           }).catch(err => {
-    //                               console.error(err);
-    //                           })
-    // })

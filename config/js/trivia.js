@@ -35,11 +35,11 @@ const init_trivia = () => {
     ];
 
     // select document
-    let quizContainer = document.querySelector('#quizContainer');
-    let main = document.querySelector('main');
+    let quizContainer = document.querySelector('.column-container');
+    let main = document.querySelector('.flex-container');
     let quiz = document.querySelector('#quiz');
     let multiOption = document.querySelector('.multiOption');
-    
+
     const hideSubmitBtn = document.querySelector('.hidden');
     const previousButton = document.querySelector("#prev");
     const nextButton = document.querySelector("#next");;
@@ -98,7 +98,6 @@ const init_trivia = () => {
         for (const option of choices) {
             console.log(option);
             if(option.checked) {
-                console.log('option selected ' + option.checked);
                 decision = option.value;
             }
         }
@@ -121,7 +120,7 @@ const init_trivia = () => {
         previousButton.style.border = 'none';
         if(!selectedOption) {
             event.preventDefault()
-            event.target.style.border = "3px solid red";
+            event.target.style.border = "5px solid red";
             return false
         } else {
             event.target.style.border = 'none';
@@ -185,18 +184,15 @@ const init_trivia = () => {
 
     //.. display the score
     const displayScore = () => {
-        let selectedOption = document.querySelector('input[type="radio"]:checked');
-        let answerValue = selectedOption.value;
-        console.log('the selected  answer: ' + answerValue);
-        console.log('the correct answer: ' + myQuestions[currentAnswer].correctAnswer);
         tempStorage.forEach((element, index) => {
             if(element  === myQuestions[index].correctAnswer) {
-               score++
+               score++;
             }
         });
-
+        //...
         let sectionScore = document.createElement("section");
-        sectionScore.setAttribute('class', "results");
+        sectionScore.id = "col1";
+        sectionScore.setAttribute('class', 'column-container');
         let resultsTile = document.createElement("div");
         resultsTile.setAttribute('id', 'scoreTitle');
         let resultsScore = document.createElement("div");
@@ -207,17 +203,18 @@ const init_trivia = () => {
         let scoreTitle = document.createElement('h4');
         let scoreLabel = document.createElement('label');
         let scoreSummary = document.createElement('label');
-        //..
+        //...
+        //... adding the color of the correct and incorrect answer
         let colorDiv = document.createElement("div");
-        colorDiv.className = "colorInfo"
+        colorDiv.id = "col4";
+        colorDiv.className = "column-container";
         let correct = document.createElement('label');
         let incorrect = document.createElement('label');
         
         let colorCorrect = document.createElement('span');
         let colorIncorrect = document.createElement('span');
-        let linebr1 = document.createElement('br')
-        let linebr2 = document.createElement('br')
-        //..
+        let linebr2 = document.createElement('br');
+
         correct.textContent = "Correct Answer: ";
         incorrect.textContent = "Incorrect Answer: ";
         colorCorrect.textContent = " c";
@@ -245,49 +242,55 @@ const init_trivia = () => {
         sectionScore.appendChild(resultsScore);
         sectionScore.appendChild(resultsSummary);
         main.appendChild(sectionScore);
-        main.appendChild(linebr1);
+        // main.appendChild(linebr1);
         colorDiv.appendChild(correct)
         colorDiv.appendChild(colorCorrect)
         colorDiv.appendChild(linebr2)
         colorDiv.appendChild(incorrect)
         colorDiv.appendChild(colorIncorrect)
-        main.appendChild(colorDiv);
+        document.body.appendChild(colorDiv);
+       
     }
-
+    //... display the retake quiz button
+    const refreshPage = () => {
+        //.. display retake quiz button 
+        let refreshPage = document.createElement("section");
+        refreshPage.id = "col3";
+        refreshPage.className = 'column-container';
+        refreshPage.innerHTML = "Retake Quiz";
+        refreshPage.style.cursor = "pointer";
+        refreshPage.addEventListener("click", ()=> {
+            window.location.reload();
+        });
+        main.appendChild(refreshPage);
+    }
     //..
     const reviewAnswers = () => {
-        // use toggle function to display list of question with their correct answers
+        // user clicked on the review button to display list of question with their correct answers
+        let columnContainer2 = document.querySelector('#col2');
         let reviewDom = document.createElement("div");
         reviewDom.addEventListener("click", outputAnswers);
         reviewDom.className = "reviews"
 
         let ReviewH4 = document.createElement('h4')
         ReviewH4.textContent = "Review Answers";
-        reviewDom.style.backgroundColor = "#0ac99a"; // type of green
-        reviewDom.style.color = "#0d2959";  
-        reviewDom.style.width = "145px";
-        reviewDom.style.marginLeft = "45%";
-        reviewDom.style.textAlign = "center";
-        reviewDom.style.borderRadius = " 15px";
-        reviewDom.style.height = "25px";
-        reviewDom.style.cursor = "pointer";
-        reviewDom.style.marginTop = "-8em";
         reviewDom.appendChild(ReviewH4);
-        main.appendChild(reviewDom);
+        columnContainer2.appendChild(reviewDom);
     }
     //..
     const outputAnswers = () => {
-        console.log('review button was clicked ........................');
         let oldReview = document.querySelector(".reviews");
-        let btncontainer = document.querySelector("#btncontainer")
+        let btncontainer = document.querySelector(".btncontainer");
+        let title = document.querySelector("#title");
+        //..
         if(oldReview) {
             oldReview.remove();
             btncontainer.remove();
+            title.remove();
         }
         //...
         myQuestions.map((items, itemIndex) => {
             let quizDiv = document.createElement('div');
-           
             quizDiv.className = "outputQuestions"
             let header4 = document.createElement('h4');
             header4.textContent = `${itemIndex + 1} . ${items.question}`;
@@ -303,30 +306,42 @@ const init_trivia = () => {
                 input.name = 'answers'
                 input.value = `${key}`;
                 label.textContent = `${value}`;
-                console.log("key ->" + `${key}`);
-                console.log("value -> " + `${value}` );
-                answerDiv.appendChild(input);
+                // answerDiv.appendChild(input);
                 answerDiv.appendChild(label);
                 quizDiv.appendChild(answerDiv);
+                //...
+                answersColor(label, key, itemIndex);
             }
             quizContainer.appendChild(quizDiv)
-        });
+            quizContainer.style= "overflow-y: scroll;"
+            quizContainer.style.backgroundColor= "rgb(223, 223, 223)";
+        });   
     }
 
     //.. this fun is used to show submit button
-    const displaySubmitBtn = () => {
+    const displayElement = () => {
         // this fun display  the submit button
         const submitBtn = document.querySelector('#submit');
         submitBtn.addEventListener("click", () => {
-            console.log("dry test.......");
             if(submitBtn) {
                 submitBtn.remove();
                 displayScore();
                 reviewAnswers();
+                refreshPage(); 
             } 
         })
     }
+    //......
+    const answersColor = (label, key, index) => {
 
+        console.log("tempstorage:  " + tempStorage[index]);
+        console.log('that key--->: ' + key);
+        if(tempStorage[index] == key && tempStorage[index] == myQuestions[index].correctAnswer) {
+            label.style.color = "#0ac99a"; //green
+        } else if(tempStorage[index] == key && tempStorage[index] != myQuestions[index].correctAnswer) {
+            label.style.color = "#bf0f0f"; // red
+        }
+    }
     //....kick off functions here or launcher below......
     //.. display the first question and answer
     updateQuestion(currentQuestion);
@@ -336,8 +351,8 @@ const init_trivia = () => {
     //.. display the prev question
     displayPrevious();
 
-    //.. show submit button
-    displaySubmitBtn();
+    //.. show review button, display score and the retake quiz button
+    displayElement();
 
 }
 window.addEventListener('load', init_trivia);

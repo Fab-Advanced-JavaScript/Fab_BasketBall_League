@@ -7,7 +7,7 @@ html {
 } 
 
 body {
-  background-color:rgb(248, 248, 243) !important;
+  background-color:rgb(250, 250, 242) !important;
 }
 
 /*
@@ -16,51 +16,75 @@ body {
 */
 
 .container {
-    /* color : #edece8; */
     margin-left: 50%;
     margin-top: -2em;
 }
-.justify-content-center, #fbar {
-    background-color: #000000;
-    color: #edece8;
-    font-style: normal;
-    font-size: 18px;
-    height: 45px;
+header {
+  color: white;
+  background:  url(../images/black_bb.jpg) no-repeat center center;
+  background-size: cover;
+  height: 7.5em;
+  position: sticky;
+  top: 0;
+}
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.spanheader {
+  list-style-type: none;
+  margin-top: 1.5em;
+  margin-left: 8em;
+  font-family: 'PT Serif', serif;
+  font-size: 18px;
+}
+/**search bar*/
+.searchteam{
+  margin-top: -1.5em;
+  width: 200px !important;
+  margin-left: 60% !important;
 }
 
-/** ------------*/
+/*black basketball*/
+#blackbb {
+  height: 50px;
+  width: 80px;
+}
 
-.ulMain {
+/** -----nav styling-------*/
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #c4de00;
   height: 50px;
-}
 
-.liMain {
-  float: left;
 }
-
-.liMain a {
-  display: block;
-  color: #000000 ;
+.list-container .liMain a{
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-family: verdana, sans-serif;
   text-align: center;
   padding: 14px 16px;
-  font-weight: 500;
+  font-weight: 550;
+  color: black;
+  display: inline-block;
+  border: 2px solid #a2b800;
+  border-radius: .5em;
+  padding: .5em 1em;
+  margin: .5em;
   text-decoration: none;
+  background-color:#c4de00;
 }
-
-.liMain a:hover  {
-  background-color: #d7eb2d;
- 
-}
-
-#burger {
-  padding: 12.5px;
-  margin-left: 5px;
-  background-color: transparent;
+.liMain a:hover {
+ background-color: #edece8;
 }
 
 .accountbtn {
@@ -79,6 +103,7 @@ body {
   min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  font-family: 'PT Serif', serif;
 }
 
 .dropdown-content a {
@@ -102,13 +127,7 @@ body {
   float: right;
   position: fixed;
   bottom: 45px;
-}
-
-#store {
-  margin-left: 35em;
-}
-.dropdown {
-  margin-right: 3em;
+  margin-right: 1em;
 }
 
 #items {
@@ -131,31 +150,30 @@ body {
   float: right;
   border: 2px solid #c4de00;
   background-color: grey;
-  width: 17.5em;
-}
-
-#location {
-  width: 9.5em;
+  width: 16.5em;
 }
 
 .colorActitvity, .activity {
   background-color: black;
   color: #c4de00;
-  padding-left: 28%;
+  padding-left: 25%;
   font-style: normal;
   font-size: 18px;
+  font-family: 'PT Serif', serif;
   height: 35px;
 }
 
-.datainput {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 10px;
+#location {
+  width: 9.5em;
+  margin-bottom: 2px;
 }
 .forecast-button {
   background-color: black;
+  border-radius: 10px;
+  font-size: 12px;
+  border: solid black;
   color: #c4de00;
- 
+  font-family: 'PT Serif', serif;
 }
 
 .outputCityInfos  {
@@ -166,7 +184,6 @@ body {
 .category {
   color: black;
 }
-
 .options {
   display: flex;
   height: 2em;
@@ -174,10 +191,7 @@ body {
   margin-top : -0.5em;
 }
 
-#solo {
-  width: 7em;
-}
-#team {
+#solo, #team {
   width: 7em;
 }
 #all {
@@ -188,14 +202,20 @@ body {
   background-color: #c4de00;
   ;
 }
-
-.results, #listAll {
-  list-style-type: none;
-  height: 10em;
-  font-size: 15px;
+.results {
   background-color: rgb(235, 235, 205);
-  
+  height: 9em;
 }
+
+#listAll {
+  list-style-type: none;
+  font-size: 14px;
+  font-family: 'PT Serif', serif;
+  columns: 2;
+  padding-left: 8px;
+  padding-right: 4px;
+}
+
 
 
 /** implementing the Method 2 of the burger menu*/
@@ -203,16 +223,21 @@ body {
 .burger-items {
   position: absolute;
   background: black;
-  top: 6em;
+  top: 7.4em;
   width: 15em;
   height: 25em;
   overflow: hidden;
   padding-top: 1em;
-  margin-left: -1em;
   /* hide the menu above the screen by default */
   transform: translate(-100%);
   /* transition adds a little animation when sliding in and out the menu */
   transition: transform 0.5s ease;
+}
+
+#burger {
+  padding: 12.5px;
+  margin-left: 5px;
+  background-color: transparent;
 }
 
 .navburger {
@@ -233,9 +258,14 @@ hr.lihr {
   background-color: #c4de00;
   margin-right: 5em;
 }
+/** team styling container*/
+.container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 4em;
+}
 
 /*team List styling*/
-
 .team_list_scroll  {
   margin-left: -3.5em;
   overflow-x: hidden;
@@ -245,27 +275,25 @@ hr.lihr {
   
 }
 
-.team_list_scroll img{
-  width: 54px;
-  height: 35px;
-}
-/* .teamList {
-  margin-left: -4em;
-} */
-
-/* team details styling*/
-
-.container {
-  display: flex;
-  padding-top: 5em;
-}
-
+/**styling for the loaded team page*/
 .team_details {
   /* margin-top: 5em; */
   margin-left: 1.2em;
 }
-.logo {
-  height: 20px;
+
+.team_list_scroll img{
+  width:38px;
+  height: 35px;
+}
+.team_list_scroll p {
+  border: 1px solid #ddd;
+  background-color: rgb(250, 250, 242);
+}
+.logo a {
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'PT Serif', serif;
+  color: black;
 }
 
 /*testing class*/
@@ -275,12 +303,42 @@ hr.lihr {
   border: 1px solid white;
 }
 
+/*
+* Players styling section
+*/
 
+.searches-tables-container{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(250, 250, 242) ;
+  background-color: rgba(223, 223, 212, 0.945);
+  margin: 40px 30px 30px 30px;
+  padding-left: 35px;
+  padding-right: 35px;
+}
 
+.title-search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 3em;
+}
 
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.border-right {
+  width: 15em;
+}
+.college {
+  width: 16em;
+}
 
-
-
-
-
+#playersh2 {
+  font-family: 'PT Serif', serif;
+}
 

@@ -1,71 +1,136 @@
 
   body {
-    font-family: 'Roboto Slab', serif;
-    background-color: #d4d4c2;
+    background-color:rgb(250, 250, 242) !important;
   }
 /*styling the header*/
-  #fbar {
-    background-color: #000000;
-    color: #edece8;
-    font-style: normal;
-    font-size: 15px;
-    text-align: center;
-    height: 45px;
-    margin-top: -14px;
-    padding-top: 0.2px;
+header {
+    color: blanchedalmond;
+    background:  url(../images/black_bb.jpg) no-repeat center center;
+    background-size: cover;
+    height: 6em;
+    margin-top: -1.2em;
+    padding-top: 2em;
+    position: sticky;
+    top:0;
+  }
+
+#titleheader {
+    font-family: 'PT Serif', serif;
+    font-size: 18px;
+    margin-left: 8em;
   }
 
 /*styling for the back button*/
 #back a {
-    margin-left: 3%;
     border: 2px solid #e6e6d4;
+    border-radius: 10px;;
     background-color: black;
     color: blanchedalmond;
     width: 7%;
     padding: 8px 8px;
+    font-family: 'PT Serif', serif;
 }
 
 ul {list-style-type: none;} 
 
 /*styling the title, quiz and answers*/
-main {
-    margin-top: 1%;
+.flex-container {
+    display: flex;
+    height: 50%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2em;;
 }
 
-#quizContainer {  
-    height: 475px;
-    width: 550px;
-    margin-left: 30%;
+.column-container {  
+    margin: 2em;
     border: 1px solid #e6e6d4;
-    background-color: rgb(216, 215, 206);
-    /* transform: translateX(-50%) translateY(-50%); */
 }
- #title {
-     margin-top: -20px;
+
+#col1 {
+    order: 1;
+    width: 150px;
+    height: 82px;
+    text-align: center;
+    margin-top: 12%;
+    background-color: rgb(204, 200, 200);
+    
+  }
+#col2 {
+    order: 2;
+    margin-top: -0.5em;
+    height: 460px;
+    width: 700px;
+    background-color: rgb(223, 223, 223);
+   
+  }
+#col3 {
+    order: 3;
+    color: black ;
+    border-radius: 5px;
+    background-color: rgb(6, 207, 207);
+    margin-top: 12%;
+    width: 97px;
+    height: 25px;
+    font-size: 15px;
+    padding-left: 3px;
+    font-family: 'PT Serif', serif;
+  }
+  #col4{
+    margin-top: -20%;
+    border: none;
+    width: 160px;
+    height: 100px;
+    font-family: 'PT Serif', serif;
+  }
+
+#title h2 {
      text-align: center;
      color: blanchedalmond;
      background-color: black;
+     font-family: 'PT Serif', serif;
+     font-size: 22px;
+     padding: 5px;
  }
 
 #quiz > h4 {
-    padding-top: 2px;
-    font-size: 18px;
-    text-align: center;
+    /* padding-top: 2px; */
+    font-size: 23px;
+    margin-left: 10%;
+    font-family: 'Redressed', cursive;
 }
 .multiOption  {
     display: block;
-    padding: 3px 0 10px 15px;
-    width: 200px;
-    margin: 2.5em 0 0 10em;
-
+    width: 250px;
+    margin: 1em 0 0 6.5em;
+    
 }
+
+.multiOption label {
+    font-family: 'PT Serif', serif;
+    font-size: 16px;
+    margin-top: -5em;
+}
+
 /*styling for the prev and next button*/
-#prev, #next {
-    margin-left: 25%;
-    margin-top: 5em;
-    width: 65px;
-    background-color: black;
-    color: blanchedalmond;
+.btncontainer{
+    margin-left: 32%;
+    width:50%;
+    font-weight: bolder;
+    font-family: 'PT Serif', serif;
+}
+
+#next {
+    margin-left: 3em;
+    width: 80px;
+    border-radius: 8px;
+    border: transparent;
+}
+
+#prev {
+    border-radius: 8px;
+    border: transparent;
 }
 
 /*submit button and score styling*/
@@ -76,40 +141,61 @@ main {
 
 #submit {
     color: cornsilk;
-    margin-left: 40%;
-    margin-top: 20%;
+    margin-left: 22%;
+    margin-top: 40%;
     width: 85px;
     height: 45px;
     background-color: black;
     border-radius: 5px;
+    font-family: 'PT Serif', serif;
 }
 
-.results {
-    margin-top: -25%;
-    margin-left: 2em;
-    text-align: center;
-    border: 2.5px solid #e6e6d4;
-    width: 130px;
-}
-
-#scoreTitle {
+#scoreTitle h4 {
     background-color: black;
-    text-align: center;
-    margin-top: -1.5em;
+    font-size: 17px;
     color: blanchedalmond;
-
+    font-family: 'PT Serif', serif;
 }
 
 #scoreOutput, #scoreSummary {
     color: black;
     font-weight: bold;
-    padding-bottom: 1em;
-
+    padding-bottom: -5em;
+    font-family: 'PT Serif', serif;
+    font-size: 15px;
 }
 
-.colorInfo {
-    margin-left: 2em;
+.reviews h4 {
+    border-radius: 15px;
+    border: 2px solid rgb(160, 156, 156);
+    background-color: rgb(6, 207, 207);
+    color: #0d2959; 
+    width: 200px;
+    margin-left: 35%;
+    margin-top: 20%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'PT Serif', serif;
 }
+
+.outputQuestions h4 {
+    font-family: 'PT Serif', serif;
+    padding-left: 1em;
+    font-size: 18px;
+    font-weight:bold;
+    
+}
+.outputAnswers label{
+    padding-left: 1.5em;
+    font-family: 'PT Serif', serif;
+    font-size: 15px;
+}
+ 
+
+
+
 
 
 

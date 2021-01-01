@@ -32,5 +32,8 @@ router.get('/scores', (req, res) => {
 router.get('/quiz', (req, res) => {
     res.sendFile(path.join(__dirname+'/public/quiz.html'));
 });
+router.get('/players', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/players.html'));
+});
 
 module.exports = router;

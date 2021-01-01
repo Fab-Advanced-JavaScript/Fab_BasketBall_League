@@ -15,26 +15,38 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
-
     <header>
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-            <a class="nav-link" id="fbar" href="#">Fab BasketBall League</a>
-            </li>
-        </ul>
-    </header>
+        <!-- tags for the main navigation menu-->
+        <nav>
+            <ul class="list-container">
+                <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
+                <li class="liMain"><a href="/">Home</a></li>
+                <li class="liMain"><a href="/scores">Scores</a></li>
+                <li class="liMain"><a href="#video">Videos</a></li>
+                <li class="liMain"><a href="/players">Players</a></li>
+                <li class="liMain"><a href="/teams">Teams</a></li>
+                <li class="liMain"><a href="#shop">Store</a></li>
+            </ul>
+            <!-- tags for the person account icon -->
+            <div class="dropdown">
+                <button class="accountbtn">
+                    <img src ="images/account_circle-24px.svg" alt="account person" id="account">
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Account Details</a>
+                    <a href="#">Help</a>
+                    <hr>
+                    <a href="#">Hide Score</a>
+                </div>
+            </div>
+        </nav>
 
-<!-- tags for the main menu-->
-<div>
-    <ul class="ulMain">
-        <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
-        <li class="liMain"><a href="/">Home</a></li>
-        <li class="liMain"><a href="/scores">Scores</a></li>
-        <li class="liMain"><a href="#video">Videos</a></li>
-        <li class="liMain"><a href="#players">Players</a></li>
-        <li class="liMain"><a href="/teams">Teams</a></li>
-    </ul>
-</div>
+        <div>  
+            <ul>
+                <li class="spanheader"><span >Fab BasketBall League</span></li>
+            </ul> 
+        </div>
+    </header>
 
   <!-- tags for the burger menu-->
   <nav class="burger-items">
@@ -50,7 +62,7 @@
     </ul>
 </nav>
 <br>
-    <h1>Welcome to Fab BasketBall League Trivia</h1><br><br>
+    <h1>Welcome Trivia</h1><br><br>
 
     <p>This Trivia game is based on general basketball questions in US.
         One question with multiple choice answers will be presented to you.
@@ -59,6 +71,6 @@
     </p>
     <br><br>
 
-    <button type="button" class="btn btn-success">Take the Quiz</button>
+    <button type="button" class="btn btn-success">Start Trivia</button>
 </body>
 </html>

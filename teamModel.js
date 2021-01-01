@@ -8,7 +8,7 @@ let TeamSchema = new Schema({
   abbreviation: String,
   city: String,
   conference: String,
-  full_name: String,
+  full_name: String
 });
 
 // compile schema to model
