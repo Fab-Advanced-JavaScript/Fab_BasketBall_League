@@ -80,10 +80,8 @@ const init = () => {
         let lineBreakOne = document.createElement("br");
         let lineBreakTwo = document.createElement("br");
         let lineBreakThree = document.createElement("br");
-        let lineBreak = document.createElement("br");
         let weatherBr1 = document.createElement("br");
         let weatherBr2 = document.createElement("br");
-        let weatherBr3 = document.createElement("br");
         let weatherBr4 = document.createElement("br");
 
         myH1.textContent =`City Name: ${weatherInfo.name}`;
@@ -265,9 +263,24 @@ const init = () => {
          clearValue.value = "";
     }
 
-    //..
+     //.. this will clear the input enter by user
+     const clearForcastData = () => {
+         console.log("check clear button..");
+        clearData1 = document.querySelector('.outputCityInfos');
+        clearData2 = document.querySelector('.category');
+        
+        if(clearData1 && clearData2) {
+            clearData1.remove();
+            clearData2.remove();
+        }
+   }
+
+    //.. kick off app
     let btnTask = document.querySelector(".forecast-button");
     btnTask.addEventListener("click", getCityDetails);
+
+    let clearData = document.querySelector(".clear-button");
+    clearData.addEventListener("click", clearForcastData);
 }
 
 window.addEventListener("load", init);

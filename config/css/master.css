@@ -167,7 +167,7 @@ header {
   width: 9.5em;
   margin-bottom: 2px;
 }
-.forecast-button {
+.forecast-button, .clear-button {
   background-color: black;
   border-radius: 10px;
   font-size: 12px;
