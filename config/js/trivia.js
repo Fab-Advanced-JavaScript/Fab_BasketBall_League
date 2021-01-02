@@ -35,12 +35,14 @@ const init_trivia = () => {
     ];
 
     // select document
-    let quizContainer = document.querySelector('.column-container');
-    let main = document.querySelector('.flex-container');
-    let quiz = document.querySelector('#quiz');
+    let main = document.querySelector('.main-container');
+    let sectionContainer = document.querySelector('.section-container')
+    let quizContainer = document.querySelector('.column');
+    let quizQuestion = document.querySelector('#quiz');
     let multiOption = document.querySelector('.multiOption');
 
-    const hideSubmitBtn = document.querySelector('.hidden');
+    let hideSubmitBtn = document.querySelector('.hidden');
+    let hideSummaryColor = document.querySelector('.summaryColor');
     const previousButton = document.querySelector("#prev");
     const nextButton = document.querySelector("#next");;
 
@@ -57,7 +59,7 @@ const init_trivia = () => {
         const triviaQuiz = myQuestions[questionIndex];
         let header4 = document.createElement('h4');
         header4.textContent = `${questionIndex + 1} . ${triviaQuiz.question}`;
-        quiz.appendChild(header4);
+        quizQuestion.appendChild(header4);
 
         //... this loop through properties of the answers objects using Obeject.entiries = [key, values]
         Object.entries(triviaQuiz.answers).sort((a, b) => b[0].localeCompare(a[0])).map((items, indexItems) => {
@@ -81,7 +83,7 @@ const init_trivia = () => {
     const positionSubmitBtn = element => {
         console.log(myQuestions.length);
         if(currentQuestion == myQuestions.length) {
-            quiz.style.display = 'none';
+            quizQuestion.style.display = 'none';
             multiOption.style.display = 'none';
             nextButton.style.display = 'none';
             previousButton.style.display = 'none';
@@ -142,7 +144,7 @@ const init_trivia = () => {
            //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
            currentQuestion++;
            positionSubmitBtn(event);
-           quiz.innerHTML = "";
+           quizQuestion.innerHTML = "";
            multiOption.innerHTML= "";
    
              //.. set the current question to index 0 once it hit the index 3 or the last question in the array
@@ -168,7 +170,7 @@ const init_trivia = () => {
             tempStorage[currentQuestion] = decision;
 
             //.. set the quiz and multiOption innnerHTML to empty in order to remove all content when the button is clicked
-            quiz.innerHTML = "";
+            quizQuestion.innerHTML = "";
             multiOption.innerHTML= "";
             currentQuestion--;
             if (currentQuestion < 0) {
@@ -203,26 +205,7 @@ const init_trivia = () => {
         let scoreTitle = document.createElement('h4');
         let scoreLabel = document.createElement('label');
         let scoreSummary = document.createElement('label');
-        //...
-        //... adding the color of the correct and incorrect answer
-        let colorDiv = document.createElement("div");
-        colorDiv.id = "col4";
-        colorDiv.className = "column-container";
-        let correct = document.createElement('label');
-        let incorrect = document.createElement('label');
-        
-        let colorCorrect = document.createElement('span');
-        let colorIncorrect = document.createElement('span');
-        let linebr2 = document.createElement('br');
 
-        correct.textContent = "Correct Answer: ";
-        incorrect.textContent = "Incorrect Answer: ";
-        colorCorrect.textContent = " c";
-        colorCorrect.style.backgroundColor = "#0ac99a";  //green color  #00b344
-        colorCorrect.style.width = "10px";
-        colorIncorrect.style.backgroundColor = "#bf0f0f";  // red color
-        colorIncorrect.style.width = "10px";
-        colorIncorrect.textContent = "c ";
         //..
         scoreTitle.textContent = "Your Score";
         scoreLabel.textContent =  `${score}/${myQuestions.length}`;
@@ -234,22 +217,15 @@ const init_trivia = () => {
             scoreSummary.textContent =  `you passed`;
             scoreSummary.style.color =  "#00b344";
         }
-        //.. appending child
+
+         //.. appending child
         resultsTile.appendChild(scoreTitle);
         resultsScore.appendChild(scoreLabel);
         resultsSummary.appendChild(scoreSummary);
         sectionScore.appendChild(resultsTile);
         sectionScore.appendChild(resultsScore);
         sectionScore.appendChild(resultsSummary);
-        main.appendChild(sectionScore);
-        // main.appendChild(linebr1);
-        colorDiv.appendChild(correct)
-        colorDiv.appendChild(colorCorrect)
-        colorDiv.appendChild(linebr2)
-        colorDiv.appendChild(incorrect)
-        colorDiv.appendChild(colorIncorrect)
-        document.body.appendChild(colorDiv);
-       
+        sectionContainer.appendChild(sectionScore);
     }
     //... display the retake quiz button
     const refreshPage = () => {
@@ -262,7 +238,7 @@ const init_trivia = () => {
         refreshPage.addEventListener("click", ()=> {
             window.location.reload();
         });
-        main.appendChild(refreshPage);
+        sectionContainer.appendChild(refreshPage);
     }
     //..
     const reviewAnswers = () => {
@@ -271,7 +247,6 @@ const init_trivia = () => {
         let reviewDom = document.createElement("div");
         reviewDom.addEventListener("click", outputAnswers);
         reviewDom.className = "reviews"
-
         let ReviewH4 = document.createElement('h4')
         ReviewH4.textContent = "Review Answers";
         reviewDom.appendChild(ReviewH4);
@@ -310,7 +285,7 @@ const init_trivia = () => {
                 answerDiv.appendChild(label);
                 quizDiv.appendChild(answerDiv);
                 //...
-                answersColor(label, key, itemIndex);
+                selectedAnswersColor(label, key, itemIndex);
             }
             quizContainer.appendChild(quizDiv)
             quizContainer.style= "overflow-y: scroll;"
@@ -325,6 +300,7 @@ const init_trivia = () => {
         submitBtn.addEventListener("click", () => {
             if(submitBtn) {
                 submitBtn.remove();
+                hideSummaryColor.classList.remove('summaryColor');
                 displayScore();
                 reviewAnswers();
                 refreshPage(); 
@@ -332,8 +308,7 @@ const init_trivia = () => {
         })
     }
     //......
-    const answersColor = (label, key, index) => {
-
+    const selectedAnswersColor = (label, key, index) => {
         console.log("tempstorage:  " + tempStorage[index]);
         console.log('that key--->: ' + key);
         if(tempStorage[index] == key && tempStorage[index] == myQuestions[index].correctAnswer) {

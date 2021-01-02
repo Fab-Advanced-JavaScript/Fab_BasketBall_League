@@ -7,9 +7,8 @@ header {
     color: blanchedalmond;
     background:  url(../images/black_bb.jpg) no-repeat center center;
     background-size: cover;
-    height: 6em;
-    margin-top: -1.2em;
-    padding-top: 2em;
+    height: 4.5em;
+    padding-top: 1em;
     position: sticky;
     top:0;
   }
@@ -18,32 +17,38 @@ header {
     font-family: 'PT Serif', serif;
     font-size: 18px;
     margin-left: 8em;
+    margin-right: 1em;
   }
 
 /*styling for the back button*/
 #back a {
-    border: 2px solid #e6e6d4;
-    border-radius: 10px;;
-    background-color: black;
-    color: blanchedalmond;
-    width: 7%;
-    padding: 8px 8px;
+    text-decoration: none;
     font-family: 'PT Serif', serif;
+    width: 7%;
+    margin-left: 85%;
+    color: blanchedalmond;
 }
+
 
 ul {list-style-type: none;} 
 
 /*styling the title, quiz and answers*/
-.flex-container {
+.main-container {
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.section-container {
     display: flex;
     height: 50%;
     flex-wrap: nowrap;
     justify-content: center;
     flex-direction: row;
-    margin-top: 2em;;
 }
 
-.column-container {  
+.column {  
     margin: 2em;
     border: 1px solid #e6e6d4;
 }
@@ -59,7 +64,7 @@ ul {list-style-type: none;}
   }
 #col2 {
     order: 2;
-    margin-top: -0.5em;
+    /* margin-top: -2em; */
     height: 460px;
     width: 700px;
     background-color: rgb(223, 223, 223);
@@ -75,13 +80,6 @@ ul {list-style-type: none;}
     height: 25px;
     font-size: 15px;
     padding-left: 3px;
-    font-family: 'PT Serif', serif;
-  }
-  #col4{
-    margin-top: -20%;
-    border: none;
-    width: 160px;
-    height: 100px;
     font-family: 'PT Serif', serif;
   }
 
@@ -134,9 +132,20 @@ ul {list-style-type: none;}
 }
 
 /*submit button and score styling*/
-.hidden {
+.hidden, .summaryColor{
     display: none;
   
+}
+
+.correctColor {
+    display: flex;
+    margin-left: 32%;
+    font-family: 'PT Serif', serif;
+    margin-top: 2em;
+}
+.correctColor img {
+    height: 12px;
+    width: 50px;
 }
 
 #submit {
@@ -183,6 +192,7 @@ ul {list-style-type: none;}
 .outputQuestions h4 {
     font-family: 'PT Serif', serif;
     padding-left: 1em;
+    padding-top: 1.4em;
     font-size: 18px;
     font-weight:bold;
     
