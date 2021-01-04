@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const PlayerModel = require('./playerModel');
+const file = require('fs');
 
 class PlayersManager {
     setUpConnection() {
@@ -27,7 +28,7 @@ class PlayersManager {
             }
         };
     // urls      
-    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/sac";
+    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/por";
 
     fetch(playerUrl, options)
                 .then(response => response.json())
@@ -80,6 +81,15 @@ class PlayersManager {
         console.log("display data from collection PlayerInfos");
         callback(docs);
     }).sort(mysort);
+  }
+
+   // this is used to read the heaShot.json file
+   readHeadShotFile(callback) {
+    let fileName = "headShot.json"
+    file.readFile(fileName, (err, data) => {
+      if(err) throw err;
+      callback(data);
+    })
   }
 }
 module.exports = PlayersManager;

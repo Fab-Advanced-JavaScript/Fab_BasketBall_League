@@ -38,19 +38,19 @@ class TaskManager {
     let teamUrl = "http://localhost:8080/api/teamJson";
 
     fetch(apiUrl, options)
-                .then(response => response.json())
-                .then(data  => {
-                    console.log(data);
-                    this.insertTeamData(data);
-                    return fetch(teamUrl)
-                                        .then(response => response.json())
-                                        .then(imgItems => {
-                                            console.log(imgItems);
-                                            this.insertTeamUrlInfo(imgItems);
-                                        }).catch(err => {
-                                            console.error(err);
-                                        });
-              });
+          .then(response => response.json())
+          .then(data  => {
+            console.log(data);
+            this.insertTeamData(data);
+            return fetch(teamUrl)
+                                .then(response => response.json())
+                                .then(imgItems => {
+                                  console.log(imgItems);
+                                  this.insertTeamUrlInfo(imgItems);
+                                }).catch(err => {
+                                  console.error(err);
+                                });
+          });
   }
 
   // this insert data to Mongodb

@@ -73,6 +73,14 @@ app.get("/api/allPlayers", (req, res) => {
     })
 });
 
+/** creates restFul api to get data in teamInfo.json */
+app.get("/api/headShot", (req, res) => {
+    playerObj.readHeadShotFile(data => {
+        let jsonData = JSON.parse(data);
+        res.json(jsonData);
+    })
+});
+
 
 // displays a message about the port the app is using
 app.listen(port, () => {

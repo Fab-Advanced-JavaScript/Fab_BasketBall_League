@@ -115,7 +115,6 @@ ul {list-style-type: none;}
 .btncontainer{
     margin-left: 32%;
     width:50%;
-    font-weight: bolder;
     font-family: 'PT Serif', serif;
 }
 
@@ -124,11 +123,13 @@ ul {list-style-type: none;}
     width: 80px;
     border-radius: 8px;
     border: transparent;
+    font-size: 16px;
 }
 
 #prev {
     border-radius: 8px;
     border: transparent;
+    font-size: 16px;
 }
 
 /*submit button and score styling*/

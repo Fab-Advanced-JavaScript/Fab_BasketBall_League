@@ -311,8 +311,8 @@ hr.lihr {
   display: flex;
   flex-direction: column;
   border: 2px solid rgb(250, 250, 242) ;
-  background-color: rgba(223, 223, 212, 0.945);
-  margin: 40px 30px 30px 30px;
+  background-color: rgba(240, 240, 238, 0.945);
+  margin: 6em 30px 30px 30px;
   padding-left: 35px;
   padding-right: 35px;
 }
