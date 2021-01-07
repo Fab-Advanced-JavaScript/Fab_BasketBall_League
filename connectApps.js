@@ -4,18 +4,20 @@ const teamRest = require('./restTeams')
 const navMenu = require('./navMenuRouter');
 const express = require("Express");
 const bodyParser = require('body-parser');
+const path = require('path');
+// const { set } = require('mongoose');
 const app = express();
-
 const port = 8080;
 
-//setup  the router for the Nav Menu and the List of the team in '/Team'
+// view engine setup
+app.set('view engine', 'ejs');
+
+//setup  the router for the Nav Menu, burger menu and the List of the team in '/Team'
 app.use('/', navMenu);
 app.use('/', teamRest);
 
-// configuration
-// app.use(express.static(__dirname));
-
-// setup to allow the app to access file in public and config folders
+// setup  allow the app to access file in public, view and config folders
+// app.use(express.static('views'));
 app.use(express.static('config'));
 app.use(express.static('public'));
 app.use(express.json());
@@ -25,7 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // create an instance of taskManager
 const taskObj = new TaskManager();
 const playerObj = new PlayersManager();
-
 
 /**
  * this is the player data section

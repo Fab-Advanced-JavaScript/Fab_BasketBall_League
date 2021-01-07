@@ -27,6 +27,9 @@ header {
   position: sticky;
   top: 0;
 }
+/**
+** search bar styling ******
+*/
 .search-container {
   display: flex;
   flex-direction: row;
@@ -39,18 +42,13 @@ header {
   font-family: 'PT Serif', serif;
   font-size: 18px;
 }
-/**search bar*/
+
 .searchteam{
   margin-top: -1.5em;
   width: 200px !important;
   margin-left: 60% !important;
 }
 
-/*black basketball*/
-#blackbb {
-  height: 50px;
-  width: 80px;
-}
 
 /** -----nav styling-------*/
 
@@ -331,9 +329,11 @@ hr.lihr {
   padding-left: 25px;
   padding-right: 25px;
 }
+
 .border-right {
   width: 15em;
 }
+
 .college {
   width: 16em;
 }
@@ -342,3 +342,58 @@ hr.lihr {
   font-family: 'PT Serif', serif;
 }
 
+
+/*
+* login styling section
+*/
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  font-family: 'PT Serif', serif;
+  margin: 0 auto;
+}
+.accountImg {
+  margin-left: 6.5em;
+}
+.col-md-9 label {
+  color: #3495eb;
+  font-family: 'PT Serif', serif;
+  font-size: 16px;
+}
+.col-md-9 span {
+  color: #02192e;
+  font-family: 'PT Serif', serif;
+  font-size: 14px;
+}
+/**
+* this the styling for the trivia home page
+*/
+
+.trivia {
+  display: flex;
+  flex-direction: column;
+}
+.trivia h1 {
+  text-align: center;
+  border-radius: 15px;
+  border: 10px solid transparent;
+  width: 25%;
+  margin: auto;
+  background-color: black;
+  color: white;
+  font-family: 'PT Serif', serif;
+}
+.trivia p {
+  width: 25%;
+  margin: auto;
+  font-family: 'PT Serif', serif;
+}
+.trivia .btn {
+  margin-left: 45%;
+  width: 7em;
+  background-color:  #c4de00 !important;
+  color: black !important;
+  font-family: 'PT Serif', serif;
+}

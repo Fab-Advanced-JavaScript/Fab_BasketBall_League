@@ -1,0 +1,57 @@
+<header>
+    <!-- tags for the main navigation menu-->
+    <nav>
+        <ul class="list-container">
+            <li class="liMain"><img src ="images/iconMenuBurger.png" alt="burger image" id="burger"></li>
+            <li class="liMain"><a href="/">Home</a></li>
+            <li class="liMain"><a href="/scores">Scores</a></li>
+            <li class="liMain"><a href="#video">Videos</a></li>
+            <li class="liMain"><a href="/players">Players</a></li>
+            <li class="liMain"><a href="/teams">Teams</a></li>
+            <li class="liMain"><a href="#shop">Store</a></li>
+        </ul>
+        <!-- tags for the person account icon -->
+        <div class="dropdown">
+            <button class="accountbtn">
+                <img src ="images/account_circle-24px.svg" alt="account person" id="account">
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Account Details</a>
+                <a href="#">Help</a>
+                <hr>
+                <a href="#">Hide Score</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-container">
+         <!--header Title-->
+         <div>  
+            <li class="spanheader"><span><%= header %></span></li>
+        </div>
+        <!----search with icon-->
+        <div class="col-md-4 mt-5 ">
+            <div class="input-group searchteam">
+                <input class="form-control form-control-sm mr-3 w-75" id="userinput" type="search" placeholder="Search Teams ....">
+                <span class="input-group-append">
+                    <button class="btn rounded-pill border-0 ml-n5" type="button">
+                        <!-- <i class="fa fa-search"></i> -->
+                    </button>
+                </span>
+            </div>
+        </div>
+</header>
+
+<!-- tags for the burger menu-->
+<nav class="burger-items">
+<img src="images/closebtn.png" alt="close button" style="height: 28px; width: 25px; margin-left: 11em;" id ="closebtn">
+<br>
+<ul class="navburger">
+    <li class="liBurger"><a href="#">Full schedule</a></li><hr class="lihr">
+    <li class="liBurger"><a href="/scores">Scores</a></li><hr class="lihr">
+    <!-- <li class="liBurger"><a href="#">Tickets</a></li><hr class="lihr"> -->
+    <li class="liBurger"><a href="/trivia_home">Trivia</a></li><hr class="lihr">
+    <li class="liBurger"><a href="/draft_login">FBL Draft</a></li><hr class="lihr">
+    <li class="liBurger"><a href="#">FBL Music BASE: Line PlayList</a></li>
+</ul>
+</nav>

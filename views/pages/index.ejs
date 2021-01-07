@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head'); %>
+<body>
+    <%- include('../partials/header'); %>
+
+     <!--implemention the weather information and the weather activity 
+        when the get forcast butto  is clicked-->
+
+        <div class="forecast">
+            <div class="colorActitvity">
+                <label >Activity Forecast</label>
+            </div>
+                <div class="datainput">
+                  <!-- <label for="location" class="hidden">Location</label> -->
+                  <input id="location" placeholder="Enter location" type = text>
+                  <br>
+                  <button type="submit" class="forecast-button">Get Forecast</button>
+                  <button type="submit" class="clear-button">Clear</button>
+                </div>
+            </div>
+
+<script src="/js/weatherInfo.js" charset="utf-8"></script>
+</body>
+</html>

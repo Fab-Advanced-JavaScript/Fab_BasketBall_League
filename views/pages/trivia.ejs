@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/triviaHead'); %>
+<body>
+    <header>
+        <div id="titleheader">
+            <span ><%= header %></span></li>
+        </div>
+        
+        <div id="back">
+            <ul>
+                <li><a href="/trivia_home">&lt; Back</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- main where questions and answers are displayed-->
+    <main class="main-container">
+        <div class="summaryColor">
+            <ul class="correctColor">
+                <li>
+                    <label for="correct">Correct Answers:</label>
+                    <img src="/images/yes.jpg" alt="correct answer">&nbsp;&nbsp;&nbsp;
+                </li>
+                <li>
+                    <label for="incorrect">Incorrect Answers:</label>&nbsp;
+                    <img src="/images/no.jpg" alt="incorrect">
+                </li>
+            </ul>
+        </div>
+        <div class="section-container">
+            <section id="col2" class="column" >
+                <div id="title">
+                    <h2>Fab BasketBall Quiz</h2>
+                </div>
+                    <div id="quiz">
+                       <!--quesiton goes here-->
+                    </div>
+                        <div class="multiOption">
+                         <!--Multiple answer goes here-->
+                        </div >
+                         <div class="btncontainer">
+                            <button type="button" id='prev' >Previous</button>
+                            <button type="button" id='next' >Next</button><br>
+                            <button type="button" id='submit' class="hidden">Submit</button>
+                        </div>
+            </section>
+            <!-- display other sections and div tags here-->
+        </div>
+       
+           <!--display result-->
+    </main>
+</body>
+</html>

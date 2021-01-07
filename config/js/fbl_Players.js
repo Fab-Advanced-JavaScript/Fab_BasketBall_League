@@ -40,7 +40,8 @@ const drawPlayerList = data => {
         let temp ="";
         data.forEach((items, index) => {
             temp += "<tr>";
-            temp += "<td class= border-right>"+ "<img src=" + items.imageData + "/>" + items.firstName + " \t" + items.lastName  + "</td>";
+            temp += "<td class= border-right>"+ items.firstName + " \t" + items.lastName  + "</td>";
+            // temp += "<td class= border-right>"+ "<img src=" + items.imageData + "/>" + items.firstName + " \t" + items.lastName  + "</td>";
             temp += "<td>" + items.team + "</td>";
             temp += "<td>" + items.jersey + "</td>";
             temp += "<td>" + items.position + "</td>";
@@ -53,6 +54,5 @@ const drawPlayerList = data => {
         myRow.innerHTML = temp;
     }
 }
-
 
 window.addEventListener("load", init_fbl_players);
