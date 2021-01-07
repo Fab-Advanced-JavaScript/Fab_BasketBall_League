@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const file = require('fs');
-const TeamModel = require('./teamModel');
-const TeamUrlModel = require('./teamUrlModel');
+const TeamModel = require('./mongooseModels/teamModel');
+const TeamUrlModel = require('./mongooseModels/teamUrlModel');
 
 class TaskManager {
 

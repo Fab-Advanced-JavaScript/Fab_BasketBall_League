@@ -1,7 +1,7 @@
 const TaskManager = require('./TaskManager');
 const PlayersManager = require('./PlayersManager');
-const teamRest = require('./restTeams')
-const navMenu = require('./navMenuRouter');
+const teamRest = require('./routers/restTeams')
+const navMenu = require('./routers/navMenuRouter');
 const express = require("Express");
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -20,6 +20,7 @@ app.use('/', teamRest);
 // app.use(express.static('views'));
 app.use(express.static('config'));
 app.use(express.static('public'));
+app.use(express.static('routers'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +37,7 @@ const playerObj = new PlayersManager();
 // taskObj.getAllData();
 
 
-/** restFul api to get informatin of Team */
+/** restFul api to get informatin of Team from mongodb */
 app.get("/api/allTeams", (req, res) => {
     taskObj.findTeamData(data => {
         console.log(data);
@@ -44,7 +45,7 @@ app.get("/api/allTeams", (req, res) => {
     })
 });
 
-/** restFul api to get information of few properties in TeamUrl */
+/** restFul api to get information of few properties in TeamUrl from mongodb*/
 app.get("/api/teamUrl", (req, res) => {
     taskObj.findTeamUrl(data => {
         console.log(data);

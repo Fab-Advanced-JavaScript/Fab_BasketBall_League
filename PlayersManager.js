@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
-const PlayerModel = require('./playerModel');
+const PlayerModel = require('./mongooseModels/playerModel');
 const file = require('fs');
 
 class PlayersManager {
