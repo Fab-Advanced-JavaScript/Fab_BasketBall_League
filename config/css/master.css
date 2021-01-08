@@ -221,7 +221,7 @@ header {
 .burger-items {
   position: absolute;
   background: black;
-  top: 7.4em;
+  top: 3.1em;
   width: 15em;
   height: 25em;
   overflow: hidden;
@@ -396,4 +396,23 @@ hr.lihr {
   background-color:  #c4de00 !important;
   color: black !important;
   font-family: 'PT Serif', serif;
+}
+
+/**
+* section styling for account creation
+*/
+
+.form-container {
+  border: 2px solid rgb(250, 250, 242);
+  background-color: rgb(249, 253, 225);
+  width: 40%;
+  margin: auto;
+  margin-top: 3em;
+  font-family: 'PT Serif', serif;
+}
+.formstyle {
+  padding: 10px 0 3em 0;
+}
+.form-container .control-group, #legend {
+  margin-left:  30%;
 }

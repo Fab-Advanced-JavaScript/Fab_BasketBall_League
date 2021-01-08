@@ -13,13 +13,6 @@ router.get('/',(req,res) => {
     res.render('pages/index', {title: title , header: headerTitle});
 });
   
-router.get('/scores',(req,res) => {
-    // res.sendFile(path.join(__dirname+'/public/scores.html'));
-    title = "Score Page"
-    headerTitle = "Fab BasketBall League";
-    res.render('pages/index', {title: title , header: headerTitle});
-});
-  
 router.get('/teams',(req,res) => {
     // res.sendFile(path.join(__dirname+'/public/teams.html'));
     title = "Teams Page"
@@ -44,12 +37,21 @@ router.get('/trivia', (req, res) => {
 router.get('/draft_login', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/draft.html'));
     title = "Draft Login Page"
-    headerTitle = "Draft";
+    headerTitle = "Draft Login";
     res.render('pages/draftLogin', {title: title, header: headerTitle});
 });
 
+router.get('/signup', (req, res) => {
+    // res.sendFile(path.join(__dirname+'/public/draft.html'));
+    title = "Create an Account"
+    headerTitle = "Sign Up";
+    res.render('pages/signup', {title: title, header: headerTitle});
+});
+
 router.get('/scores', (req, res) => {
-    res.sendFile(path.join(__dirname+'/public/scores.html'));
+    title = "Scores Page"
+    headerTitle = "Scores";
+    res.render('pages/scores', {title: title, header: headerTitle});
 });
 
 router.get('/players', (req, res) => {

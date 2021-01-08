@@ -1,10 +1,12 @@
  <!---Login section-->
- <form class="form-signin">
+ <form class="form-signin" action = "/auth" method = "POST">
     <img class="mb-4 accountImg" src="/images/account_circle-24px.svg" alt="" width="72" height="72">
     <label for="Username" class="sr-only">Username</label>
-    <input type="text" id="inputUsername" class="form-control" placeholder="Enter Username" required="" autofocus="">
+    <input type="text" id="inputUsername" class="form-control" placeholder="Enter Username" required="" autofocus="" name="username">
+    <br>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Enter Password" required="">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Enter Password" name="password" required="">
+    <br>
     <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
     <hr>
     <!-- sign up section-->
@@ -12,9 +14,17 @@
         <!-- Button -->                                       
         <div class="col-md-offset-3 col-md-9">
             <span for="">Don't have an account!</span>
-            <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Sign Up</button>
+            <button id="btn-signup" type="submit" class="btn btn-dark "><i class="icon-hand-right"></i>Sign Up</button>
             <hr>
             <label for="">Forgot Password?</label>
         </div>
     </div>
   </form>
+
+   <!-- js file -->
+   <script>
+    const signBtn = document.querySelector('#btn-signup');
+    signBtn.addEventListener('click', () => {
+        window.location.href = "/signup"; 
+    });
+</script>  

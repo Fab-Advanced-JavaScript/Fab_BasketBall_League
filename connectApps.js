@@ -1,11 +1,10 @@
 const TaskManager = require('./TaskManager');
 const PlayersManager = require('./PlayersManager');
-const teamRest = require('./routers/restTeams')
-const navMenu = require('./routers/navMenuRouter');
+const teamRest = require('./routes/restTeams')
+const navMenu = require('./routes/navMenuRouter')
 const express = require("Express");
 const bodyParser = require('body-parser');
-const path = require('path');
-// const { set } = require('mongoose');
+const LoginTasks = require('./LoginTaskManager');
 const app = express();
 const port = 8080;
 
@@ -17,10 +16,8 @@ app.use('/', navMenu);
 app.use('/', teamRest);
 
 // setup  allow the app to access file in public, view and config folders
-// app.use(express.static('views'));
 app.use(express.static('config'));
 app.use(express.static('public'));
-app.use(express.static('routers'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -82,6 +79,33 @@ app.get("/api/headShot", (req, res) => {
         res.json(jsonData);
     })
 });
+
+
+/***
+ * this section implements the Draft login page
+ * with mysql
+ */
+
+const loginTask = new LoginTasks();
+loginTask.checkConnection();
+
+/**
+ * get player list from the mysql then create a restful api
+ */
+app.get('/playerList', (err, res) => {
+    loginTask.allPlayer(data => {
+        res.json(data);
+        console.log(data);
+    });
+});
+
+/**
+ * get data enter in the form by the user
+ */
+app.post('/auth', (req, res) => {
+    loginTask.getUserData(req, res);
+})
+
 
 
 // displays a message about the port the app is using
