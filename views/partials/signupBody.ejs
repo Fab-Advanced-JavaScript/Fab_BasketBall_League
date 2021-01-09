@@ -1,6 +1,8 @@
 <div class="form-container">
-
-<form class="form-horizontal formstyle" action='' method="POST">
+  <% if (message) { %>
+    <div class="alert alert-danger col-sm-12"><%= message %></div>
+ <% } %>
+<form class="form-horizontal formstyle" action="signup" method="POST">
     <fieldset>
       <div id="legend">
         <legend class="">Create a new Account</legend>

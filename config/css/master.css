@@ -404,15 +404,20 @@ hr.lihr {
 
 .form-container {
   border: 2px solid rgb(250, 250, 242);
-  background-color: rgb(249, 253, 225);
-  width: 40%;
+  background-color: rgb(225, 226, 216);
+  width: 30%;
   margin: auto;
   margin-top: 3em;
   font-family: 'PT Serif', serif;
+  font-size: 16px;
 }
 .formstyle {
   padding: 10px 0 3em 0;
 }
 .form-container .control-group, #legend {
-  margin-left:  30%;
+  margin-left:  25%;
+}
+#legend legend {
+  font-family: 'PT Serif', serif;
+  font-size: 18px;
 }

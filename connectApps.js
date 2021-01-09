@@ -2,18 +2,13 @@ const TaskManager = require('./TaskManager');
 const PlayersManager = require('./PlayersManager');
 const teamRest = require('./routes/restTeams')
 const navMenu = require('./routes/navMenuRouter')
+const auth_signup = require('./routes/auth_signup');
 const express = require("Express");
 const bodyParser = require('body-parser');
 const LoginTasks = require('./LoginTaskManager');
+const SignUpTasks = require('./SignUpTaskManager');
 const app = express();
 const port = 8080;
-
-// view engine setup
-app.set('view engine', 'ejs');
-
-//setup  the router for the Nav Menu, burger menu and the List of the team in '/Team'
-app.use('/', navMenu);
-app.use('/', teamRest);
 
 // setup  allow the app to access file in public, view and config folders
 app.use(express.static('config'));
@@ -21,6 +16,14 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// view engine setup
+app.set('view engine', 'ejs');
+
+//setup  the router for the Nav Menu, burger menu and the List of the team in '/Team'
+app.use('/', navMenu);
+app.use('/', teamRest);
+app.use('/', auth_signup)
 
 // create an instance of taskManager
 const taskObj = new TaskManager();
@@ -80,33 +83,38 @@ app.get("/api/headShot", (req, res) => {
     })
 });
 
-
 /***
- * this section implements the Draft login page
+ * this section implements the Create account
  * with mysql
  */
+// instantiate the Signup class
+const SignUpTaskObj = new SignUpTasks(); 
+// checkin mysql connection is successful
+// SignUpTaskObj.checkConnection();
+ // get data enter in the form by the user
+// app.post('/signup', (req, res) => {
+//     SignUpTaskObj.getSignUpData(req, res);
+// })
 
-const loginTask = new LoginTasks();
-loginTask.checkConnection();
 
-/**
- * get player list from the mysql then create a restful api
+/***
+ * this section implements the login page
+ * with mysql
  */
-app.get('/playerList', (err, res) => {
-    loginTask.allPlayer(data => {
-        res.json(data);
-        console.log(data);
-    });
-});
+const loginTaskObj = new LoginTasks(); 
 
-/**
- * get data enter in the form by the user
- */
-app.post('/auth', (req, res) => {
-    loginTask.getUserData(req, res);
-})
+// app.get('/playerList', (err, res) => {
+//     loginTask.allPlayer(data => {
+//         res.json(data);
+//         console.log(data);
+//     });
+// });
 
 
+ //get data enter in the form by the user
+// app.post('/signup', (req, res) => {
+//     loginTaskObj.getLoginData(req, res);
+// })
 
 // displays a message about the port the app is using
 app.listen(port, () => {

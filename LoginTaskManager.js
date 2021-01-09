@@ -33,7 +33,7 @@ class LoginTaskManager {
         this.runSql(sql, undefined, callback)
     }
 
-    getUserData(req, res) {
+    getLoginData(req, res) {
         // const userName = req.body.username;
         // const password = req.body.password;
         // destructuring ...

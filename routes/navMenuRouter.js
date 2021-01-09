@@ -4,6 +4,7 @@ const router = express.Router();
 
 let title = "";
 let headerTitle = "";
+let message = "";
 
 //... routers for nav bar menu
 router.get('/',(req,res) => {
@@ -45,7 +46,8 @@ router.get('/signup', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/draft.html'));
     title = "Create an Account"
     headerTitle = "Sign Up";
-    res.render('pages/signup', {title: title, header: headerTitle});
+
+    res.render('pages/signup', {title: title, header: headerTitle, message: message});
 });
 
 router.get('/scores', (req, res) => {
