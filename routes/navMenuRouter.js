@@ -35,18 +35,17 @@ router.get('/trivia', (req, res) => {
     res.render('pages/trivia', {title: title , header: headerTitle});
 });
 
-router.get('/draft_login', (req, res) => {
+router.get('/login', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/draft.html'));
     title = "Draft Login Page"
     headerTitle = "Draft Login";
-    res.render('pages/draftLogin', {title: title, header: headerTitle});
+    res.render('pages/login', {title: title, header: headerTitle, message: message});
 });
 
 router.get('/signup', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/draft.html'));
     title = "Create an Account"
     headerTitle = "Sign Up";
-
     res.render('pages/signup', {title: title, header: headerTitle, message: message});
 });
 
@@ -62,6 +61,11 @@ router.get('/players', (req, res) => {
     title = "Players Page"
     headerTitle = "Players";
     res.render('pages/players', {title: title , header: headerTitle});
+});
+
+router.get('/draft', (req, res) => {
+    // res.sendFile(path.join(__dirname+'/public/players.html'));
+    res.render('pages/draft', {title: title , header: headerTitle});
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ const express = require("Express");
 const bodyParser = require('body-parser');
 const LoginTasks = require('./LoginTaskManager');
 const SignUpTasks = require('./SignUpTaskManager');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8080;
 
@@ -24,6 +25,7 @@ app.set('view engine', 'ejs');
 app.use('/', navMenu);
 app.use('/', teamRest);
 app.use('/', auth_signup)
+app.use(cookieParser());
 
 // create an instance of taskManager
 const taskObj = new TaskManager();
@@ -102,19 +104,14 @@ const SignUpTaskObj = new SignUpTasks();
  * with mysql
  */
 const loginTaskObj = new LoginTasks(); 
-
-// app.get('/playerList', (err, res) => {
-//     loginTask.allPlayer(data => {
-//         res.json(data);
-//         console.log(data);
-//     });
-// });
-
-
- //get data enter in the form by the user
-// app.post('/signup', (req, res) => {
-//     loginTaskObj.getLoginData(req, res);
-// })
+//get data enter in the form by the user
+app.post('/login', (req, res) => {
+    // let title = "";
+    // let headerTitle = "Draft Login";
+    // let message = ""
+    loginTaskObj.getLoginData(req, res);
+        
+})
 
 // displays a message about the port the app is using
 app.listen(port, () => {

@@ -214,12 +214,12 @@ header {
   padding-right: 4px;
 }
 
-
-
-/** implementing the Method 2 of the burger menu*/
+/** 
+*implementing the Method 2 of the burger menu
+*/
 
 .burger-items {
-  position: absolute;
+  position: fixed;
   background: black;
   top: 3.1em;
   width: 15em;
@@ -342,7 +342,6 @@ hr.lihr {
   font-family: 'PT Serif', serif;
 }
 
-
 /*
 * login styling section
 */
@@ -403,19 +402,19 @@ hr.lihr {
 */
 
 .form-container {
+  position: fixed;
   border: 2px solid rgb(250, 250, 242);
   background-color: rgb(225, 226, 216);
   width: 30%;
-  margin: auto;
-  margin-top: 3em;
+  margin: 1em 0 2em 34%;
   font-family: 'PT Serif', serif;
   font-size: 16px;
 }
 .formstyle {
-  padding: 10px 0 3em 0;
+  padding: 10px 0 2em 0;
 }
 .form-container .control-group, #legend {
-  margin-left:  25%;
+  margin-left: 23%;
 }
 #legend legend {
   font-family: 'PT Serif', serif;
