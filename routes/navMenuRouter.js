@@ -5,6 +5,7 @@ const router = express.Router();
 let title = "";
 let headerTitle = "";
 let message = "";
+let print ="";
 
 //... routers for nav bar menu
 router.get('/',(req,res) => {
@@ -57,15 +58,9 @@ router.get('/scores', (req, res) => {
 
 router.get('/players', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/players.html'));
-
     title = "Players Page"
     headerTitle = "Players";
     res.render('pages/players', {title: title , header: headerTitle});
-});
-
-router.get('/draft', (req, res) => {
-    // res.sendFile(path.join(__dirname+'/public/players.html'));
-    res.render('pages/draft', {title: title , header: headerTitle});
 });
 
 module.exports = router;

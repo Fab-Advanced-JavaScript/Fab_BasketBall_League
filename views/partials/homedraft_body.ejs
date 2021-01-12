@@ -1,0 +1,27 @@
+   <div class="searches-tables-container">
+       <h2>List of Prospects</h2>
+       <div>
+        <hr>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Rank</th> 
+                <th>Players</th>  
+                <th>Affiliation</th> 
+                <th>Post</th> 
+            </tr>
+        </thead>
+        <tbody id="playerinfos">
+            <% print.forEach(player => { %>
+                <tr>  
+                    <td><%= player.rk %></td>  
+                    <td><%= player.players %></td>
+                    <td><%= player.affiliation %></td>
+                    <td><%= player.post %></td>
+                </tr>                                   
+             <% }) %>
+        </tbody>
+    </table>
+
+   </div>

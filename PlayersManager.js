@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const PlayerModel = require('./mongooseModels/playerModel');
-const file = require('fs');
 
 class PlayersManager {
     setUpConnection() {
@@ -68,11 +67,12 @@ class PlayersManager {
     console.log("Succesfully inserted Data From the SPORTS DATA IO end-point into MongoDB" );
     }
 
-      // this is used to Retrieve data from Mongodb
+    /**
+     * this is used to Retrieve data from Mongodb
+     */
     findPlayerData(callback) {
     // setting up the connection
     this.setUpConnection();
-
     //sort name alphabetically or ascending using {team_name: 1}; and  descending{team_name: -1};
     let mysort = {lastName: 'asc'}; 
     // compile schema to model
@@ -81,15 +81,6 @@ class PlayersManager {
         console.log("display data from collection PlayerInfos");
         callback(docs);
     }).sort(mysort);
-  }
-
-   // this is used to read the heaShot.json file
-   readHeadShotFile(callback) {
-    let fileName = "headShot.json"
-    file.readFile(fileName, (err, data) => {
-      if(err) throw err;
-      callback(data);
-    })
   }
 }
 module.exports = PlayersManager;

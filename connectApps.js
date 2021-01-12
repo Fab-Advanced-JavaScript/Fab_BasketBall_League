@@ -1,12 +1,12 @@
 const TaskManager = require('./TaskManager');
 const PlayersManager = require('./PlayersManager');
+const AuthManager = require('./AuthManager');
+const auth_session = require('./routes/auth_session');
 const teamRest = require('./routes/restTeams')
 const navMenu = require('./routes/navMenuRouter')
-const auth_signup = require('./routes/auth_signup');
 const express = require("Express");
 const bodyParser = require('body-parser');
-const LoginTasks = require('./LoginTaskManager');
-const SignUpTasks = require('./SignUpTaskManager');
+
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8080;
@@ -24,12 +24,8 @@ app.set('view engine', 'ejs');
 //setup  the router for the Nav Menu, burger menu and the List of the team in '/Team'
 app.use('/', navMenu);
 app.use('/', teamRest);
-app.use('/', auth_signup)
+app.use('/', auth_session);
 app.use(cookieParser());
-
-// create an instance of taskManager
-const taskObj = new TaskManager();
-const playerObj = new PlayersManager();
 
 /**
  * this is the player data section
@@ -38,6 +34,8 @@ const playerObj = new PlayersManager();
 //this  taskObj.getAllData() get data from the rapidAPI then insert it into teamStoreDB in mongodb
 // taskObj.getAllData();
 
+// create an instance of taskManager
+const taskObj = new TaskManager();
 
 /** restFul api to get informatin of Team from mongodb */
 app.get("/api/allTeams", (req, res) => {
@@ -69,49 +67,30 @@ app.get("/api/teamJson", (req, res) => {
 
 //this  playerObj.allPlayers(); get data from the api Sport data IO then insert it into teamStoreDB in mongodb
 // playerObj.allPlayers();
+// create an instance of playerManager
+const playerObj = new PlayersManager();
 
 /** restFul api to get Players information */
 app.get("/api/allPlayers", (req, res) => {
     playerObj.findPlayerData(data => {
         res.json(data);
+        console.log(data);
     })
 });
-
-/** creates restFul api to get data in teamInfo.json */
-app.get("/api/headShot", (req, res) => {
-    playerObj.readHeadShotFile(data => {
-        let jsonData = JSON.parse(data);
-        res.json(jsonData);
-    })
-});
-
-/***
- * this section implements the Create account
- * with mysql
- */
-// instantiate the Signup class
-const SignUpTaskObj = new SignUpTasks(); 
-// checkin mysql connection is successful
-// SignUpTaskObj.checkConnection();
- // get data enter in the form by the user
-// app.post('/signup', (req, res) => {
-//     SignUpTaskObj.getSignUpData(req, res);
-// })
-
 
 /***
  * this section implements the login page
  * with mysql
  */
-const loginTaskObj = new LoginTasks(); 
+const authTaskObj = new AuthManager(); 
 //get data enter in the form by the user
 app.post('/login', (req, res) => {
-    // let title = "";
-    // let headerTitle = "Draft Login";
-    // let message = ""
-    loginTaskObj.getLoginData(req, res);
-        
-})
+    authTaskObj.loginData(req, res)   
+});
+
+app.post('/signup', (req, res) => {
+    authTaskObj.registerData(req, res);  
+});
 
 // displays a message about the port the app is using
 app.listen(port, () => {

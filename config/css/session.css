@@ -1,0 +1,76 @@
+
+html {
+    box-sizing: border-box;
+  }
+  
+  * {
+    box-sizing: inherit;
+  } 
+  
+  body {
+    background-color:rgb(250, 250, 242) !important;
+  }
+  
+/** -----nav styling-------*/
+
+header {
+    color:#ed5d15;
+    background:  url(../images/bbLogin.jpg) no-repeat center center;
+    background-size: cover;
+    height: 7em;
+    margin-top: -1.7em;
+    position: sticky;
+    top: 0;
+  }
+
+.list-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding-left: 15em;
+    /* background-color: #000000; */
+    height: 50px;
+  
+  }
+  .list-container .liMain a{
+    font-size: .6em;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-family: verdana, sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+    font-weight: 550;
+    color: #ed5d15;
+    display: inline-block;
+    border: 2px solid #a63505;
+    border-radius: .5em;
+    padding: .5em 1em;
+    margin: .5em;
+    text-decoration: none;
+    background-color:#000000;
+  }
+  .list-container #logout {
+      margin-left: 15em;
+}
+
+header .spanheader {
+    padding-top: 1.2em;
+    list-style-type: none;
+    margin-left: 55em;
+    font-family: 'PT Serif', serif;
+    font-size: 18px;
+}
+
+.searches-tables-container{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(250, 250, 242) ;
+    background-color: rgba(240, 240, 238, 0.945);
+    margin: 2em 30px 30px 30px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: 'PT Serif', serif;
+    font-size: 18px;
+  }

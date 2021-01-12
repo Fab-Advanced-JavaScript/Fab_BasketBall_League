@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const mysql_config = require('../mysql_config');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
 
 let title = "";
 let headerTitle = "Sign Up";
