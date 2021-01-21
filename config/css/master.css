@@ -257,20 +257,21 @@ hr.lihr {
   margin-right: 5em;
 }
 /** team styling container*/
-.container {
+.team-container {
   display: flex;
   flex-direction: row;
-  padding-top: 4em;
+  justify-content: flex-start;
+  margin-top: 2em;
+  padding-left: 2em;
+  height: 595px;
 }
 
 /*team List styling*/
 .team_list_scroll  {
-  margin-left: -3.5em;
   overflow-x: hidden;
   overflow-y: auto;
-  width: 250px;
-  height: 470px;
-  
+  width: 255px;
+  height: 585px;
 }
 
 /**styling for the loaded team page*/
@@ -334,8 +335,8 @@ hr.lihr {
   width: 18em;
 }
 .border-right img {
-  height: 30px;
-  width:30px;
+  height: 35px;
+  width:37px;
 }
 
 .college {
@@ -423,4 +424,21 @@ hr.lihr {
 #legend legend {
   font-family: 'PT Serif', serif;
   font-size: 18px;
+}
+
+.form-container .alert-primary a {
+  padding-left: 8em;
+}
+
+/**
+* this section is for individual teams styling
+*/
+.teamstyle {
+  border:2px solid rgb(235, 235, 205);
+  font-family: 'PT Serif', serif;
+  font-size: 16px;
+}
+.output_team_detail {
+  margin-left:30%;
+  width: 20em;
 }

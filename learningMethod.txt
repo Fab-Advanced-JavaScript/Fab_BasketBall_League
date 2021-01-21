@@ -212,3 +212,116 @@ console.log("server has started");
             <% } %>
         </tbody>
       </table>
+
+
+      ============ login with jwt ======================
+      loginData(req, res) {
+        title = "Draft Login Page"
+        let headerTitle = "Draft Login";
+        const {email, password} = req.body;
+        if(!email && !password) {
+            message = 'Please Enter an email and a password';
+            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
+        } else if (!email && password) {
+            message = 'Provide an Email';
+            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
+        }  else if (email && !password) {
+            message = 'Provide an Email or a Password';
+            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
+        }
+        sql = "SELECT * FROM users WHERE email = ?";
+        connection.query(sql, [email], async(err, data) => {
+            console.log('sql data : ' + data);
+            if(err) throw err;
+            //..
+            if(!data || !(await bcrypt.compare(password, data[0].password))) {
+                message = "Email or Password is Incorrect"
+                res.status(401).render('pages/login', { title: title, header:headerTitle, message:message})
+            } else {
+                const id = data[0].id;
+                const token = jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+                console.log('token is: ' + token);
+                const cookiesOptions = {
+                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000), httpOnly: true
+                }
+                // httpOnly: true means that we set our cookie if we are only in the browser environment
+                res.cookie('jwt', token, cookiesOptions); // set up the cookie in the browser
+                res.status(200).redirect('/draft_home');
+            }
+        });
+    }
+
+    ============================== reset mysql password ================
+
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_new_password';
+mysql> FLUSH PRIVILEGES;
+mysql> quit;
+
+================================== registration with node js $ mysql =======================
+const express = require("express");
+const router = express.Router();
+const mysql_config = require('../mysql_config');
+const bcrypt = require('bcryptjs');
+
+let title = "";
+let headerTitle = "Sign Up";
+let message = "";
+
+let connection = mysql_config.getConnection();
+router.post('/signup', (req, res) => {
+    //...
+    let signdata = req.body;
+    console.log(signdata);
+    const {first_name, last_name, email, password, password_confirm} = req.body;
+    //..
+    let selectquery = "SELECT EMAIL FROM users WHERE email=?";
+    connection.query(selectquery, [email], async(err, data) => {
+        if(err) throw err;
+        console.log(data);
+        if(data.length > 0) {
+            message = 'That email already exist';
+            return res.render('pages/signup', { title: title, header:headerTitle, message: message})
+        } else if (password != password_confirm) {
+            message = 'The Password entered does not match';
+            return res.render('pages/signup', { title: title, header:headerTitle, message: message});
+        }
+        //.. display the has password on the console
+        let hashedPass = await bcrypt.hash(password, 8);
+        console.log('encrypted password: ' + hashedPass);
+        let insertquery = 'INSERT INTO users SET ?';
+        connection.query(insertquery, {first_name: first_name, last_name: last_name, email: email, password: hashedPass}, (err, data) => {
+            console.log("inserted data:  " + data);
+            if (err) throw err;
+            message = 'User Registered';
+            return res.render("pages/signup", {title: title, header:headerTitle, message: message})
+        })
+    });
+});
+module.exports = router;
+
+================== ejs ============
+<html>
+<h1>Hello, <%= username %></h1>
+<br>
+<h3>Shopping Cart: </h3>
+<br>
+<ul>
+<% for(var item in cart) { %>
+<li><%= item %></li>
+<% } %>
+</ul>
+</html>
+
+
+INSERT INTO `prospectlist` VALUES (1, 'Zion Williamson', 'Duke', 'PF', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (2, 'Anthony Edwards', 'Georgia', 'G', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (3, 'James Wiseman', 'Menphis', 'C', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (4, 'Tyler Herro', 'Kentucky', 'SG', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (5, 'LaMelo Ball', 'IIIawarra Hawks', 'G', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (6, 'Jarrett Culver', 'Texas Tech', 'SG', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (7, 'Cassius Winston', 'Michigan', 'G', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (8, 'Jaxson Hayes', 'North Carolina', 'C', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (9, 'Kenyon Martin Jr', 'Indiana', 'F', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (10, 'Obi Toppin', 'Dayton', 'F', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (11, 'Patrick Williams', 'Florida State', 'F', null, null, 0, 0, 0);
+INSERT INTO `prospectlist` VALUES (12, 'Killian Hayes', 'USC', 'G', null, null, 0, 0, 0);

@@ -1,22 +1,8 @@
-const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const PlayerModel = require('./mongooseModels/playerModel');
+const mongo = require('./mongodb_config');
 
 class PlayersManager {
-    setUpConnection() {
-        //set up moongose connection
-        let dbUrl = "mongodb://localhost:27017/teamStore"
-        mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true });
-        // get reference to database
-        let db = mongoose.connection;
-        db.once('open', () => {
-          console.log("Connection Successful!");
-        });
-    
-        //Bind connection to error event (to get notification of connection errors)
-        db.on('error', console.error.bind(console, 'connection error:'));
-    }
-    
     // this is used to get data from the api
     allPlayers() {
         let options = {
@@ -27,7 +13,7 @@ class PlayersManager {
             }
         };
     // urls      
-    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/por";
+    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/bkn";
 
     fetch(playerUrl, options)
                 .then(response => response.json())
@@ -42,7 +28,7 @@ class PlayersManager {
     // this insert data to Mongodb
     insertPlayerData(results) {
     // setting up the connection
-    this.setUpConnection();
+    mongo.setUpConnection();
     // loop through data
     results.map(data => {
         // defining the players object
@@ -64,7 +50,7 @@ class PlayersManager {
             if(err) throw err
         });
     });
-    console.log("Succesfully inserted Data From the SPORTS DATA IO end-point into MongoDB" );
+    console.log(`${results.length} Player documents From the SPORT DATA IO have been inserted into MongoDB`);
     }
 
     /**
@@ -72,7 +58,7 @@ class PlayersManager {
      */
     findPlayerData(callback) {
     // setting up the connection
-    this.setUpConnection();
+    mongo.setUpConnection();
     //sort name alphabetically or ascending using {team_name: 1}; and  descending{team_name: -1};
     let mysort = {lastName: 'asc'}; 
     // compile schema to model

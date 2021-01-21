@@ -5,12 +5,16 @@ const Schema = mongoose.Schema;
 
 //Define a schema
 let TeamSchema = new Schema({
-  abbreviation: String,
+  key: String,
   city: String,
+  name: String,
   conference: String,
-  full_name: String
+  division: String,
+  teamLogo: String,
+  teamUrl: String
+  
 });
 
 // compile schema to model
-const TeamModel = mongoose.model('TeamInfo', TeamSchema);
+const TeamModel = mongoose.model('Team_documents', TeamSchema);
 module.exports = TeamModel;

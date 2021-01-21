@@ -97,24 +97,4 @@ const filterByValue = data => {
     })
 }
 
-// const filterByValue = data => {
-//     let valueSelected = document.querySelector('#players');
-//     let filterValue = valueSelected.value.toUpperCase();
-//     let playerTable = document.querySelector(".table");
-//     data = playerTable.querySelectorAll('tr'); // get all tr from div table
-
-//         for (i = 0; i < data.length; i++) {
-//             let td = data[i].getElementsByTagName("td")[0];
-//             if(td){
-//                 let txtValue = td.textContent || td.innerText;
-
-//                 if (txtValue.toUpperCase().indexOf(filterValue) > -1) { // check for matches
-//                     data[i].style.display = "";
-//                 } else {
-//                     data[i].style.display = "none";
-//                 }
-//             }
-//         }
-// }
-
 window.addEventListener("load", init_fbl_players);

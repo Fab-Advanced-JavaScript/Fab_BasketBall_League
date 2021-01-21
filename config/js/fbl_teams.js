@@ -4,12 +4,12 @@ const init_fbl_teams =() => {
 
 // this get data from the RestFul api pull from Mongodb
 const getData = () => {
-    const teamUrl = "http://localhost:8080/api/teamUrl";
+    const teamApiUrl = "http://localhost:8080/api/allTeams";
     /**
      *   ----- Method One ------
      * use a fetch to make multiple api call
      */
-    fetch(teamUrl)
+    fetch(teamApiUrl)
                 .then(response => response.json())
                 .then(el => {
                     console.log(el);
@@ -27,7 +27,7 @@ const drawTeamList = items => {
     let listScroll = document.createElement('div');
    
     // set up classe Names
-    divContainer.className = "container";
+    divContainer.className = "team-container";
     sectionOne.className = "teamList";
     listScroll.className = "team_list_scroll";
     
@@ -36,11 +36,11 @@ const drawTeamList = items => {
         let teamPara = document.createElement('p');
         teamPara.classList.add('logo')
         let imgList = document.createElement('img');
-        imgList.src = `${components.imageUrl}`
+        imgList.src = `${components.teamLogo}`
         let teamhyperlink = document.createElement('a')
         teamhyperlink.setAttribute('href', "#");
         teamhyperlink.setAttribute('onclick', "loadPages(event)");
-        teamhyperlink.innerHTML =`${components.team_name}`;
+        teamhyperlink.innerHTML =`${components.city} ${components.name}`;
         teamPara.appendChild(imgList);
         teamPara.appendChild(teamhyperlink);
         listScroll.appendChild(teamPara);
@@ -72,12 +72,12 @@ const loadPages = event => {
                 .then(res => res.text())
                 .then(html => {
                     console.log(html);
-                        let divContainer = document.querySelector('.container')
+                        let divContainer = document.querySelector('.team-container')
                         let sectionTwo = document.createElement('section');
                         let div = document.createElement('div');
                         // set up classe Names
                         sectionTwo.className = "team_details";
-                        div.classList.add('output');
+                        div.classList.add('output_team_detail');
                         div.innerHTML = html;
                         sectionTwo.appendChild(div);
                         divContainer.appendChild(sectionTwo);

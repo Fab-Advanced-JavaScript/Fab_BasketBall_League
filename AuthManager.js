@@ -3,45 +3,47 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 let connection  = mysql.getConnection()
-let sql = "";
 let title = ""
 let headerTitle = "";
 let message = "";
-
+let login = "";
+/**
+ * Authentication class
+ * to handle login and sign up
+ */
 class AuthManager {
     //...
     loginData(req, res) {
-        title = "Draft Login Page"
+        title = "Draft Login Page";
         let headerTitle = "Draft Login";
-        const {email, password} = req.body;
-        if(!email && !password) {
-            message = 'Please Enter an email and a password';
+        //..
+        const {username, password} = req.body;
+
+        if(!username && !password) {
+            message = 'Please Enter a Username and a password';
             return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
-        } else if (!email && password) {
-            message = 'Provide an Email';
+        } else if (!username && password) {
+            message = 'Provide a Username';
             return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
-        }  else if (email && !password) {
-            message = 'Provide an Email or a Password';
+        }  else if (username && !password) {
+            message = 'Provide a Username or a Password';
             return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
         }
-        sql = "SELECT * FROM users WHERE email = ?";
-        connection.query(sql, [email], async(err, data) => {
-            console.log('sql data : ' + data);
+        let sql = "SELECT * FROM team_owners WHERE username = ?";
+        connection.query(sql, [username], async(err, data) => {
             if(err) throw err;
+            console.log('login sql data : ' + data);
             //..
-            if(!data || !(await bcrypt.compare(password, data[0].password))) {
-                message = "Email or Password is Incorrect"
+            if(!data  || !(await bcrypt.compare(password, data[0].password)))  {
+                message = "username or Password is Incorrect"
                 res.status(401).render('pages/login', { title: title, header:headerTitle, message:message})
             } else {
-                const id = data[0].id;
-                const token = jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
-                console.log('token is: ' + token);
-                const cookiesOptions = {
-                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000), httpOnly: true
-                }
-                // httpOnly: true means that we set our cookie if we are only in the browser environment
-                res.cookie('jwt', token, cookiesOptions); // set up the cookie in the browser
-                res.status(200).redirect('/draft_home');
+                console.log(req.session);
+                req.session.userId = data[0].team_ownersId;
+                req.session.username = username;
+                console.log('data id only : ' + data[0].team_ownersId);
+                console.log('data username : ' + data[0].username);
+                res.redirect('/draft_home');
             }
         });
     }
@@ -51,37 +53,41 @@ class AuthManager {
      */
     registerData(req, res) {
 
-        const {first_name, last_name, email, password, password_confirm} = req.body;
+        const {username, first_name, last_name, email, password, password_confirm} = req.body;
         //..
-        let selectquery = "SELECT EMAIL FROM users WHERE email=?";
-        connection.query(selectquery, [email], async(err, data) => {
-            console.log(data);
+        let selectquery = "SELECT username FROM team_owners WHERE username =?";
+        connection.query(selectquery, [username], async(err, data) => {
+            console.log('register data : ' + data);
             if(err) throw err;
         
             if(data.length > 0) {
-                message = 'That email already exist';
-                return res.render('pages/signup', { title: title, header:headerTitle, message: message})
+                login = "";
+                message = 'That Username already exist';
+                return res.render('pages/signup', { title: title, header:headerTitle, message: message, login:login})
             } else if (password != password_confirm) {
+                login = "";
                 message = 'The Password entered does not match';
-                return res.render('pages/signup', { title: title, header:headerTitle, message: message});
+                return res.render('pages/signup', { title: title, header:headerTitle, message: message, login:login});
             }
             //.. display the has password on the console
             let hashedPass = await bcrypt.hash(password, 8);
             console.log('encrypted password: ' + hashedPass);
             //.. insert data to users table
-            let insertquery = 'INSERT INTO users SET ?';
+            let insertquery = 'INSERT INTO team_owners SET ?';
             let userData = {
+                username: username, 
                 first_name: first_name, 
                 last_name: last_name, 
-                email: email, 
+                email: email,
                 password: hashedPass
             };
-    
+            //..
             connection.query(insertquery, userData, (err, data) => {
                 console.log("inserted data:  " + data);
                 if (err) throw err;
                 message = 'User Registered';
-                return res.render("pages/signup", {title: title, header:headerTitle, message: message})
+                login = 'login';
+                return res.render("pages/signup", {title: title, header:headerTitle, message: message, login:login})
             });
         });
     }

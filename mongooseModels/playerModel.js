@@ -18,5 +18,5 @@ let PlayerSchema = new Schema({
 });
 
 // compile schema to model
-const PlayerModel = mongoose.model('PlayerInfo', PlayerSchema);
+const PlayerModel = mongoose.model('Player_documents', PlayerSchema);
 module.exports = PlayerModel;

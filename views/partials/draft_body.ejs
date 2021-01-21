@@ -1,0 +1,57 @@
+<div class="form-container">
+       <%if (message){ %>
+        <div class="alert alert-primary col-sm-12"><%= message %></div>
+       <% } %>
+  
+  <form class="form-horizontal formstyle" action="signup" method="POST">
+        <hr>
+        <div class="control-group">
+          <!-- Username -->
+          <div class="controls">
+            <input type="text" id="player_name" name="player_name" placeholder="Player Name" class="input-xlarge">
+          </div>
+        </div> <br>
+        <div class="control-group">
+          <!-- firstname -->
+          <div class="controls">
+            <input type="text" id="team_name" name="team_name" placeholder="Team Name" class="input-xlarge">
+          </div>
+        </div> <br>
+  
+        <div class="control-group">
+          <!-- lastname -->
+          <div class="controls">
+            <input type="text" id="college" name="college" placeholder="college" class="input-xlarge">
+          </div>
+        </div><br>
+     
+        <div class="control-group">
+          <!-- E-mail -->
+          <div class="controls">
+            <input type="number" id="draft_year" name="draft_year" placeholder="Draft Year" class="input-xlarge">
+          </div>
+        </div><br>
+     
+        <div class="control-group">
+          <!-- Password-->
+          <div class="controls">
+            <input type="number" id="round_number" name="round_number" placeholder="Round Number" class="input-xlarge">
+          </div>
+        </div> <br>
+     
+        <div class="control-group">
+          <!-- Password -->
+          <div class="controls">
+            <input type="number" id="pick_number" name="pick_number" placeholder="Pick Number" class="input-xlarge">
+          </div>
+        </div>
+        <hr>
+     
+        <div class="control-group">
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-dark">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

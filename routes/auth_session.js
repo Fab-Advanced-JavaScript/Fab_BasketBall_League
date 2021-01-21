@@ -1,39 +1,42 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require('../mysql_config');
+const session = require('express-session');
 
-
-let title = "";
-let headerTitle = "";
-let message = "";
-
+let obj = {};
 let connection  = mysql.getConnection();
+
 
 /**
  * this section the route for the authentication
  */
 router.get('/draft_home', (req, res) => {
-    title = "Home Page"
-    headerTitle = "Welcome to FBL Draft";
-    let dataObj = {};
-    connection.query('SELECT * FROM playerlist', (err, data) => {
-        console.log(data);
-        if(err) throw err;
-    
-        dataObj = { 
-            title: title,
-            header: headerTitle,
-            message: message,
-            print: data
-        };
-        res.render('pages/draft_home', dataObj);                
-    });
+    // let userId = req.session.userId
+    if(session == null) {
+        res.redirect('/login')
+        return;
+    } else {
+        connection.query('SELECT * FROM prospectlist', (err, data) => {
+            console.log(data);
+            if(err) throw err;
+            obj = { 
+                title: "Home Page",
+                header: "Welcome to FBL Draft",
+                message: "",
+                print: data
+            };
+            res.render('pages/draft_home', obj);
+        }); 
+    }     
 });
 //..
 router.get('/draft', (req, res) => {
-    title = "Pick page"
-    headerTitle = "Pick Up a Prospect";
-    res.render('pages/draft', {title: title, header: headerTitle});
+    obj = { 
+        title: "Pick Page",
+        header: "Pick Up a Prospect",
+        message: ""
+    };
+    res.render('pages/draft', obj);
 });
 //..
 router.get('/owners_signup', (req, res) => {
@@ -55,7 +58,9 @@ router.get('/summary', (req, res) => {
 });
 //..
 router.get('/logout', (req, res) => {
-    title = "logout Page"
-    res.render('pages/logout', {title: title, header: headerTitle});
+    // session.destroy();
+    // req.session.destroy();
+    // res.redirect('/login')
+
 });
 module.exports = router;
