@@ -275,10 +275,7 @@ hr.lihr {
 }
 
 /**styling for the loaded team page*/
-.team_details {
-  /* margin-top: 5em; */
-  margin-left: 1.2em;
-}
+
 
 .team_list_scroll img{
   width:38px;
@@ -433,12 +430,22 @@ hr.lihr {
 /**
 * this section is for individual teams styling
 */
-.teamstyle {
-  border:2px solid rgb(235, 235, 205);
-  font-family: 'PT Serif', serif;
-  font-size: 16px;
+.team_details {
+  /* margin-top: 5em; */
+  margin-left: 1.2em;
+  width: 28em;
+  height: 38em;
 }
-.output_team_detail {
-  margin-left:30%;
-  width: 20em;
+.teamstyle {
+  font-family: 'PT Serif', serif;
+  font-size: 17px;
+}
+
+#logoId {
+  width: 25em;
+  height: 12em;
+}
+.teamstyle label {
+  padding-left: 7em;
+
 }
