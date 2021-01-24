@@ -5,19 +5,20 @@ const init_fbl_teams =() => {
 // this get data from the RestFul api pull from Mongodb
 const getData = () => {
     const teamApiUrl = "http://localhost:8080/api/allTeams";
+    const playerApiUrl = "http://localhost:8080/api/allPlayers";
     /**
      *   ----- Method One ------
      * use a fetch to make multiple api call
      */
     fetch(teamApiUrl)
-                .then(response => response.json())
-                .then(el => {
-                    console.log(el);
-                    drawTeamList(el);
-                    searchForTeamName(el);
-                }).catch(err => {
-                    console.error(err);
-                });
+            .then(response => response.json())
+            .then(el => {
+                console.log(el);
+                drawTeamList(el);
+                searchForTeamName(el);
+            }).catch(err => {
+                console.error(err);
+            });
 }
 
 const drawTeamList = items => {
@@ -54,6 +55,28 @@ const drawTeamList = items => {
     loadPages(items);
 }
 
+// const rosterList = infos => {
+//     let divContainer = document.querySelector('.team-container')
+//     // create Element
+//     let section3 = document.createElement('section');
+//     let team_div = document.createElement('div');
+//      // set up classe Names
+//     section3.className = "team_players";
+//     team_div.className = "teamOutput"
+//     //..
+//     infos.map(components => {
+//         let team_label = document.createElement('label');
+//         team_label.textContent = `${components.firstName} ${components.lastName}`;
+//         team_div.appendChild(team_label)
+//     })
+//     section3.appendChild(team_div)
+//     divContainer.appendChild(section3);
+
+//     // call display atlanta content if any content does not exist when the page load
+//     // loadPages(items);
+
+// }
+
 const loadPages = event => {
     // this clear the content if it exist
     clearHtml();
@@ -61,9 +84,10 @@ const loadPages = event => {
     let teamName = "";
     if(event.target) {
         let fullteamName = event.target.innerHTML;
-        teamName = fullteamName.split(' ')[0].toLowerCase();
+        // teamName = fullteamName.split(' ')[0].toLowerCase();
+        teamName = fullteamName.split(' ').pop().toLowerCase(); // pop function return the last element in the array
     } else {
-        teamName = "atlanta";
+        teamName = "hawks";
     }
     
     let teamurl = `http://localhost:8080/fbl/teams/${teamName}`
@@ -74,12 +98,8 @@ const loadPages = event => {
                     console.log(html);
                         let divContainer = document.querySelector('.team-container')
                         let sectionTwo = document.createElement('section');
-                        let div = document.createElement('div');
-                        // set up classe Names
                         sectionTwo.className = "team_details";
-                        div.classList.add('output_team_detail');
-                        div.innerHTML = html;
-                        sectionTwo.appendChild(div);
+                        sectionTwo.innerHTML = html;
                         divContainer.appendChild(sectionTwo);
                 })
                 .catch((error) => {

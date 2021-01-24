@@ -36,7 +36,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /**
- * this is the player data section
+ * this is the Team data section
  */
 // create an instance of teamManager
 const teamTask = new TeamManager();

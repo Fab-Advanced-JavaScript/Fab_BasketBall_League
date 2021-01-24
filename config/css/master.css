@@ -256,7 +256,9 @@ hr.lihr {
   background-color: #c4de00;
   margin-right: 5em;
 }
-/** team styling container*/
+/** 
+*team page styling container
+*/
 .team-container {
   display: flex;
   flex-direction: row;
@@ -265,17 +267,21 @@ hr.lihr {
   padding-left: 2em;
   height: 595px;
 }
+.teamList {
+  order: 1;
+}
+.team_players {
+  order: 3;
+  width: 25em;
+  margin-left: 8em;
+}
 
-/*team List styling*/
 .team_list_scroll  {
   overflow-x: hidden;
   overflow-y: auto;
   width: 255px;
   height: 585px;
 }
-
-/**styling for the loaded team page*/
-
 
 .team_list_scroll img{
   width:38px;
@@ -292,6 +298,30 @@ hr.lihr {
   color: black;
 }
 
+/**
+* this section is for individual teams styling
+*/
+.team_details {
+  order: 2;
+  margin-left: 1.2em;
+  width: 28em;
+  height: 38em;
+}
+.teamstyle {
+  font-family: 'PT Serif', serif;
+  font-size: 17px;
+}
+
+#logoId {
+  width: 25em;
+  height: 12em;
+}
+.teamstyle label {
+  padding-left: 7em;
+
+}
+
+
 /*testing class*/
 
 .open {
@@ -300,7 +330,7 @@ hr.lihr {
 }
 
 /*
-* Players styling section
+* Players page styling section
 */
 
 .searches-tables-container{
@@ -332,8 +362,8 @@ hr.lihr {
   width: 18em;
 }
 .border-right img {
-  height: 35px;
-  width:37px;
+  height: 37px;
+  width:39px;
 }
 
 .college {
@@ -425,27 +455,4 @@ hr.lihr {
 
 .form-container .alert-primary a {
   padding-left: 8em;
-}
-
-/**
-* this section is for individual teams styling
-*/
-.team_details {
-  /* margin-top: 5em; */
-  margin-left: 1.2em;
-  width: 28em;
-  height: 38em;
-}
-.teamstyle {
-  font-family: 'PT Serif', serif;
-  font-size: 17px;
-}
-
-#logoId {
-  width: 25em;
-  height: 12em;
-}
-.teamstyle label {
-  padding-left: 7em;
-
 }

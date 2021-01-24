@@ -13,7 +13,7 @@ class PlayersManager {
             }
         };
     // urls      
-    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/bkn";
+    let playerUrl = "https://api.sportsdata.io/v3/nba/stats/json/Players/bos";
 
     fetch(playerUrl, options)
                 .then(response => response.json())

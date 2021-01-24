@@ -6,6 +6,9 @@
      * let datafile2 = fetch("./data.json")
      * Promise.all([datafile1, datafile2])
                                     .then(files => {
+                                        <--files[0].json()
+                                           --- files[1].json()
+                                            -->
                                         files.map(el => {
                                             processData(el.json());
                                         })
@@ -325,3 +328,63 @@ INSERT INTO `prospectlist` VALUES (9, 'Kenyon Martin Jr', 'Indiana', 'F', null, 
 INSERT INTO `prospectlist` VALUES (10, 'Obi Toppin', 'Dayton', 'F', null, null, 0, 0, 0);
 INSERT INTO `prospectlist` VALUES (11, 'Patrick Williams', 'Florida State', 'F', null, null, 0, 0, 0);
 INSERT INTO `prospectlist` VALUES (12, 'Killian Hayes', 'USC', 'G', null, null, 0, 0, 0);
+
+
+======================= Combining API call with ASYNC/AWAIT ================================
+  const getCovidData = async () => {
+      console.log("index.html 10 | Processing...");
+      const request = await fetch("https://covid19.mathdro.id/api");
+      const data = await request.json();
+      return data;
+    };
+
+    const getMoreAPIDataWithUrl = async newUrl => {
+      const request = await fetch(newUrl);
+      const data = await request.json();
+      return data;
+    };
+
+    const callDataInOrder = async () => {
+      const covidData = await getCovidData();
+      console.log("index.html 27 | covid Data", covidData);
+      document.getElementById("total-cases").innerText =
+        covidData.confirmed.value;
+
+      const detailData = await getMoreAPIDataWithUrl(
+        covidData.confirmed.detail
+      );
+      console.log("index.html 31 | detail Data", detailData);
+      document.getElementById("city-of-origin").innerText =
+        detailData[0].confirmed;
+    };
+    callDataInOrder();
+    
+    ========================= Method 2 Of combining Api call using PromiseAll===============
+     let teamFile = fetch(teamApiUrl)
+    let playerFile = fetch(playerApiUrl)
+    Promise.all([teamFile, playerFile])
+            .then(files => {
+                processTeamData(files[0].json());
+                processPlayerData(files[1].json());
+            }).catch(err => {
+                console.error(err);
+            })
+}
+
+const processTeamData = promise => {
+    promise 
+        .then (data => {
+            console.log('team' + data);
+            drawTeamList(data);
+            searchForTeamName(data)
+            return data
+        })
+}
+const processPlayerData = promise => {
+    promise 
+        .then (data => {
+            rosterList(data);
+            return data
+        })
+}
+

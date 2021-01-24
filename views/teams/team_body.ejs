@@ -1,12 +1,25 @@
 <div class="teamstyle">
-    <% if (print) { %>
-            <img src= "<%= print.teamLogo %>" id="logoId"/>
+    <% if (teams) { %>
+            <img src= "<%= teams.teamLogo %>" id="logoId"/>
             <br><br><hr>
-            <label for=""><span><b>Name:</b></span><%= "\t" + print.city + "\t" + print.name %></label><br><hr>
-            <label for=""><span><b>City:</b></span><%= "\t" + print.city %></label><br><hr>
-            <label for=""><span><b>Conference:</b></span><%= "\t" + print.conference%></label><br><hr>
-            <label for=""><span><b>Division:</b></span><%= "\t" + print.division%></label><br><hr>
-            <label for=""><span><b>Abbreviation:</b></span><%= "\t" + print.key%></label><br><hr>                          
+            <label for=""><span><b>Name:</b></span><%= "\t" + teams.city + "\t"+ teams.name %></label><br><hr>
+            <label for=""><span><b>City:</b></span><%= "\t" + teams.city %></label><br><hr>
+            <label for=""><span><b>Conference:</b></span><%= "\t" + teams.conference%></label><br><hr>
+            <label for=""><span><b>Division:</b></span><%= "\t" + teams.division%></label><br><hr>
+            <label for=""><span><b>Abbreviation:</b></span><%= "\t" + teams.key%></label><br><hr>                          
     <% } %>
 </div> 
 
+<div class="wrapper">
+    <% if (players.length > 0) { %>
+        <% players.forEach(data =>  { %>
+            <img src="<%= data.headShot%>" alt="">
+            <h2><%=data.firstName%></h2>
+            <label for=""><%=data.lastName%></label>
+            <label for=""><%=data.position%></label>
+            <label for=""><%=data.jersey%></label>
+        <% }) %>
+   <% } %>
+   
+
+</div>

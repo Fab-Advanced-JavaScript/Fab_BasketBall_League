@@ -5,170 +5,75 @@ const Router = require('router')
 const path = require('path');
 const router = express.Router();
 
+
+let player = "";
+let team = "";
+let obj ={};
+
+
 /**
  * this function will fetch data from api and return it
  */  
-const getTeamData = async() => { 
-    let options = {
-        method: 'GET',
-    };
-    let teamApiUrl = "http://localhost:8080/api/allTeams";
-    
 
-    return await fetch(teamApiUrl, options)
-            .then(res => res.json())
-            .then(data  => {
-                console.log('what is in data: ' + data);
-                return data
-            }).catch(err => {
-                console.error(err);
-            });  
-}
+let teamApiUrl = "http://localhost:8080/api/allTeams";
+let playerApiUrl = "http://localhost:8080/api/allPlayers";
+
+let teamData = fetch(teamApiUrl)
+let playerData = fetch(playerApiUrl)
+
+Promise.all([teamData, playerData])
+        .then(data => {
+            team = data[0].json(); // team data[0] is the response and .json()
+            player = data[1].json();
+            console.log(player);
+            Promise.all([team, player]) // team and player are 2 promises that return a JSON obj
+                    .then(components => processData(components[0], components[1])) // the data are resolved here
+            
+        }).catch(err => {
+            console.error(err);
+        });
+
 
 /**
- * fbl team rest page information 
+ * 
  * 
  */
-getTeamData()
-        .then(data => {
-            obj ={};
-            //..
-            router.get('/fbl/teams/atlanta', (req, res) =>{  
-                obj = {
-                    title : "Wizards page",
-                    print: data[0]
-                }
-                res.render('teams/team_page', obj);
-            });
-            //..
-            router.get('/fbl/teams/brooklyn', (req, res) =>{  
-                obj = {
-                    title : "Hornets page ",
-                    print: data[1]
-                }
-                res.render('teams/team_page', obj);
-            });
-            //..
-            router.get('/fbl/teams/boston', (req, res) =>{  
-                obj = {
-                    title : "Hawks Page",
-                    print: data[2]
-                }
-                res.render('teams/team_page', obj);
-            });
-            //..
-            router.get('/fbl/teams/charlotte', (req, res) =>{  
-                obj = {
-                    title : "Miami Page",
-                    print: data[3]
-                }
-                res.render('teams/team_page', obj);
-            });
-            //..
-            router.get('/fbl/teams/chicago', (req, res) =>{  
-                obj = {
-                    title : "Orlando Page",
-                    print: data[4]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/cleveland', (req, res) =>{  
-                obj = {
-                    title : "Orlando Page",
-                    print: data[5]
-                }
-                res.render('teams/team_page', obj);
-            });
-
-             //..
-             router.get('/fbl/teams/dallas', (req, res) =>{  
-                obj = {
-                    title : "Orlando Page",
-                    print: data[6]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/denver', (req, res) =>{  
-                obj = {
-                    title : "Denver Page",
-                    print: data[7]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/detroit', (req, res) =>{  
-                obj = {
-                    title : "Detroit Page",
-                    print: data[8]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/Golden', (req, res) =>{  
-                obj = {
-                    title : "Golden Page",
-                    print: data[9]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/houston', (req, res) =>{  
-                obj = {
-                    title : "Houston Page",
-                    print: data[10]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/indiana', (req, res) =>{  
-                obj = {
-                    title : "Indiana Page",
-                    print: data[11]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/lac', (req, res) =>{  
-                obj = {
-                    title : "Clippers Page",
-                    print: data[12]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/lal', (req, res) =>{  
-                obj = {
-                    title : "Lakers Page",
-                    print: data[13]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/memphis', (req, res) =>{  
-                obj = {
-                    title : "Memphis Page",
-                    print: data[14]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/miami', (req, res) =>{  
-                obj = {
-                    title : "Miami Page",
-                    print: data[15]
-                }
-                res.render('teams/team_page', obj);
-            });
-             //..
-             router.get('/fbl/teams/milwaukee', (req, res) =>{  
-                obj = {
-                    title : "Milwaukee Page",
-                    print: data[16]
-                }
-                res.render('teams/team_page', obj);
-            });
-        })
-
+const processData = (team, player) => {         
+    //..
+    router.get('/fbl/teams/hawks', (req, res) => {  
+        obj = {
+            title : "Atlanta page",
+            teams: team[0],
+            players: player.filter(p => p.team == team[0].key)
+        }
+        res.render('teams/team_page', obj);
+        
+    })
+    router.get('/fbl/teams/nets', (req, res) =>{  
+        obj = {
+            title : "Atlanta page",
+            teams: team[1],
+            players: player.filter(p => p.team == team[1].key)
+        }
+        res.render('teams/team_page', obj);
+        });
+        //..
+        router.get('/fbl/teams/celtics', (req, res) =>{    
+            obj = {
+                title : "Atlanta page",
+                teams: team[2],
+                players: player.filter(p => p.team == team[2].key)
+            }
+            res.render('teams/team_page', obj);
+        });
+         //..
+         router.get('/fbl/teams/hornets', (req, res) =>{    
+            obj = {
+                title : "Atlanta page",
+                teams: team[3],
+                players: player.filter(p => p.team == team[3].key)
+            }
+            res.render('teams/team_page', obj);
+        });
+}
 module.exports = router;

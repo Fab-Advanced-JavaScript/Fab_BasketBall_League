@@ -35,7 +35,7 @@ const drawPlayerList = data => {
         let temp ="";
         data.forEach(items => {
             temp += "<tr>";
-            temp += "<td class= border-right>"+ "<img src=\"" + items.headShot + "\"/>" + " " + items.firstName + "\t" + items.lastName  + "</td>";
+            temp += "<td class= border-right>"+ "<img src=\"" + items.headShot + "\"/>" + " " + items.firstName + " " + items.lastName  + "</td>";
             temp += "<td>" + items.team + "</td>";
             temp += "<td>" + items.jersey + "</td>";
             temp += "<td>" + items.position + "</td>";
@@ -63,7 +63,7 @@ const searchForPlayers= tr => {
                 let txtValue = td.textContent || td.innerText;
 
                 if (txtValue.toUpperCase().indexOf(filterValue) > -1) { // check for matches
-                    tr[i].style.display = "";
+                    tr[i].style.display = ""; // display is empty 
                 } else {
                     tr[i].style.display = "none";
                 }
@@ -77,17 +77,19 @@ const filterByValue = data => {
     let playerTable = document.querySelector(".table");
     data = playerTable.querySelectorAll('tr');
     let filterValue = valueSelected.value.toUpperCase();
-
-    valueSelected.addEventListener("onchange", () => { 
-    console.log(filterValue);
+    //..
+    valueSelected.addEventListener("change", () => { 
+        filterValue = valueSelected.value.toUpperCase();
+        console.log(filterValue);
     // get all tr from div table
         for (i = 0; i < data.length; i++) {
-         
+            
             let td = data[i].getElementsByTagName("td")[0];
             if(td){
                 let txtValue = td.textContent || td.innerText;
-
-                if (txtValue.toUpperCase().indexOf(filterValue) > -1) { // check for matches
+                if  (filterValue == "ALL PLAYERS") {
+                    data[i].style.display = "";
+                } else if(txtValue.split(' ').pop().toUpperCase()[0] == filterValue) {
                     data[i].style.display = "";
                 } else {
                     data[i].style.display = "none";
