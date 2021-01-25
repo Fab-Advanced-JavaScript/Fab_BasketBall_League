@@ -1,62 +1,28 @@
-<div class="form-container">
+<div class="create-container">
   <% if (message && !login) { %>
     <div class="alert alert-danger col-sm-12"><%= message %></div>
     <% } else if (message && login){ %>
       <div class="alert alert-primary col-sm-12"><%= message %><a href="/login"><%= login %></a></div>
      <% } %>
 
-    <form class="form-horizontal formstyle" action="signup" method="POST">
-        <div id="legend">
-          <legend class="">Create a new Account</legend>
-        </div>
+    <form class="form-horizontal createstyle" action="signup" method="POST">
+        <label >Create a new Account</label>
         <hr>
-        <div class="control-group">
-          <!-- Username -->
-          <div class="controls">
-            <input type="text" id="username" name="username" placeholder="Username" class="input-xlarge">
-          </div>
-        </div> <br>
-        <div class="control-group">
-          <!-- firstname -->
-          <div class="controls">
-            <input type="text" id="first_name" name="first_name" placeholder="First Name" class="input-xlarge">
-          </div>
-        </div> <br>
-
-        <div class="control-group">
-          <!-- lastname -->
-          <div class="controls">
-            <input type="text" id="last_name" name="last_name" placeholder="Last Name" class="input-xlarge">
-          </div>
-        </div><br>
-    
-        <div class="control-group">
-          <!-- E-mail -->
-          <div class="controls">
-            <input type="text" id="email" name="email" placeholder="Email" class="input-xlarge">
-          </div>
-        </div><br>
-    
-        <div class="control-group">
-          <!-- Password-->
-          <div class="controls">
-            <input type="password" id="password" name="password" placeholder="Password" class="input-xlarge">
-          </div>
-        </div> <br>
-    
-        <div class="control-group">
-          <!-- Password -->
-          <div class="controls">
-            <input type="password" id="password_confirm" name="password_confirm" placeholder="Re-type Password" class="input-xlarge">
-          </div>
-        </div>
-        <hr>
-    
-        <div class="control-group">
-          <!-- Button -->
-          <div class="controls">
-            <button class="btn btn-dark">Register</button>
-          </div>
+          <input type="text" id="inputUsername" class="form-control" placeholder="Enter username" name="username">
+          <br>
+          <input type="text" id="inputFirstName" class="form-control" placeholder="Enter First Name" name="firstName">
+          <br>
+          <input type="text" id="inputLastName" class="form-control" placeholder="Enter Last Name" name="lastName">
+          <br>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Enter Email" name="email">
+          <br>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Enter Password" name="password">
+          <br>
+          <input type="password" id="inputPasswordTwo" class="form-control" placeholder="Re-Type Password" name="password_confirm">
+          <br>
+          <hr>
+        <div class="controls">
+          <button class="btn btn-dark">Register</button>
         </div>
     </form>
 </div>

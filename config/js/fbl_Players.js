@@ -49,7 +49,6 @@ const drawPlayerList = data => {
     }
 }
 //.. search for players
-
 const searchForPlayers= tr => {
     let userInput = document.querySelector('#searchPlayer');
      userInput.addEventListener("keyup", () => { 
@@ -80,10 +79,8 @@ const filterByValue = data => {
     //..
     valueSelected.addEventListener("change", () => { 
         filterValue = valueSelected.value.toUpperCase();
-        console.log(filterValue);
-    // get all tr from div table
+        // get all tr from div table
         for (i = 0; i < data.length; i++) {
-            
             let td = data[i].getElementsByTagName("td")[0];
             if(td){
                 let txtValue = td.textContent || td.innerText;

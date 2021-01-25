@@ -378,12 +378,16 @@ hr.lihr {
 * login styling section
 */
 
-.form-signin {
+.form-signin, .createaccount {
   width: 100%;
-  max-width: 330px;
+  max-width: 335px;
   padding: 15px;
   font-family: 'PT Serif', serif;
   margin: 0 auto;
+}
+#accountcolor, .createaccount label {
+  color: blue;
+  cursor: pointer;
 }
 .accountImg {
   margin-left: 6.5em;
@@ -433,21 +437,37 @@ hr.lihr {
 * section styling for account creation
 */
 
-.form-container {
-  position: fixed;
+.login-container {
+  display: flex;
+  flex-direction: column;
   border: 2px solid rgb(250, 250, 242);
   background-color: rgb(225, 226, 216);
-  width: 30%;
-  margin: 1em 0 2em 34%;
+  width: 35%;
+  height: 55%;
+  margin: 1em 0 0 34%;
   font-family: 'PT Serif', serif;
   font-size: 16px;
 }
-.formstyle {
-  padding: 10px 0 2em 0;
+.create-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(250, 250, 242);
+  background-color: rgb(225, 226, 216);
+  width: 30%;
+  height: 55%;
+  margin: 1em 0 0 35%;
+  font-family: 'PT Serif', serif;
+  font-size: 18px;
+
 }
-.form-container .control-group, #legend {
-  margin-left: 23%;
+
+.createstyle {
+  width: 80%;
+  padding: 15px;
+  margin: auto;
 }
+
+
 #legend legend {
   font-family: 'PT Serif', serif;
   font-size: 18px;

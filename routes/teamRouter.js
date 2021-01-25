@@ -25,7 +25,6 @@ Promise.all([teamData, playerData])
         .then(data => {
             team = data[0].json(); // team data[0] is the response and .json()
             player = data[1].json();
-            console.log(player);
             Promise.all([team, player]) // team and player are 2 promises that return a JSON obj
                     .then(components => processData(components[0], components[1])) // the data are resolved here
             

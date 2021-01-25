@@ -1,33 +1,30 @@
  <!---Login section-->
- <div class="form-container">
+ <div class="login-container">
     <% if (message) { %>
       <div class="alert alert-danger col-sm-12"><%= message %></div>
    <% } %>
     <form class="form-signin" action = "/login" method = "POST">
         <img class="mb-4 accountImg" src="/images/account_circle-24px.svg" alt="" width="72" height="72">
-        <label for="username" class="sr-only">username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Enter username" name="username">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Enter an Email" name="email">
         <br>
-        <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Enter Password" name="password">
         <br>
         <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
         <hr>
     </form>
       <!-- sign up section-->
-      <div class="form-group">
         <!-- Button -->                                       
-        <div class="col-md-offset-3 col-md-9">
-            <span for="">Don't have an account!</span>
-            <button id="btn-signup" type="submit" class="btn btn-dark "><i class="icon-hand-right"></i>Sign Up</button>
+        <div class="createaccount">
+            <span for="">Don't have an account!</span>&nbsp;
+            <span id="accountcolor">Create An Account</span>
+            <!-- <button id="btn-signup" type="submit" class="btn btn-dark "><i class="icon-hand-right"></i>Sign Up</button> -->
             <hr>
-            <label for="">Forgot Password?</label>
+            <label id="forgotpass">Forgot Password?</label>
         </div>
-    </div>
- </div>
+</div>
 <!-- js file -->
 <script>
-const signBtn = document.querySelector('#btn-signup');
+const signBtn = document.querySelector('#accountcolor');
 signBtn.addEventListener('click', () => {
     window.location.href = "/signup"; 
 });
