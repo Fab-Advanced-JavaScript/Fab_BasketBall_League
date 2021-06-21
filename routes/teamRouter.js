@@ -26,13 +26,10 @@ Promise.all([teamData, playerData])
             team = data[0].json(); // team data[0] is the response and .json()
             player = data[1].json();
             Promise.all([team, player]) // team and player are 2 promises that return a JSON obj
-                    .then(components => processData(components[0], components[1])) // the data are resolved here
-            
+                    .then(components => processData(components[0], components[1])) // the data are resolved here  
         }).catch(err => {
             console.error(err);
         });
-
-
 /**
  * 
  * 
@@ -41,7 +38,7 @@ const processData = (team, player) => {
     //..
     router.get('/fbl/teams/hawks', (req, res) => {  
         obj = {
-            title : "Atlanta page",
+            title : "Atlanta Hawks",
             teams: team[0],
             players: player.filter(p => p.team == team[0].key)
         }
@@ -50,7 +47,7 @@ const processData = (team, player) => {
     })
     router.get('/fbl/teams/nets', (req, res) =>{  
         obj = {
-            title : "Atlanta page",
+            title : "Brooklyn Nets",
             teams: team[1],
             players: player.filter(p => p.team == team[1].key)
         }
@@ -59,7 +56,7 @@ const processData = (team, player) => {
         //..
         router.get('/fbl/teams/celtics', (req, res) =>{    
             obj = {
-                title : "Atlanta page",
+                title : "Boston Celtics",
                 teams: team[2],
                 players: player.filter(p => p.team == team[2].key)
             }
@@ -68,7 +65,7 @@ const processData = (team, player) => {
          //..
          router.get('/fbl/teams/hornets', (req, res) =>{    
             obj = {
-                title : "Atlanta page",
+                title : "Charlotte Hornets",
                 teams: team[3],
                 players: player.filter(p => p.team == team[3].key)
             }

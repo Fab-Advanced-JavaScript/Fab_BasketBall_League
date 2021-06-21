@@ -1,6 +1,6 @@
  <!---Login section-->
  <div class="login-container">
-    <% if (message) { %>
+    <% if ( message.length > 0) { %>
       <div class="alert alert-danger col-sm-12"><%= message %></div>
    <% } %>
     <form class="form-signin" action = "/login" method = "POST">
@@ -25,7 +25,7 @@
 <!-- js file -->
 <script>
 const signBtn = document.querySelector('#accountcolor');
-signBtn.addEventListener('click', () => {
+  signBtn.addEventListener('click', () => {
     window.location.href = "/signup"; 
 });
 </script>  

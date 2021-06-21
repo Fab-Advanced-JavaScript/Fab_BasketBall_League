@@ -79,6 +79,7 @@ const filterByValue = data => {
     //..
     valueSelected.addEventListener("change", () => { 
         filterValue = valueSelected.value.toUpperCase();
+        console.log(filterValue);
         // get all tr from div table
         for (i = 0; i < data.length; i++) {
             let td = data[i].getElementsByTagName("td")[0];
@@ -87,6 +88,7 @@ const filterByValue = data => {
                 if  (filterValue == "ALL PLAYERS") {
                     data[i].style.display = "";
                 } else if(txtValue.split(' ').pop().toUpperCase()[0] == filterValue) {
+                    console.log(txtValue.split(' ').pop());
                     data[i].style.display = "";
                 } else {
                     data[i].style.display = "none";

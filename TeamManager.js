@@ -2,8 +2,7 @@
 const fetch = require('node-fetch');
 const TeamModel = require('./mongooseModels/teamModel');
 const mongo = require('./mongodb_config');
-const { options } = require('mongoose');
-const mongodb_config = mongo.setUpConnection();
+
 
 /**
  * class Team Manager
@@ -25,7 +24,7 @@ class TeamManager {
     fetch(teamApiUrl, options)
           .then(response => response.json())
           .then(data  => {
-            console.log('teams data' + data);
+            // console.log('teams data' + data);
             this.insertTeamData(data);
             
           }).catch(err => {
@@ -50,7 +49,7 @@ class TeamManager {
           teamLogo: el.WikipediaLogoUrl,
           teamUrl: el.team_url
         };
-        console.log(teamObj);
+        // console.log(teamObj);
         TeamModel.collection.insertOne(teamObj, (err, res) => {
           if(err) throw err
         });

@@ -1,8 +1,8 @@
 <div class="create-container">
-  <% if (message && !login) { %>
+  <% if (message) { %>
     <div class="alert alert-danger col-sm-12"><%= message %></div>
-    <% } else if (message && login){ %>
-      <div class="alert alert-primary col-sm-12"><%= message %><a href="/login"><%= login %></a></div>
+    <% } else if (message){ %>
+      <div class="alert alert-primary col-sm-12"><%= message %><a href="/login">login</a></div>
      <% } %>
 
     <form class="form-horizontal createstyle" action="signup" method="POST">
@@ -22,7 +22,7 @@
           <br>
           <hr>
         <div class="controls">
-          <button class="btn btn-dark">Register</button>
+          <button type="submit" class="btn btn-dark">Register</button>
         </div>
     </form>
 </div>

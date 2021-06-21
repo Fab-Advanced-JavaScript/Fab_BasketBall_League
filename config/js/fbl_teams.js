@@ -55,28 +55,6 @@ const drawTeamList = items => {
     loadPages(items);
 }
 
-// const rosterList = infos => {
-//     let divContainer = document.querySelector('.team-container')
-//     // create Element
-//     let section3 = document.createElement('section');
-//     let team_div = document.createElement('div');
-//      // set up classe Names
-//     section3.className = "team_players";
-//     team_div.className = "teamOutput"
-//     //..
-//     infos.map(components => {
-//         let team_label = document.createElement('label');
-//         team_label.textContent = `${components.firstName} ${components.lastName}`;
-//         team_div.appendChild(team_label)
-//     })
-//     section3.appendChild(team_div)
-//     divContainer.appendChild(section3);
-
-//     // call display atlanta content if any content does not exist when the page load
-//     // loadPages(items);
-
-// }
-
 const loadPages = event => {
     // this clear the content if it exist
     clearHtml();

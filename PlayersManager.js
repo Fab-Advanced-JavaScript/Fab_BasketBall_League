@@ -18,7 +18,7 @@ class PlayersManager {
     fetch(playerUrl, options)
                 .then(response => response.json())
                 .then(data  => {
-                    console.log(data);
+                    // console.log(data);
                     this.insertPlayerData(data);
                 }).catch(err => {
                     console.error(err);
@@ -45,7 +45,7 @@ class PlayersManager {
             country: data.BirthCountry,
             headShot: data.PhotoUrl
         };
-        console.log(playerObj);
+        // console.log(playerObj);
         PlayerModel.collection.insertOne(playerObj, (err, res) => {
             if(err) throw err
         });

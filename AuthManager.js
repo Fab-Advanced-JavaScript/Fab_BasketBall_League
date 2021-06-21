@@ -1,52 +1,70 @@
 const mysql = require('./mysql_config');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-let connection  = mysql.getConnection()
+let connection  = mysql.getConnection();
 let title = ""
 let headerTitle = "";
 let message = "";
-let login = "";
 /**
  * Authentication class
- * to handle login and sign up
+ * to handle login with passport-local
  */
 class AuthManager {
-    //...
-    loginData(req, res) {
-        title = "Draft Login Page";
-        let headerTitle = "Draft Login";
-        //..
-        const {email, password} = req.body;
 
-        if(!email && !password) {
-            message = 'Please Enter a Username and a password';
-            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
-        } else if (!email && password) {
-            message = 'Provide a Username';
-            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
-        }  else if (email && !password) {
-            message = 'Provide a Username or a Password';
-            return res.status(400).render('pages/login', { title: title, header:headerTitle, message:message})
-        }
-        let sql = "SELECT * FROM team_owners WHERE email = ?";
-        connection.query(sql, [email], async(err, data) => {
-            if(err) throw err;
-            console.log('login sql data : ' + data);
-            //..
-            if(!data  || !(await bcrypt.compare(password, data[0].password)))  {
-                message = "Email or Password is Incorrect"
-                res.status(401).render('pages/login', { title: title, header:headerTitle, message:message})
-            } else {
-                console.log(req.session);
-                req.session.userId = data[0].team_ownersId;
-                req.session.email = email;
-                console.log('data id only : ' + data[0].team_ownersId);
-                console.log('data email : ' + data[0].email);
-                res.redirect('/draft_home');
-            }
+    // used to serialize the user for the session
+    serialUser() {
+        passport.serializeUser( (user, next) => {
+            next(null, user);
         });
     }
+
+    deserialUser() {
+        // used to deserialize the user
+        passport.deserializeUser((id, done) => {
+            connection.query("select * from team_owners  where team_ownersId = "+team_ownersId, (err,rows) => {	
+                done(err, rows[0]);
+            })
+        });
+        connection.end();
+    }
+    
+    //...
+    loginData() {
+
+        this.serialUser();
+        // this.deserialUser();
+        //.. declaring variable
+        // title = "Draft Login Page";
+        // headerTitle = "Draft Login
+
+        passport.use('localSignin', new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            emailField : 'email',
+            passwordField : 'password',
+            passReqToCallback : true // allows us to pass back the entire request to the callback
+        }, (email, password, next) => { // callback with email and password from our form
+            // connection.connect();
+            let sql = "SELECT * FROM team_owners  WHERE email = ?";
+            connection.query(sql, [email], (err, rows) => {
+                if (err) return next(err);
+                //..
+                if (!rows.length)
+                    return next(null, false, {message:'this Email does not exist.'});
+                    
+                // check if the password is valid
+                if (!bcrypt.compareSync(password, rows[0].password)) {
+                    return next(null, false, { message: 'Incorrect password.'});
+                } else {
+                    //return successful login if the user is found
+                    return next(null, rows[0]);
+                }
+               
+            });
+        }));
+    }
+
     /**
      * this function get data from mysql 
      * then display them to a page using EJS templating
@@ -91,6 +109,15 @@ class AuthManager {
             });
         });
     }
+
+    // route middleware to make sure
+    isLoggedIn(req, res, next) {
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+	// if they aren't redirect them to the home page
+	res.redirect('/');
+ }
 }
 
 module.exports = AuthManager;
