@@ -1,8 +1,10 @@
 <div class="create-container">
-  <% if (message) { %>
+  <% if (message == 'This Email already Exist!' 
+    || message == 'The password does not match' 
+    || message == 'You must Enter a password' ) { %>
     <div class="alert alert-danger col-sm-12"><%= message %></div>
-    <% } else if (message){ %>
-      <div class="alert alert-primary col-sm-12"><%= message %><a href="/login">login</a></div>
+    <% } else if (message == 'Account Has been succesfully created'){ %>
+      <div class="alert alert-primary col-sm-12"><%= message %>&nbsp;&nbsp;<a href="/login">login</a></div>
      <% } %>
 
     <form class="form-horizontal createstyle" action="signup" method="POST">

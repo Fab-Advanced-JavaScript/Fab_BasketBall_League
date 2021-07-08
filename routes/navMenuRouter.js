@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const router = express.Router();
 const mysql = require('../mysql_config');
 let connection  = mysql.getConnection();
@@ -44,6 +45,13 @@ router.get('/login', (req, res) => {
     // render the page and pass in any flash data if it exists
     res.render('pages/login', {title: title, header: headerTitle, message: req.flash('loginMessage')});
 });
+ // Passport strategies are middlewares
+ router.post('/login', passport.authenticate('localSignin', {
+    successRedirect: '/draft_home',
+    failureRedirect: '/login',
+    failureFlash: true 
+    // res.render('pages/view_profiles', {title: title, header: headerTitle});
+}));
 
 router.get('/signup', (req, res) => {
     // res.sendFile(path.join(__dirname+'/public/draft.html'));
@@ -52,6 +60,13 @@ router.get('/signup', (req, res) => {
     res.render('pages/signup', {title: title, header: headerTitle, message: req.flash('SignUpMessage')});
     // res.render('pages/signup', {title: title, header: headerTitle, message: message, login: login});
 });
+
+// Sign-up route
+router.post('/signup', passport.authenticate('localSignup', {
+    successRedirect: '/signup',
+    failureRedirect: '/signup',
+    failureFlash: true 
+}));
 
 router.get('/scores', (req, res) => {
     title = "Scores Page"
@@ -79,7 +94,6 @@ router.get('/scores', (req, res) => {
 router.get('/logout', (req, res) => {
     req.logout();
 	res.redirect('/login');
-
 });
 
 router.get('/players', (req, res) => {

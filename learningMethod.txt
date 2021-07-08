@@ -468,4 +468,21 @@ const processPlayerData = promise => {
             return data
         })
 }
+=====================================passport explanation===================
 
+expressSession takes a configuration object, session, that defines what options to enable in a session. Here, you are configuring the following options:
+
+secret: This is the secret used to sign the session ID cookie, which can be either a string for a single secret or an array of multiple secrets. You'll create the SESSION_SECRET environmental variable shortly.
+
+cookie: This is the settings object for the session ID cookie. The default value is { path: '/', httpOnly: true, secure: false, maxAge: null }. You are setting this to be an empty object.
+
+resave: This option forces the session to be saved back to the session store, even if the application doesn't modify the session during the request. For the Auth0 Passport.js strategy, you need this to be false.
+
+saveUninitialized: This forces a session that is new, but not modified, uninitialized, to be saved to the store. Passport.js handles the modification of the session so you can set it to false. If set to true, when your web page gets crawled by bots, it creates a session for them in addition to users who only visit your front page but don't log in, which uses up more sessions and memory.
+========================
+
+cookieParser
+session
+passport.initialize
+passport.session
+app.router
